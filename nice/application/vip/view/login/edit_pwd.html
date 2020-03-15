@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>爱果 - 维修管理&amp; 经销商管理</title>
+    <meta name="keywords" content="苹果维修管理 iPhone ipad 维修管理 Apple经销商管理" />
+    <meta name="description" content="爱果是一款专业为苹果华为等手机经销商打造的管理系统。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Tjun">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css">
+</head>
+
+<body>
+<div>
+    <div class="modal-dialog modal-dialog-slideright" role="document">
+        <div class="modal-content">
+
+            <form  action="{:url('vip/login/edit_pwd')}" method="post">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary">
+                        <h3 class="block-title">
+                            <i class="fa fa-user-edit mr-1"></i> 找回密码
+                        </h3>
+                    </div>
+
+                    <div class="block-content">
+                        <div class="form-group">
+                                <input type="tel" id="phone_tel"
+                                       class="form-control form-control-lg form-control-alt" name="phone"
+                                       placeholder="手机号码">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control form-control-lg form-control-alt" id="btn_pwd" name="password"
+                                   placeholder="新密码">
+                        </div>
+
+                        <div class="form-group">
+                            <span id="smscode" class="input-group-text border-0 pull-right" style="background-color: #5c80d1;color:black;cursor: pointer;">
+                                                        获取验证码
+                            </span>
+                                <input type="text"
+                                       class="form-control form-control-lg form-control-alt col-5" name="code" placeholder="手机验证码" >
+                        </div>
+
+
+                            <div class="block-content block-content-full text-right border-top">
+                                <button class="btn btn-minw btn-primary " type="submit">{:lang('提交')}</button>
+
+                            </div>
+                        </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="__ADMIN_T__/assets/js/aiguo.core.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+<script>
+
+
+    $("#phone_tel").blur(function(){
+        var phone_tel = $(this).val().replace(/\s*/g,'');
+        if (phone_tel.length < 1) {
+            AAiguovip.notify('手机号为不能为空','danger');
+            return;
+        }
+        var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        if (!myreg.test(phone_tel)) {
+            AAiguovip.notify('亲，您输入的手机号不正确','danger');
+            return;
+        }
+    });
+
+    function verification() {
+        var phone_tel = $("#phone_tel").val().replace(/\s*/g,'');
+        if (phone_tel.length < 1) {
+            AAiguovip.notify('手机号为不能为空','danger');
+            return;
+        }
+        var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        if (!myreg.test(phone_tel)) {
+            AAiguovip.notify('亲，您输入的手机号不正确','danger');
+            return;
+        }
+        var password = $("#btn_pwd").val();
+        $.post(
+            "{:url('vip/login/sendsms')}", {
+                phone: phone_tel,
+                edit:'edit_pwd',
+                password: password,
+            },
+            function (data) {
+                if (data.code == 0) {
+                    desc_time();
+                    AAiguovip.notify(data.message, 'success');
+                } else {
+                    AAiguovip.notify(data.message, 'danger');
+                }
+                // window.location.reload();
+            },
+            'json'
+        );
+    }
+
+    $("#smscode").click(function() {
+        verification();
+    });
+
+    var time = 180;
+    //180s倒计时
+    function desc_time() {
+        if (time === 0) {
+            time = 180;
+            $('#smscode').text('获取验证码');
+            $('#smscode').css("background-color","#5c80d1");
+            $('#smscode').on("click", verification);
+            return;
+        } else {
+            time--;
+            // $('#smscode').hide();
+            $('#smscode').text(time+'秒后再次发送');
+            $('#smscode').css("background-color","#e1e1e1");
+            $('#smscode').off("click");
+        }
+        setTimeout(function(){
+            desc_time();
+        },1000);
+    }
+
+</script>
+</body>
+
+</html>

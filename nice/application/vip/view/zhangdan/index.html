@@ -1,0 +1,241 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+
+
+<!-- Page Content -->
+<div class="content">
+    <div class="row">
+        <div class="col-md-5 col-xl-2">
+            <!-- Toggle Inbox Side Navigation -->
+            <div class="d-md-none push">
+                <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
+                <button type="button" class="btn btn-block btn-primary" data-toggle="class-toggle"
+                    data-target="#one-inbox-side-nav" data-class="d-none">
+                    打开客户列表
+                </button>
+            </div>
+            <!-- END Toggle Inbox Side Navigation -->
+
+            <!-- Inbox Side Navigation -->
+            <div id="one-inbox-side-nav" class="d-none d-md-block push">
+                <!-- Inbox Menu -->
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title"></h3>
+                        <div class="block-options">
+                            <button class="btn btn-sm btn-light" type="button">
+                                <i class="fa fa-archive text-primary"></i>
+                                <span class="d-none d-sm-inline ml-1">添加客户</span>
+                            </button>
+
+
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <ul class="nav nav-pills flex-column font-size-sm push">
+                            <li class="nav-item my-1">
+                                <a class="nav-link d-flex justify-content-between align-items-center active" href="">
+                                    <span>所有</span>
+                                    <span class="badge badge-pill badge-secondary">120</span>
+                                </a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a class="nav-link d-flex justify-content-between align-items-center"
+                                    href="javascript:void(0)">
+                                    李连杰
+                                    <span class="badge badge-pill badge-secondary">48</span>
+                                </a>
+                            </li>
+                            <li class="nav-item my-1">
+                                <a class="nav-link d-flex justify-content-between align-items-center"
+                                    href="javascript:void(0)">
+                                    <span>张学友</span>
+                                    <span class="badge badge-pill badge-secondary">12</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- END Inbox Menu -->
+
+
+
+                <!-- Account -->
+                <div class="block">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title">Account</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option">
+                                <i class="si si-settings"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <!-- Easy Pie Chart (.js-pie-chart class is initialized in Helpers.easyPieChart()) -->
+                        <!-- For more info and examples you can check out http://rendro.github.io/easy-pie-chart/ -->
+                        <!-- Pie Chart Container -->
+                        <div class="js-pie-chart pie-chart push" data-percent="35" data-line-width="3" data-size="100"
+                            data-bar-color="#abe37d" data-track-color="#eeeeee" data-scale-color="#dddddd">
+
+                        </div>
+                        <a class="block block-bordered block-rounded block-link-shadow" href="javascript:void(0)">
+                            <div class="block-content block-content-full text-center">
+                                <div class="push">
+                                    <i class="si si-like fa-2x text-success"></i>
+                                </div>
+                                <div class="font-size-h2 font-w700">
+                                    <span class="text-muted">+</span> 2.5TB
+                                </div>
+                                <div class="font-size-sm text-muted text-uppercase">Upgrade Now</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- END Account -->
+            </div>
+            <!-- END Inbox Side Navigation -->
+        </div>
+        <div class="col-md-7 col-xl-10">
+            <!-- Message List -->
+            <div class="block">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">
+                        15-30 <span class="font-w400 text-lowercase">from</span> 700
+                    </h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-toggle="tooltip" data-placement="left"
+                            title="Previous 15 Messages">
+                            <i class="si si-arrow-left"></i>
+                        </button>
+                        <button type="button" class="btn-block-option" data-toggle="tooltip" data-placement="left"
+                            title="Next 15 Messages">
+                            <i class="si si-arrow-right"></i>
+                        </button>
+                        <button type="button" class="btn-block-option" data-toggle="block-option"
+                            data-action="state_toggle" data-action-mode="demo">
+                            <i class="si si-refresh"></i>
+                        </button>
+                        <button type="button" class="btn-block-option" data-toggle="block-option"
+                            data-action="fullscreen_toggle"></button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <!-- Messages Options -->
+                    <div class="d-flex justify-content-between push">
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-light" type="button">
+                                <i class="fa fa-archive text-primary"></i>
+                                <span class="d-none d-sm-inline ml-1">Archive</span>
+                            </button>
+                            <button class="btn btn-sm btn-light" type="button">
+                                <i class="fa fa-star text-warning"></i>
+                                <span class="d-none d-sm-inline ml-1">Star</span>
+                            </button>
+                        </div>
+                        <button class="btn btn-sm btn-light" type="button">
+                            <i class="fa fa-times text-danger"></i>
+                            <span class="d-none d-sm-inline ml-1">Delete</span>
+                        </button>
+                    </div>
+                    <!-- END Messages Options -->
+
+                    <!-- Messages and Checkable Table (.js-table-checkable class is initialized in Helpers.tableToolsCheckable()) -->
+                    <div class="pull-x">
+                        <table class="js-table-checkable table table-hover table-vcenter table-bordered font-size-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center" style="width: 30px;"> </th>
+                                    <th class="text-nowrap " style="width: 30px;">状态</th>
+                                    <th class="text-nowrap" style="width: 50px;">客户信息</th>
+                                    
+                                    <th class="text-nowrap">订单内容</th>
+                                    <th class="text-nowrap" style="width: 100px;">数量</th>
+                                    <th class="text-nowrap" style="width: 100px;">进货价</th>
+                                    <th class="text-nowrap" style="width: 100px;">出货价</th>
+                                    <th class="text-nowrap" style="width: 100px;">进货价</th>
+                              
+                                </tr>
+
+
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" style="width: 60px;">
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="inbox-msg15"
+                                                name="inbox-msg15">
+                                            <label class="custom-control-label font-w400" for="inbox-msg15"></label>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                            <div class="custom-control custom-switch custom-control-primary mb-1 switch">
+                                                <input type="checkbox" class="custom-control-input" id="e-jkong1293"
+                                                    name="e-jkong1293" data-table="tiamo4" data-id="1293"
+                                                    data-field="tiamo4" > <label
+                                                    class="custom-control-label" for="e-jkong1293"
+                                                    title="开启监控/关闭">&nbsp;</label>
+                                            </div>
+                                        </td>
+            
+                                    <td class="d-none d-sm-table-cell font-w600" style="width: 140px;">李连杰
+                                    </td>
+                                    
+                                    <td>
+                                        <div class="text-muted mt-1">红色1台 白色2台 黑色350台</div>
+                                    </td>
+                                    <td class=""> 10</td>
+                                    <td class="text-nowrap"> 10</td>
+                                    <td class="text-nowrap"> 10</td>
+                                    <td class="text-nowrap"><em>2019年4月5日</em></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" class="font-w700 text-right bg-body-light"></td>
+                                    <td class="font-w700 text-nowrap bg-body-light">50</td>
+                                    <td class="font-w700 text-nowrap bg-body-light">$33.000,00</td>
+                                    <td class="font-w700 text-nowrap bg-body-light">$33.000,00</td>
+                                    <td class="font-w700 text-nowrap bg-body-light">$33.000,00</td>
+
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- END Messages and Checkable Table -->
+                </div>
+            </div>
+            <!-- END Message List -->
+        </div>
+    </div>
+</div>
+<!-- END Page Content -->
+
+
+
+
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+<script src="__ADMIN_T__/assets/bootstrap4-editable/js/bootstrap-editable.js"></script>
+<link href="__ADMIN_T__/assets/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+
+
+{//任务JS}
+<script src="__ADMIN_T__/assets/js/tasks.js"></script>
+
+
+{/block}

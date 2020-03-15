@@ -1,0 +1,213 @@
+<div id="charge_vue">
+    <!-- 充值 二维码的提示框  --->
+    <div class="modal fade bd-example-modal-sm" id="charge_qrcode" tabindex="-1" role="dialog" aria-labelledby="charge_qrcode">
+        <div class="modal-dialog modal-sm modal-dialog-slideright " role="document">
+            <div class="modal-content">
+                <form class="js-validation" name="form-user" action="/vip/user/edit.html" method="post">
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary">
+                            <h3 class="block-title">
+                                <i class="fab fa-weixin mr-1"></i> 扫码支付</h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content">
+                            <div style="width: 150px; height: 150px; margin: 4px auto " id="qrcode" ></div>
+                            <div style="text-align: center; padding: 7px; ">
+                                支付金额为:{{charge_money}}元
+                            </div>
+                            <div class="block-content block-content-full text-right border-top">
+                                <button id="cancel_pay" type="button" class="btn btn-sm btn-link mr-2" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+
+                    </div></form>
+            </div>
+        </div>
+
+    </div>
+    <!-- 充值  二维码END -->
+
+
+    <!--弹出充值金额界面-->
+    <div class="modal" id="modal-block-vcenter" tabindex="-1" role="dialog" aria-labelledby="modal-block-vcenter"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">请选择要充值金额</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content font-size-sm">
+                        <h3 class="block-title">
+                            当前账户: <span class="pull-right">{$user_jifen}</span>
+                        </h3>
+                        <hr color="#999" class="block">
+
+                        <ul class="row sel_cz_money block">
+                            <li class="col-4">
+                                <span @click="charge_money=49" :class="{'active_cz':charge_money==49}">49</span>
+                            </li>
+                            <li class="col-4">
+                                <span @click="charge_money=99" :class="{'active_cz':charge_money==99}">99</span>
+                            </li>
+                            <li class="col-4">
+                                <span @click="charge_money=199" :class="{'active_cz':charge_money==199}">199</span>
+                            </li>
+                            <li class="col-4">
+                                <span @click="charge_money=299" :class="{'active_cz':charge_money==299}">299</span>
+                            </li>
+                            <li class="col-4 ">
+                                <span @click="charge_money=499" :class="{'active_cz':charge_money==499}">499</span>
+                            </li>
+                            <li class="col-4">
+                                <span @click="charge_money=999" :class="{'active_cz':charge_money==999}">999</span>
+                            </li>
+                            <li class="col-4"></li>
+                        </ul>
+
+                        <div>
+                            <div class="block">积分规则：</div>
+                            <div style="padding-left: 5px;">
+                                一积分 = 一块钱</br>
+                                </br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+                        <button type="button" class="btn btn-sm btn-light"   style="background: none; border: none; color: #0808FD"  data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-sm btn-primary" style="background: none; border: none; color: #0808FD"  @click="chongzhi()"><i
+                                class="fa fa-check mr-1"></i>充值
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹出充值金额界面 end -->
+</div>
+
+<script>
+    var theTimer;//控制定时查询全局变量
+    var vm = new Vue({
+        el: '#charge_vue',
+        data: {
+            charge_money: 99,
+        },
+        created: function () {
+        },
+        methods: {
+            check_number: function() {
+                var charge_money = this.charge_money;
+                charge_money = charge_money.replace(/[^\d]/g, ''); // 清除“数字”和“.”以外的字符
+                if (charge_money.indexOf('.') < 0 && charge_money != '') {
+                    // 以上已经过滤，此处控制的是如果没有小数点，首位不能为类似于 01、02的金额
+                    charge_money = parseInt(charge_money);
+                }
+                this.charge_money = charge_money;
+
+            },
+            //点击充值事件
+            chongzhi:function(){
+                console.log(this.charge_money);
+                charge_money =this.charge_money;
+
+                $.post(
+                    "{:url('vip/User/wx_pay_choose')}", {
+                        money: this.charge_money
+                    },
+                    function (data) {
+                        if (data.code == 0) {
+                            if(data.content.is_wx ==1){ //如果是微信浏览器
+                                console.log("微信浏览器")
+                                if (typeof WeixinJSBridge == "undefined"){
+                                    if( document.addEventListener ){
+                                        document.addEventListener('WeixinJSBridgeReady', jsApiCall(data.content.jssdk), false);
+                                    }else if (document.attachEvent){
+                                        document.attachEvent('WeixinJSBridgeReady', jsApiCall(data.content.jssdk));
+                                        document.attachEvent('onWeixinJSBridgeReady', jsApiCall(data.content.jssdk));
+                                    }
+                                }else{
+                                    jsApiCall(data.content.jssdk);
+                                }
+                            }else{  //普通浏览器要跳出二维码支付
+
+                                $('#qrcode canvas').remove();
+                                $('#qrcode').qrcode(data.content.code_url);
+                                $('#charge_qrcode').modal('show');
+                                $('#modal-block-vcenter').modal('hide');
+                                //生成二维码之后定时查找数据库，判断支付是否成功
+                                theTimer = setInterval("clock("+data.content.order_sn+")", 1000);
+                            }
+                        } else {
+                            AAiguovip.notify(data.message, 'danger');
+                        }
+                    },
+                    'json'
+                );
+            }
+
+
+        },
+    });
+
+    function jsApiCall(data) {
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest',
+            $.parseJSON(data),
+            function (res) {
+                if(res.err_msg == "get_brand_wcpay_request:cancel"){
+                    return;
+                }
+                if(res.err_msg == "get_brand_wcpay_request:ok"){
+                    AAiguovip.notify('支付成功', 'success');
+                    setTimeout("window.location.reload()",1500);
+                }else{
+                    AAiguovip.notify('支付失败', 'danger');
+                    $('#modal-block-vcenter').modal('hide');
+                }
+                // WeixinJSBridge.log(res.err_msg);
+                // alert(res.err_code+res.err_desc+res.err_msg);
+            }
+        );
+    }
+
+    //进行轮询，查看支付状态
+    function clock(order_sn) {
+        console.log(order_sn)
+        $.ajax({
+            type: "POST",
+            url: "{:url('vip/User/timer_query_pay')}",
+            data: {order_sn : order_sn},
+            dataType:'json',
+            success: function (msg) {
+                if (msg.code == 1){
+                    AAiguovip.notify('支付成功', 'success');
+                    setTimeout("window.location.reload()",1000);
+                }else if(msg.code == 2){
+                    AAiguovip.notify('支付失败', 'danger');
+                    setTimeout("window.location.reload()",1000);
+                }
+            }
+        });
+    }
+
+    $(function(){
+        //关闭页面停止轮询
+        $('#cancel_pay').on('click', function () {
+            clearInterval(theTimer);
+        });
+    })
+
+
+
+</script>

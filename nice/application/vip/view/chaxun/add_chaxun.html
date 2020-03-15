@@ -1,0 +1,96 @@
+
+{//智能添加}
+<div class="modal fade" id="addsnlist" tabindex="-1" role="dialog" aria-labelledby="addsnlist" aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">{//modal-dialog-top 上 modal-lg放大点}
+        <div class="modal-content">
+            <form class="" name="form-builder" action="{:url('vip/chaxun/add',['order_id'=>$Request.param.id,'order_type'=>$order_type])}"   method="post">
+                <div class="block block-themed block-transparent mb-1">
+                    <div class="block-header " style="background: #ececec;border-bottom: 1px solid #ccc">
+                        <span style="color: #a1a1a1;">
+                            <i class="fa fa-pencil-alt mr-1"></i> {:lang('智能添加')}
+                        </span>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal"   style="color: #a1a1a1; font-size:22px; font-weight: normal"  aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="block-content">
+                        <div class="form-group formhide">
+                            <div >
+                                <input class="form-control" type="text" id="order_title" name="order_title" placeholder="订单描述*" aria-required="true" aria-describedby="val-username-error" aria-invalid="true">
+                            </div>
+                        </div>
+                        {switch name="order_type"}
+
+                        {case value="2"}
+                            <button style="float: right" class="btn btn-sm btn-light" type="button" data-toggle="modal"   data-target="#modal-addsnlist" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="fa fa-book text-muted mr-1"></i>{:lang('智能添加说明')}
+                            </button>
+                        {/case}
+                        {default /}
+                        <div class="form-group">
+                            <div>
+                                <label  for="message-msg" >选择查询服务(多选)</label>
+                                <button style="float: right" class="btn btn-sm btn-light" type="button" data-toggle="modal"   data-target="#modal-addsnlist" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fa iconfont iconshuoming" style="margin-right: 5px;"></i>{:lang('智能添加说明')}
+                                </button>
+                                <div class="blank"></div>
+                            </div>
+                            <div class="text-left">
+                                <div class="row">
+                                            <label class="checkbox-inline zjb_check_l "  v-for="(item,index) in fuwulist " :id="'sel_sever_'+item.id">
+                                                <input type="checkbox" name="id_list[]" :id="'inlineCheckbox'+item.id" :value="item.id"  @click="set_fuwu_check(item.id)">
+                                                {{item.name}}<span class="price">￥{{item.jifen}}</span>
+                                            </label>
+                                        <div class="blank10"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {/switch}
+
+
+                        <div class="form-group">
+                            <label for="message-msg">{:lang('智能添加')}</label>
+
+                            <div type="button"  aria-controls="collapseExample" class="btn btn-sm btn-light" style="float: right; position: relative; overflow: hidden">
+                                <i class="fa iconfont icontupian" style="margin-right: 5px; " ></i>识别图片IMEI
+                                <input id="uploadImg" type="file" name="img_sn_imei" style=" position: absolute;opacity:0;width:80px;height:80px;display:block; left:1px; top:0px;z-index: 4; ">
+                            </div>
+
+                            <div class="blank5"></div>
+
+
+                            <textarea class="form-control" id="imeitext" name="imeitext" rows="7" placeholder="{:lang('高级查询提示')}"></textarea>
+
+                        </div>
+
+                        <div class="form-group">
+
+
+
+                            <div class="collapse" id="collapseExample2">
+                                <div class="form-group">
+                                    <label for="dname"></label>
+                                    <input class="form-control" type="text" id="beizhu" name="beizhu" placeholder="统一添加或编辑备注（选填）">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+
+                        <button type="button" class="btn btn-secondary"  style="background: none; border: none; color: #0808FD" data-dismiss="modal">{:lang('取消')}</button>
+                        <button class="btn btn-minw btn-primary ajax-post" style="background: none; border: none; color: #0808FD" target-form="form-builder"
+                                type="submit">{:lang('添加查询订单')}</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

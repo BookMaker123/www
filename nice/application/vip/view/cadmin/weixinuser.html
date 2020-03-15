@@ -1,0 +1,276 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                后台管理
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">微信用户({notempty name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty} 个)</li>
+        </ol>
+    </nav>
+</div>
+{//中间内容}
+
+
+ 
+<div class="content">
+<!--        <div class="alert alert-info alert-dismissable">-->
+<!--                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>-->
+<!--                <h3 class="font-w300 push-15">使用公众号登陆自动注册</h3>                -->
+
+<!--        </div>-->
+    <div class="block" style="margin-bottom: 0px;">
+        <ul class="nav nav-tabs nav-tabs-block js-tabs-enabled" data-toggle="tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="{:url('/vip/cadmin/weixinuser')}">微信用户 <span class="badge badge-pill badge-info">{notempty name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{:url('/vip/cadmin/adminuser')}">注册用户<span class="badge badge-pill badge-success"></span>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+    <div class="block" >
+
+        <div class="block-content">
+
+            {notempty name="$Request.param.soso"}
+
+            <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
+                <span class="text-primary font-w700">搜索内容：</span> <mark>{$Request.param.so}</mark>
+            </div>
+            {/notempty}
+            <div class="block-header">
+                <h3 class="block-title">
+
+                    <form class="2" onsubmit="return check_search();" name="form-builder2" action="{:url('vip/cadmin/weixinuser',['sort'=> $Request.param.sort,'sort2'=> $Request.param.sort2,'search'=>$sort.search])}" method="post">
+                        <div class="input-group input-group-sm" style="width:23%">
+                            <input type="text" class="form-control form-control-alt" id="keyword" name="name" value="{$sort.search}" placeholder="(微信名称/用户名)支持模糊搜索">
+                            <div class="input-group-append">
+                                <button type="submit" class="input-group-text bg-body border-0" >
+                                    <i class="si si-magnifier">
+                                    </i>
+                                </button>
+                                    <a class="ml-3" href="{:url('/vip/cadmin/weixinuser')}" style="color:rgb(8, 8, 253);">重置</a>
+                            </div>
+                        </div>
+                    </form>
+                </h3>
+                <!--      搜索选项内容   >-->
+                <div class="block-options">
+                    <div class="btn-group">
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"  data-target="#setbiaoge">
+                                <i class="fa fa-user-cog"></i> {:lang('表格自定义设置')}
+                            </a>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                            data-action="fullscreen_toggle"></button>
+                </div>
+            </div>
+
+
+            <div class="block-content" id="order_list">
+
+                <!-- new 订单列表内容  包含  start -->
+                <div class="table-responsive" id="table_view">
+                    <table id="general-table" class="table table-builder js-table-sections table-bordered table-striped table-vcenter js-table-checkable js-table-checkable-enabled js-table-sections-enabled">
+                        <thead>
+                        <tr>
+
+<!--                            <th class="text-center" style="width: 30px;">-->
+<!--                                <div class="custom-control custom-checkbox custom-control-primary d-inline-block">-->
+<!--                                    <input type="checkbox" class="custom-control-input" id="check-all" name="check-all">-->
+<!--                                    <label class="custom-control-label" for="check-all"></label>-->
+<!--                                </div>-->
+<!--                            </th>-->
+                            <th class="text-center" style="width: 30px;">微信ID</th>
+                            <th class="text" style="width: 50px;">头像</th>
+                            <th class="text-nowrap" style="width: 40px;">微信名称</th>
+                            <th class="text-nowrap" style="width: 40px;">用户名</th>
+                            <th class="text" style="width: 40px;">性别</th>
+                            <th class="text-nowrap" style="width: 40px;">国家</th>
+                            <th class="text-nowrap" style="width: 40px;">省份</th>
+                            <th class="text-nowrap" style="width: 40px;">城市</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="js-table-sections-header">
+                        {notempty name="data_list.0"}
+                        {volist name="data_list" key ="key" id="vo"}
+                        <tr>
+<!--                            <td class="text-center">-->
+<!--                                <div class="custom-control custom-checkbox custom-control-primary d-inline-block">-->
+<!--                                    <input type="checkbox" class="ids custom-control-input" id="row_{$vo.id}"-->
+<!--                                           name="ids[]" value="{$vo.id}" />-->
+<!--                                    <label class="custom-control-label" for="row_{$vo.id}"></label>-->
+<!--                                </div>-->
+<!--                            </td>-->
+                            <td class="text-center">{$vo.id}</td>
+                            <td class="text"> <img class="image" src="{$vo.headimgurl}"> </td>
+                            <td >{$vo.nickname}</td>
+                            <td >{$vo.username}</td>
+
+                            <td class="text-center">{switch vo.sex}
+                                {case 1}<span class="badge badge-info">男</span>{/case}
+                                {case 2}<span class="badge badge-success">女</span>{/case}
+                                {case 0}<span class="badge badge-secondary">无</span>{/case}
+                                {default /}未知
+                                {/switch}</td>
+                            <td class="text-center">{$vo.country}</td>
+                            <td class="text-center">{$vo.province}</td>
+                            <td class="text-center">{$vo.city}</td>
+                        </tr>
+                        {/volist}
+                        {else /}
+                            <tr class="table-empty">
+                                <td class="text-center empty-info" colspan="7">
+                                    <i class="fa fa-database"></i> 亲，你还未消费，没有消费记录！
+                                </td>
+                            </tr>
+                        {/notempty}
+                        </tbody>
+
+                    </table>
+
+                    <!-- 分页开始 -->
+                    {notempty name="$page"}
+                    {$page|raw}
+                    {/notempty}
+
+                    <div class="blank10"></div>
+                    <!-- 分页 END -->
+
+                </div>
+                <!--  订单列表内容 包含 end   -->
+
+
+                <!--  以下是军原来的表格代码 包含 --------------以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 --------------------------------- -->
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- END Message List -->
+
+</div>
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+<div class="modal fade" id="editlist" tabindex="-1" role="dialog" aria-labelledby="editlist" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-slideright" role="document">
+            <div class="modal-content">
+    
+                <form class="" name="form-edit" action="{:url('vip/cadmin/addjifen')}" method="post">
+    
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary">
+                            <h3 class="block-title">
+                                    <i class="fa fa-fw fa-plus-circle"></i>
+                                    添加积分
+                            </h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+    
+                        <div class="block-content"> 
+                            <div class="form-group">
+                                <label for="example-static-input-plain">用户ID</label>
+                                <input type="text" readonly class="form-control-plaintext editid" id="id" name="id" value="">
+                            </div>         
+                            <div class="form-group dnamecss">
+                                <label for="a">用户积分</label>
+                                <input class="form-control addjifen" type="text" id="addjifen" name="addjifen" value="0.00">
+
+                                <label for="a">冻结积分</label>
+                                <input class="form-control addjifen" type="text" id="freezejifen" name="freezejifen" value="0.00">
+
+                                <label for="a">修改说明</label>
+                                <textarea class="form-control" type="text" id="remark" name="remark"  style=""></textarea>
+                        </div>
+    
+                        </div>
+                        <div class="block-content block-content-full text-right border-top">
+                            <button type="button" class="btn btn-sm btn-link mr-2" data-dismiss="modal">{:lang('取消')}</button>
+                            <button class="btn btn-minw btn-primary ajax-post" target-form="form-edit" type="submit"
+                                id="submit">添加积分</button>
+    
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+<script src="__ADMIN_T__/assets/bootstrap4-editable/js/bootstrap-editable.js"></script>
+<link href="__ADMIN_T__/assets/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+
+
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+
+<script>
+    $('#editlist').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget);
+        var recipient = button.data('lei');
+        var modal = $(this);
+        $('block-header').find('.block-title').html(recipient);
+        //恢复默认
+        modal.find('.addjifen').val(0);
+        modal.find('.editid').val(button.data('pk'));
+
+    });
+
+    function check_search() {
+
+        if ($("#keyword").val().length <= 0) {
+            alert('请输入关键字');
+            return false;
+        }
+
+    }
+</script>
+{/block}

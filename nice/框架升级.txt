@@ -1,0 +1,4 @@
+单独升级 thinkphp
+composer update topthink/framework
+升级全部
+composer update

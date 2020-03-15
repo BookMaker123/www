@@ -1,0 +1,920 @@
+{extend name="layout" /}
+{//中间块https://blog.csdn.net/shi199434/article/details/78828442 表格技术}
+{block name="content"}
+
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/lists')}">{:lang('aiguo标题')}</a>  
+            </li>
+            {notempty name="$dingdan"}
+            <li class="breadcrumb-item"> {$dingdan.dname}{notempty name="$dingdan.jieshao"}-{$dingdan.jieshao}{/notempty}  
+
+             </li>
+            {/notempty}
+            
+            <li class="breadcrumb-item active" aria-current="page">({notempty name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty} {:lang('台')})</li>
+        </ol>
+    </nav>
+</div>
+{//中间内容}
+<div class="content">
+    <!-- Message List -->
+    <div class="block">
+        <div class="block-header">
+            <h3 class="block-title">
+                    <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-fw fa-bell text-success"></i>
+                            <span class="d-none d-sm-inline ml-1">{:lang('监控')}</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu">
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post confirm" target-form="ids" href="{:url('vip/listsn/pjk')}" data-title="监控下单状态和ID状态。" data-tips="需绑定微信【爱果查询】公众号，提醒！" data-confirm="{:lang('开启监控')}" data-cancel="{:lang('取消')}">
+                                <i class="fa fa-fw fa-bell mr-1"></i> {:lang('开启监控')}
+                            </a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post confirm" target-form="ids" href="{:url('vip/listsn/qjk')}" data-title="{:lang('取消监控')}" data-tips="{:lang('取消监控')}" data-confirm="{:lang('取消监控')}"
+                                data-cancel="{:lang('取消')}">
+                                <i class="fa fa-fw fa-bell-slash mr-1"></i> {:lang('取消监控')}
+                            </a>
+                    </div>
+                </div>
+
+                <!--开发中
+                <button class="btn btn-sm btn-light" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    <i class="fa fa-fw fa-check-circle text-success"></i>
+                    <span class="d-none d-sm-inline ml-1">高级查询</span>
+                </button>
+                -->
+                <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="si si-settings text-success"></i>
+                            {//si si-settings far fa-sun text-success}
+                            <span class="d-none d-sm-inline ml-1">{:lang('操作')}</span>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu">   
+                            {notempty name="$biao_json.tt.6"}                          
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post confirm" target-form="ids"
+                                href="{:url('vip/listsn/qchu',['q'=>1])}" data-title="{:lang('标记销售')}" data-tips="{:lang('标记销售')}"
+                                data-confirm="{:lang('标记销售')}" data-cancel="{:lang('取消')}">
+                                <i class="fa fa-star mr-1"></i> {:lang('标记销售')}
+                            </a>
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post confirm" target-form="ids"
+                                href="{:url('vip/listsn/qchu')}" data-title="{:lang('取消销售')}" data-tips="" data-confirm="{:lang('取消销售')}"
+                                data-cancel="{:lang('取消')}">
+                                <i class="fa fa-pause-circle mr-1"></i> {:lang('取消销售')}
+                            </a>
+                            <div role="separator" class="dropdown-divider"></div>
+                            {/notempty}
+        
+                            
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post confirm" target-form="ids"
+                                href="{:url('vip/listsn/pdel')}" data-title="删除所选" data-tips="删除后没办法恢复!"
+                                data-confirm="确定删除（删除后没办法恢复）" data-cancel="不了">
+                                <i class="far fa-fw fa-trash-alt mr-1"></i> {:lang('删除勾选')}
+                            </a>
+                            <div role="separator" class="dropdown-divider"></div>
+                     
+        
+                            <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"  data-target="#setbiaoge">
+                                <i class="fa fa-user-cog"></i> {:lang('个性化设置')}
+                            </a>
+                    </div>
+            </div>
+            </h3>
+            <div class="block-options">
+
+                {notempty name="$Request.param.id"}
+                <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#addsnlist">
+                    <i class="fa fa-fw fa-plus-circle text-info"></i>
+                    <span class="d-none d-sm-inline ml-1">{:lang('智能添加')}</span>
+                </button>
+         
+           
+                {/notempty}
+
+                <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-file-excel text-primary"></i>
+                        <span class="d-none d-sm-inline ml-1">{:lang('表格')}</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                            {notempty name="$Request.param.id"}
+                        <a class="dropdown-item btn btn-sm  btn-light ajax-get exceldown" href="{:url('vip/listsn/excel',['id'=>$Request.param.id])}">
+                            <i class="far fa-file-excel text-info"></i> {:lang('表格下载')}                           
+                        </a>  
+                        {/notempty}                   
+                        <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" target-form="ids" href="{:url('vip/listsn/excelpost')}" data-title="生成Excel表格" data-tips="" data-confirm="生成表格" data-cancel="不了">
+                            <i class="fa fa-fw fa-file-excel text-info"></i> {:lang('表格生成')}
+                        </a>
+                        <div role="separator" class="dropdown-divider"></div>
+
+                        <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"  data-target="#setbiaoge">
+                                <i class="fa fa-user-cog"></i> {:lang('表格自定义设置')}
+                            </a>
+                </div>
+            </div>
+                <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                    data-action="fullscreen_toggle"></button>
+            </div>
+        </div>
+        <div class="block-content">
+      
+            <div class="collapse" id="collapseExample">
+                {//查询结果自动编辑}
+                <code> 开发中...</code>
+            </div>
+            <div class="progress push">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                    style="width: {$tj.chenggong100}%" aria-valuenow="{$tj.chenggong100}" aria-valuemin="0"
+                    aria-valuemax="100">
+                    <span class="font-size-sm font-w600">{:lang('成功')} {$tj.chenggong100}% ({$tj.chenggong})</span>
+                </div>
+            </div>
+
+
+
+            {notempty name="$Request.param.soso"}
+
+            <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
+                <span class="text-primary font-w700">搜索内容：</span> <mark>{$Request.param.so}</mark>
+            </div>
+            {/notempty}
+            <div class="table-responsive">
+         
+                {//table-striped黑色背景/table-bordered边界表/table-hover鼠标滑过变色/ table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0/字体整洁}
+                <table id="general-table" class="table  table-builder table-bordered table-hover table-striped table-vcenter js-table-sections js-table-checkable font-size-sm mb-0">
+                    <thead> 
+                        <tr>
+                            {php}
+                            //获取筛选匹配 是否按钮
+                            //哈哈哈 写出数组 不知道为什么还没成功
+                            if (!empty(request()->param('_filter'))) {
+                            $_filter = request()->param('_filter');
+                            $_filter_arr = array_filter(explode('|', $_filter), 'strlen');
+                            foreach ($_filter_arr as $v1){
+                            $saixuananniu[$v1]='true';
+                            }
+                            }
+                            {/php}
+                            <th class="text-center" style="width: 30px;">
+                                <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+                                    <input type="checkbox" class="custom-control-input" id="check-all" name="check-all">
+                                    <label class="custom-control-label" for="check-all"></label>
+                                </div>
+                            </th>
+                            {notempty name="$biao_json.tt.1"} 
+                            <th class="text-center" style="width: 30px;">#</th>
+                            {/notempty}
+                            {notempty name="$biao_json.tt.2"} 
+                            <th class="text-nowrap" style="width: 30px;">{:lang('编号')}</th>
+                            {/notempty}
+                            {notempty name="$biao_json.tt.3"} 
+                            <th class="text-nowrap" style="width: 30px;">{:lang('监控')}
+                            {/notempty} 
+
+                            </th>
+                            <th class="text-nowrap">
+                                {:lang('imeiorsn')}                           
+                                {notempty name="$Request.param.id"}
+                                {// 进度排序功能}
+                                {php}
+                                        $_by = input('param._by') == 'asc' ? 'desc' : 'asc';
+                                        $_param = array_merge(input('get.'), ['_by' => $_by, '_order' => 'bao_guobaotime']);
+                                        if ($_param) {
+                                            $_get = [];
+                                            foreach ($_param as $key => $value) {
+                                                $_get[] = $key. '=' .$value;
+                                            }
+                                            $_get = '?'.implode('&', $_get);
+                                        }
+                                {/php}
+                                {php}$_by = input('param._by') == 'asc' ? 'desc' : 'asc';{/php}
+                                <a class="pull-right"  href="{$Request.baseUrl}{$_get}" data-toggle="tooltip" data-original-title="保修时间排序"> 
+                                            {php}
+                                            if (input('param._order') == 'bao_guobaotime') {
+                                                echo input('param._by') == 'asc' ? '<i class="fa fa-caret-up"></i>' : '<i class="fa fa-caret-down"></i>';
+                                            } else {
+                                                echo '<i class="fa fa-sort text-muted"></i>';
+                                            }
+                             {/php}  
+                                <a href="javascript:void(0);" class="field-filter pull-right" data-filter="t1" data-type="checkbox" data-options='' data-map='{"did":"{$Request.param.id}"}' data-field="t1" data-table="tiamo1" data-toggle="tooltip"><i
+                                        class='fa fa-filter {empty name="$saixuananniu.t1"}text-muted{/empty}'></i></a>
+                                {/notempty}
+                               
+                                    <div class="btn-group">
+
+                                            {if UID == 1  } 
+                                            <button type="button" class="badge badge-light btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fab fa-searchengin"></i>
+                                            <span class="">高级查询</span>
+                                            {/if}
+
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item btn btn-sm  btn-light" id="startcheckid" href="javascript:void(0)" cmd="goon" c-type='id'>
+                                                <i class="fa fa-user-lock text-info"></i></i> 查询ID激活锁                                                          
+                                             </a>
+                                             <div role="separator" class="dropdown-divider"></div>
+                                             <a class="dropdown-item btn btn-sm  btn-light" id="startcheckimeiorsn" href="javascript:void(0)" cmd="goon" c-type='imeiorsn'>
+                                                <i class="fa fa-fw fa-exchange-alt text-info"></i></i> IMEI/序列号互转                                                           
+                                             </a>    
+
+                                </div>
+                            </div>
+                
+                            </th>
+                            {notempty name="$biao_json.tt.4"}     
+                            <th class="text-nowrap">{:lang('状态进度')}
+                                <a class="badge badge-light" href="javascript:void(0)" id="startrepairs" cmd="goon" c-type='wx'><i class="fa fa-play text-primary"></i>{:lang('批量查询')}</a>
+                                {notempty name="$Request.param.id"}
+                                <a href="javascript:void(0);" class="field-filter " data-filter="t2" data-type="checkbox" data-options='' data-map='{"did":"{$Request.param.id}"}' data-field="t2"  data-table="tiamo1" data-toggle="tooltip" >
+                                    <i  class='fa fa-filter {empty name="$saixuananniu.t2"}text-muted{/empty}'></i></a>
+                                {/notempty}
+                            </th>
+                            <th class="text-nowrap">{:lang('进度时间')}   
+                                    {notempty name="$Request.param.id"}                               
+                                    {// 进度排序功能}
+                                    {php}
+                                                $_by = input('param._by') == 'asc' ? 'desc' : 'asc';
+                                                $_param = array_merge(input('get.'), ['_by' => $_by, '_order' => 'wx_time']);
+                                                if ($_param) {
+                                                    $_get = [];
+                                                    foreach ($_param as $key => $value) {
+                                                        $_get[] = $key. '=' .$value;
+                                                    }
+                                                    $_get = '?'.implode('&', $_get);
+                                                }                                  
+                                                if (input('param._order') == 'wx_time') {
+                                                    $paixu= input('param._by') == 'asc' ? 'fa fa-caret-up' : 'fa fa-caret-down';
+                                                    $paixu_name=input('param._by') == 'asc' ? '从前到后排序' : '从后到前排序';
+                                                } else {
+                                                    $paixu= 'fa fa-sort text-muted';
+                                                    $paixu_name='从后到前排序';
+                                                }
+
+                                 {/php}<a class=""  href="{$Request.baseUrl}{$_get}" data-toggle="tooltip" data-original-title="{$paixu_name}">   <i class="{$paixu}"></i>  </a>
+                                 {/notempty}
+                            </th>
+                            <th class="text-nowrap">{:lang('新机imei-sn')}</th>
+
+                            {/notempty} 
+                            {notempty name="$biao_json.tt.5"}  
+                            <th class="text-nowrap" style="width: 300px;">{:lang('客户')}</th>
+                            {/notempty}
+                            {notempty name="$biao_json.tt.6"}  
+                            <th class="text-nowrap" style="width: 100px;">{:lang('进货价')}</th>
+                            <th class="text-nowrap" style="width: 100px;">{:lang('出货价')}</th>
+                            <th class="text-nowrap" style="width: 100px;">{:lang('销售')}
+                                {notempty name="$Request.param.id"}
+                                <a href="javascript:void(0);" class="field-filter" data-filter="t3" data-type="checkbox"
+                                    data-options='' data-map='{"did":"{$Request.param.id}"}' data-field="t3"
+                                    data-table="tiamo1" data-toggle="tooltip" data-original-title="筛选销售状态"><i
+                                        class='fa fa-filter {empty name="$saixuananniu.t3"}text-muted{/empty}'></i></a>
+                                {/notempty}</th>
+                            {/notempty}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {notempty name="$data_list"}
+                        {volist name="data_list" key ="key" id="vo"}
+                        {//js-table-sections-header 点击展开}
+                    <tbody class="js-table-sections-header">
+                        <tr>
+                            <td class="text-center">
+                                <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+                                    <input type="checkbox" class="ids custom-control-input" id="row_{$vo.id}"
+                                        name="ids[]" value="{$vo.id}" />
+                                    <label class="custom-control-label" for="row_{$vo.id}"></label>
+                                </div>
+                            </td>
+                            {notempty name="$biao_json.tt.1"}
+                            <td class="text-center">{$key+input('param.p', '1')*$biao_json.num-$biao_json.num}</td>
+                            {/notempty}
+                            {notempty name="$biao_json.tt.2"}
+                            <td class="text-center">{$vo.udid}</td>
+                            {/notempty}
+                            {notempty name="$biao_json.tt.3"}
+                            <td class="text-center">
+                                <div class="custom-control custom-switch custom-control-primary mb-1 switch">
+                                    <input type="checkbox" class="custom-control-input" id="e-jkong{$vo.id}"
+                                        name="e-jkong{$vo.id}" data-table="tiamo4" data-id="{$vo.id}"
+                                        data-field="tiamo4" {eq name="$vo.jkztai" value="1" }checked="" {/eq}> <label
+                                        class="custom-control-label" for="e-jkong{$vo.id}"
+                                        title="开启监控/关闭">&nbsp;</label>
+                                </div>
+                            </td>
+                            {/notempty}
+
+                            <td class="text-nowrap">
+
+                                {//个性化设置型号}
+                                {switch $biao_json.imeiorsn}
+                                        {case 1}
+                                            {// 支持搜索高亮 优先IMEI}
+                                            {notempty name="$vo.imei"}
+                                            <span class="badge badge-success">
+                                                {:str_replace($Request.param.so,'<code>'.$Request.param.so.'</code>',$vo.imei)}</span>
+                                            {else/}
+                                            <span class="badge badge-success">
+                                                {:str_replace($Request.param.so,'<code>'.$Request.param.so.'</code>',$vo.sn)}</span>
+                                            {/notempty}
+                                        {/case}
+                                        {case 2}
+                                            {// 支持搜索高亮 优先sn}
+                                            {notempty name="$vo.sn"}
+                                            <span class="badge badge-success">
+                                                {:str_replace($Request.param.so,'<code>'.$Request.param.so.'</code>',$vo.sn)}</span>
+                                            {else/}
+                                            <span class="badge badge-success">
+                                                {:str_replace($Request.param.so,'<code>'.$Request.param.so.'</code>',$vo.imei)}</span>
+                                            {/notempty}
+                                        {/case}
+                                        {case 3}
+                                            {// 支持搜索高亮 IMEI Sn同时}
+                                            {notempty name="$vo.imei"}
+                                            <span class="badge badge-success">
+                                                {:str_replace($Request.param.so,'<code>'.$Request.param.so.'</code>',$vo.imei)}</span>
+                                            {/notempty}
+                                            {notempty name="$vo.sn"}
+                                            <span class="badge badge-success">
+                                                {:str_replace($Request.param.so,'<code>'.$Request.param.so.'</code>',$vo.sn)}</span>
+                                            {/notempty}
+                                        {/case}
+                                        {default /}
+                                {/switch}
+
+
+                                {notempty name="$vo.wid"}
+                                {php}
+                                //可以支持多个维修ID
+                                $wid_arr= explode(" ",$vo['wid']);
+                                {/php}
+                                {volist name="$wid_arr" key='widkey' id="widvo"}
+                                <a href="javascript:void(0);" class="field-wid  badge badge-pill badge-primary"
+                                    data-filter="role" data-type="checkbox" data-options='' data-map=''
+                                    data-field-display="role" data-wid="{$widvo}" data-id="{$vo.id}"
+                                    data-toggle="tooltip">{:str_replace($Request.param.so,'<mark>'.$Request.param.so.'</mark>',$widvo)}</a>
+                                {/volist}
+                                {/notempty}
+
+                                {notempty name="$vo.bufangchulai"}
+                                <a title='查看详细进度' icon="fa fa-plus-circle" class="badge badge-pill badge-primary pop"
+                                    href="{:url('vip/listsn/chaxun',['id'=>$vo.id])}"
+                                    data-layer="{&quot;type&quot;:2,&quot;area&quot;:[&quot;370px&quot;,&quot;85%&quot;],&quot;shadeClose&quot;:true,&quot;isOutAnim&quot;:false,&quot;anim&quot;:-1}">
+
+                                    {:str_replace($Request.param.so,'<mark>'.$Request.param.so.'</mark>',$vo.wid)}
+                                </a>
+                                {/notempty}
+
+                                {notempty name="$vo.xinghao"}
+                                {//个性化设置型号}
+                                {switch $biao_json.xhao}
+                                    {case 1}<code>{$vo.xinghao.0} {$vo.xinghao.1} {$vo.xinghao.2} </code>{/case}
+                                    {case 2}<code>{$vo.xinghao.0} {$vo.xinghao.1} {$vo.xinghao.2} {$vo.xinghao.3} </code>{/case}
+                                    {case 3}<code>{$vo.xinghao.0} {$vo.xinghao.1} {$vo.xinghao.2} {$vo.xinghao.3} {$vo.xinghao.4}</code>{/case}
+                                    {default /}
+                                {/switch}  
+                                {/notempty}
+
+                                {notempty name="$vo.bao_json"}
+                                {php}
+                                $bao_arr=json_decode($vo['bao_json'],true);
+                                $datetime1 = new DateTime(date('Y-m-d'));
+                                $datetime2 = new DateTime(date($bao_arr['d']));
+                                $interval = $datetime1->diff($datetime2);
+                                $tian = $interval->format('%R%a天');
+                                {/php}
+
+                                <span class="badge badge-pill badge-info">{$bao_arr.d} {$tian}</span>
+                                {/notempty}
+
+                                <code><a href="javascript:void(0);" title='备注' class="text-edit" data-table="tiamo1" data-placeholder="填写备注" data-type="text" data-pk="{$vo.id}" data-name="tiamo1">{$vo.kh_beizhu}</a> </code>
+                                {notempty name="$vo.bao_lei"}
+                                {php}
+
+                                switch ($vo['bao_lei']) {
+                                    case 'T':
+                                        echo $baolei= '<span class="badge badge-pill badge-success">更换</span>';
+                                        break;
+                                    case 'X':
+                                    echo  $baolei= '<span class="badge badge-pill badge-danger">错误</span>';
+                                        break;
+                                    case 'WG':
+                                    echo  $baolei= '<span class="badge badge-pill badge-warning">未购买验证</span>';
+                                        break;
+                                    case 'WJ':
+                                    echo  $baolei= '<span class="badge badge-pill badge-warning">未激活</span>';
+                                        break;
+                                    case 'JC':
+                                    echo   $baolei= '<span class="badge badge-pill badge-warning">借出</span>';
+                                        break;
+                                    case 'PD':
+                                    echo  $baolei= '<span class="badge badge-pill badge-primary">AC+</span>';
+                                        break;
+                                    case 'PE':
+                                        echo  $baolei= '<span class="badge badge-pill badge-primary">AC+</span>';
+                                            break;
+                                    case 'PP':
+                                    echo $baolei= '<span class="badge badge-pill badge-success">AC</span>';
+                                    break;
+                                    case 'LI':
+                                    echo $baolei= '<span class="badge badge-pill badge-success">普保</span>';
+                                    break;
+                                    case 'OO':
+                                    echo $baolei= '<span class="badge badge-pill badge-secondary">过保</span>';
+                                        break;
+                                    default:
+                                        $baolei='';
+                                }
+                                if($vo['bao_guobaotime']!=null&& $vo['bao_guobaotime']!=0){
+                                    $datetime1 = new DateTime(date('Y-m-d'));
+                                    $datetime2 = new DateTime(date($vo['bao_guobaotime']));
+                                    $interval = $datetime1->diff($datetime2);
+                                    $tian = $interval->format('%R%a天');
+                                    echo " <span class='badge badge-pill badge-info'>$tian</span>";
+                                }                                                           
+                                {/php}                                  
+                                {/notempty}
+                                {notempty name="$vo.bao_guanhuan"}{$vo.bao_guanhuan=='1'?='<span class="badge badge-dark">官换</span>'}{/notempty}  
+                                <span class="" id="tiamoo-{$vo.id}id"> </span> 
+                                <span class="" id="tiamoo-{$vo.id}imeiorsn"> </span>                                  
+                            </td>
+                            {notempty name="$biao_json.tt.4"} 
+                            <td class="text-nowrap">
+                                                              
+                                    <code><a href="javascript:void(0);" title='快速查询状态或进度'  id="dchawx"  name="{$vo.id}"><i class="fa fa-fw fa-search-plus">{//fa fa-fw fa-search-plus}</i></a></code>   
+                                    <span class="" id="tiamoo-{$vo.id}wx"> 
+                                        
+                                    {empty name="$vo.wx_ztai_id_arr"}{else /}<span
+                                        class="badge badge-{$vo.wx_ztai_id_arr.2}">{$vo.wx_ztai_id_arr.1}</span>{/empty}
+                                    {notempty name="$vo.wx_ctime_str"}<code>{$vo.wx_ctime_str}</code>{/notempty}
+
+                                    {php} 
+                                        if (strstr($vo['wx_json'], "FINL")) {
+                                            echo '<small class="text-muted">完成</small>';
+                                        }elseif (strstr($vo['wx_json'], "PRES")) {
+                                            echo '<small class="text-muted">进行中</small>';
+                                        }                                    
+                                    {/php} 
+                                </span>                                
+                            </td>
+                            <td class="text-nowrap">
+                                {//最新进度时间}
+                                {notempty name="$vo.wx_time"}
+                                {:date('Y-m-d H:i:s',$vo['wx_time'])}
+                                <code>{$vo.wx_arr2.zuixinjindu_jiange}</code>
+                                {/notempty}                        
+                            </td>
+                            <td class="text-nowrap">                               
+                                <code>
+                                    <a href="javascript:void(0);" title='' class="text-edit" data-table="tiamo6" data-placeholder="{:lang('新机imei-sn')}" data-type="text" data-pk="{$vo.id}" data-name="tiamo6">{$vo.newimeiorsn}</a>
+                                    </code>
+                            </td>
+                            {/notempty} 
+                            {notempty name="$biao_json.tt.5"} 
+                            <td class="text-nowrap">
+                                <code>
+                                  <a href="#" id="kehus" data-type="kehus" class="kehus"  data-pk="{$vo.id}" data-title="客户信息" data-value='{name: "{$vo.kh_name}", phone: "{$vo.kh_phone}", kuaidi: "{$vo.kh_kuaidi}"}'></a>
+                                </code>
+                            </td>
+                            {/notempty} 
+                            {notempty name="$biao_json.tt.6"} 
+                            <td class="font-size-sm">
+                                {notempty name="$vo.money_j"}<code>￥</code>{/notempty}
+                                <code>
+                                    <a href="javascript:void(0);" title='进货价' class="text-edit" data-table="tiamo2" data-placeholder="填写进货价" data-type="text" data-pk="{$vo.id}" data-name="tiamo2">{$vo.money_j}</a>
+                                    </code>
+                            </td>
+                            <td class="font-size-sm">
+                                {notempty name="$vo.money_c"}<code>￥</code>{/notempty}
+                                <code>
+                                    <a href="javascript:void(0);" title='出货价' class="text-edit" data-table="tiamo3" data-placeholder="填写出货价" data-type="text" data-pk="{$vo.id}" data-name="tiamo3">{$vo.money_c}</a>
+                                </code>
+                            </td>
+                            <td class="font-size-sm">
+                                <div
+                                    class="custom-control custom-checkbox custom-control-success  custom-control-lg mb-1 switch">
+                                    <input type="checkbox" class="custom-control-input" id="e-c{$vo.id}"
+                                        name="e-c{$vo.id}" data-table="tiamo5" data-id="{$vo.id}" data-field="tiamo5"
+                                        {eq name="$vo.chuhuo" value="1" }checked="" {/eq}> <label
+                                        class="custom-control-label" for="e-c{$vo.id}" title="设置销售状态">&nbsp;</label>
+                                </div>
+                            </td>
+                            {/notempty} 
+
+                        </tr>
+
+                    <tbody>
+                        <tr>
+                            <td class="text-center"></td>
+                            {notempty name="$biao_json.tt.1"}<td class="text-center"></td>{/notempty}   
+                            {notempty name="$biao_json.tt.2"}<td class="text-center"></td>{/notempty}                           
+                            {notempty name="$biao_json.tt.3"}<td class="text-center"></td>{/notempty}
+                            
+                            <td class="font-size-sm">
+                                <ul class="list-unstyled">
+                                    <li>设备信息：
+                                        <ul class="fa-ul">
+                                            <li>
+                                                <span class="fa-li">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </span>
+                                                IMEI：{$vo.imei}
+                                            </li>
+                                            <li>
+                                                <span class="fa-li">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </span>
+                                                序列号：{$vo.sn}
+                                            </li>
+                                            <li>
+                                                <span class="fa-li">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </span>
+                                                维修ID：{$vo.wid}
+                                            </li>
+                                            <li>
+                                                <span class="fa-li">
+                                                    <i class="fa fa-angle-right"></i>
+                                                </span>
+                                                查找我的iPhone：
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>保修状态：{notempty name="$vo.bao_lei"} {php}echo $baolei{/php}{/notempty}
+                                        <ul class="fa-ul">
+                                            <li>激活状态：{notempty name="$vo.bao_lei"}{$vo['bao_lei']=='WJ' ? "未激活" : '已激活'}{/notempty}</li>
+                                            <li>是否官换：{notempty name="$vo.bao_guanhuan"}{$vo.bao_guanhuan=='1'?='是'}{$vo.bao_guanhuan=='2'?='否'}{/notempty}</li>
+                                            <li>购买日期：{notempty name="$vo.bao_guobaotime"}
+                                                {php}
+                                                //根据保修类型 判断减去时间
+                                                    switch ($vo['bao_lei']) {                                  
+                                                        case 'PD':
+                                                            echo @date('Y年m月d日', strtotime ("-729 day", strtotime($vo['bao_guobaotime'])));
+                                                            break;
+                                                        case 'PE':
+                                                            echo @date('Y年m月d日', strtotime ("-729 day", strtotime($vo['bao_guobaotime'])));
+                                                        break;
+                                                        case 'PP':
+                                                            echo @date('Y年m月d日', strtotime ("-729 day", strtotime($vo['bao_guobaotime'])));
+                                                        break;
+                                                        case 'LI':
+                                                            echo @date('Y年m月d日', strtotime ("-364 day", strtotime($vo['bao_guobaotime'])));
+                                                        break;
+                                                        case 'OO':
+                                                            echo @date('Y年m月d日', strtotime ("-364 day", strtotime($vo['bao_guobaotime'])));
+                                                        break;
+                                                        default:
+                                                        break;                                                      
+                                                     }
+                                
+                                                {/php}
+
+                                                
+                                                {/notempty} </li>
+                                            <li>过保日期：{notempty name="$vo.bao_guobaotime"}{$vo.bao_guobaotime|strtotime|date='Y年m月d日'}
+                                              {/notempty} 
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </td>
+                            {notempty name="$biao_json.tt.4"}
+                            <td class="font-size-sm"></td>
+                            <td class="font-size-sm text-nowrap" >
+                                <ul class="fa-ul">
+                                    {notempty name="$vo.wx_arr2.buzou1_time"}
+                                    <li>
+                                        <span class="fa-li">
+                                            <i class="fa fa-angle-right"></i>
+                                        </span>
+
+                                    <li>
+                                        {notempty name="$vo.wx_sqtime"}
+                                            申请时间：{:date('Y-m-d H:i:s',$vo['wx_sqtime'])} 
+                                            {else /}
+                                            申请服务： {:date('Y-m-d H:i:s',$vo['wx_arr2']['buzou1_time'])}
+                                        {/notempty}
+                                       
+                                    </li>
+                                    {/notempty}
+                                    {notempty name="$vo.wx_arr2.buzou2_time"}
+                                    <li>
+                                        <span class="fa-li">
+                                            <i class="fa fa-angle-right"></i>
+                                        </span>
+
+                                    <li>诊断时间：{:date('Y-m-d H:i:s',$vo['wx_arr2']['buzou2_time'])}</li>
+                                    </li>
+                                    {/notempty}
+                                    {notempty name="$vo.wx_arr2.buzou3_time"}
+                                    <li>
+                                        <span class="fa-li">
+                                            <i class="fa fa-angle-right"></i>
+                                        </span>
+
+                                    <li>完成时间：{:date('Y-m-d H:i:s',$vo['wx_arr2']['buzou3_time'])}</li>
+                                    </li>
+                                    {/notempty}
+                                </ul>
+                            </td>
+                            <td class="font-size-sm"></td>
+                            {/notempty}
+                            {notempty name="$biao_json.tt.5"} <td class="text-center"></td>{/notempty}
+                            {notempty name="$biao_json.tt.6"}
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            {/notempty} 
+                        </tr>
+                    </tbody>
+                    </tbody>            
+                    {/volist}
+                       
+                    {else /}
+                    <tbody>
+                        <tr class="table-empty">
+                            <td class="text-center empty-info" colspan="10">
+                                {notempty name="$Request.param.id"}
+                                <button type="button" class="btn btn-sm btn-light" data-toggle="modal"
+                                    data-target="#addsnlist">
+                                    <i class="fa fa-database"></i> 当前列表没有管理设备，点击我或者右上角<code>{:lang('智能添加')}</code>按钮。
+                                </button>
+                                {else /}
+                                {/notempty}
+                                {notempty name="$Request.param.soso"}
+                                <i class="fa fa-database"></i> 您搜索的内容：<code>{$Request.param.so}</code>为空
+                                {/notempty}
+                            </td>
+                        </tr>
+                    </tbody>
+                    {/notempty}
+                    </tbody>
+                    </tbody>
+                </table>
+                {//分页}        
+                    {notempty name="$page"}               
+                        {$page|raw}               
+                    {/notempty}
+            </div> 
+        </div>
+    </div>
+
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+<div class="modal fade" id="addsnlist" tabindex="-1" role="dialog" aria-labelledby="addsnlist" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">{//modal-dialog-top 上 modal-lg放大点}
+        <div class="modal-content">
+            <form class="" name="form-builder" action="{:url('vip/listsn/add',['did'=>$Request.param.id])}"
+                method="post">
+                <div class="block block-themed block-transparent mb-1">
+                    <div class="block-header bg-success">
+                        <h3 class="block-title">
+                            <i class="fa fa-pencil-alt mr-1"></i> {:lang('智能添加')}
+                        </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+             
+
+                    <div class="block-content">
+     
+                        <div class="form-group">
+                            <label for="message-msg">{:lang('智能添加')}</label>
+                            <textarea class="form-control" id="textbox" name="textbox" rows="8" placeholder="{:lang('智能添加提示')}"></textarea>
+                        
+                        </div>
+                        <div class="form-group">
+                               
+                            
+
+                      
+                        <button class="btn btn-sm btn-light" type="button" data-toggle="collapse"
+                        data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                        更多
+                        </button>
+
+                        <button class="btn btn-sm btn-light" type="button" data-toggle="modal"
+                            data-target="#modal-addsnlist" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="fa fa-book text-muted mr-1"></i>{:lang('智能添加说明')}
+                        </button>
+
+                       
+                            <div class="collapse" id="collapseExample2">
+                                <div class="form-group">
+                                    <label for="dname"></label>
+                                    <input class="form-control" type="text" id="beizhu" name="beizhu" placeholder="统一添加或编辑备注（选填）">
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+                          <!-- 
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{:lang('取消')}</button>
+                         -->  
+                        <button class="btn btn-minw btn-primary ajax-post" target-form="form-builder"
+                            type="submit">{:lang('智能添加')}</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{//个性化设置}
+<div class="modal fade" id="setbiaoge" tabindex="-1" role="dialog" aria-labelledby="setbiaoge" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">{//modal-dialog-top 上 modal-lg放大点}
+            <div class="modal-content">
+                <form class="" name="form-builder21" action="{:url('vip/listsn/getgexinghua',['did'=>$Request.param.id])}" method="post">
+                    <div class="block block-themed block-transparent mb-1">
+                        <div class="block-header bg-success">
+                            <h3 class="block-title">
+                                <i class="fa fa-pencil-alt mr-1"></i> 设置个性化
+                            </h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+    
+                        <div class="block-content">
+                                <div class="form-group">
+                                        <label class="d-block">每页显示条数<code>设置值大会影响页面订单速度</code></label>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline1" name="tiaoshu" value='100' {$biao_json.num==100?='checked'}>
+                                            <label class="custom-control-label" for="example-rd-custom-inline1">100条</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline2" name="tiaoshu" value='200' {$biao_json.num==200?='checked'}>
+                                            <label class="custom-control-label" for="example-rd-custom-inline2">200条</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline3" name="tiaoshu" value='300' {$biao_json.num==300?='checked'}>
+                                            <label class="custom-control-label" for="example-rd-custom-inline3">300条</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" class="custom-control-input" id="example-rd-custom-inline5" name="tiaoshu" value='500' {$biao_json.num==500?='checked'}>
+                                                <label class="custom-control-label" for="example-rd-custom-inline5">500条</label>
+                                            </div>
+                                    </div>
+
+                                <div class="form-group">
+                                        <label>列表IMEI/序列号显示规则</label>
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio" class="custom-control-input" id="example-rd-custom1" name="imeiorsn" value='1' {$biao_json.imeiorsn==1?='checked'}>
+                                            <label class="custom-control-label" for="example-rd-custom1">优先显示IMEI <span class="badge badge-success"> 354845*****1849</span></label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio" class="custom-control-input" id="example-rd-custom2" name="imeiorsn" value='2' {$biao_json.imeiorsn==2?='checked'}>
+                                            <label class="custom-control-label" for="example-rd-custom2">优先显示序列号 <span class="badge badge-success"> F17*****JCL6</span></label>
+                                        </div>
+                                        <div class="custom-control custom-radio mb-1">
+                                            <input type="radio" class="custom-control-input" id="example-rd-custom3" name="imeiorsn" value='3' {$biao_json.imeiorsn==3?='checked'}>
+                                            <label class="custom-control-label" for="example-rd-custom3">同时显示IMEI和序列号<span class="badge badge-success"> 354845*****1849</span> <span
+                                                    class="badge badge-success"> F17*****JCL6</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <label>型号设置</label>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" class="custom-control-input" id="setxhao1" name="xhao" value="1" {$biao_json.xhao==1?='checked'}>
+                                                <label class="custom-control-label" for="setxhao1">简单
+                                                    <code> iPhone X 深空灰色 256GB</code></label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" class="custom-control-input" id="setxhao2" name="xhao" value="2" {$biao_json.xhao==2?='checked'}>
+                                                <label class="custom-control-label" for="setxhao2">详细
+                                                    <code> iPhone X 深空灰色 256GB A1865</code></label>
+                                            </div>
+                                            <div class="custom-control custom-radio mb-1">
+                                                <input type="radio" class="custom-control-input" id="setxhao3" name="xhao" value="3" {$biao_json.xhao==3?='checked'}>
+                                                <label class="custom-control-label" for="setxhao3">高级
+                                                    <code> iPhone X 深空灰色 256GB A1865 4G三网</code></label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                                <label class="d-block">列显示 <code>根据您的经销商管理需要设置列表</code> </label>
+                                                {volist name="biaogezaidingyi" key ="key1" id="vo1"}
+
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                        {php}$achecked='';
+                                                        if(array_key_exists($key1,$biao_json['tt'])){
+                                                            $achecked='checked'  ;                                                     
+                                                        }                                                       
+                                                        {/php}
+                                                        <input type="checkbox" class="custom-control-input" id="liexianshi{$key1}" name="t[{$key1}]" {$achecked}>
+                                                        <label class="custom-control-label" for="liexianshi{$key1}">{$vo1}</label>
+                                                    </div>
+                                                {/volist}
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="d-block">表格下载格式 <code>根据需要下载Excel表格格式</code> </label>
+                                                {volist name="exxiazaidingyi" key ="key2" id="vo2"}
+                                                <div class="custom-control custom-checkbox custom-control-inline">
+                                                    {php}$bchecked='';
+                                                    if(array_key_exists($key2,$biao_json['bb'])){
+                                                        $bchecked='checked'  ;                                                     
+                                                    }                                                       
+                                                    {/php}
+                                                    <input type="checkbox" class="custom-control-input" id="exbiaoge{$key2}" name="b[{$key2}]" {$bchecked}>
+                                                    <label class="custom-control-label" for="exbiaoge{$key2}">{$vo2}</label>
+                                                </div>
+                                                {/volist}                                
+                                            </div>                                      
+                            <div class="form-group">
+    
+                            </div>
+                        </div>
+                        <div class="block-content block-content-full text-right border-top">                            
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button class="btn btn-minw btn-primary ajax-post" target-form="form-builder21" type="submit">设置</button>
+    
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+
+{//添加说明}
+<div class="modal fade" id="modal-addsnlist" tabindex="-1" role="dialog" aria-labelledby="modal-addsnlist"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">智能添加帮助</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <p>1.<code>自动识别各种格式！</code></br>
+                        DNPQVM**GRY7</br>
+                        355420079898722 DNPQVMM**RY7</br>
+                        355420079898712 F19QQD4**RY7 G317244333 </br>
+                    </p>
+                    <p>更多格式，自己去发掘！反正不收费！
+                    </p>
+                    <p><code>根据您的数据智能识别添加或编辑，给您人性化的体验！</code></p>
+                </div>
+                <div class="block-content block-content-full text-right bg-light">
+                    <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">明白</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{//模块}
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/jm/t00001.js"></script>
+
+<script src="__ADMIN_T__/assets/js/plugins/editable/js/bootstrap-editable.js"></script>
+<link href="__ADMIN_T__/assets/js/plugins/editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+<script type="text/javascript">
+var wxlist = [{volist name="data_list" id="vo" }"{$vo.id}", {/volist}];
+var advancewxlist = []
+</script>
+<script src="__ADMIN_T__/assets/js/kehu.js"></script>
+<!--<script src="__ADMIN_T__/assets/js/jm/c00001.js"></script>-->
+    <script src="__ADMIN_T__/assets/js/check.js"></script>
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+{/block}

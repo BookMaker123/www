@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>爱果 - 维修管理&amp; 经销商管理</title>
+    <meta name="keywords" content="苹果维修管理 iPhone ipad 维修管理 Apple经销商管理" />
+    <meta name="description" content="爱果是一款专业为苹果华为等手机经销商打造的管理系统。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Tjun">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css">
+</head>
+
+<body>
+    <div id="page-container">
+        <main id="main-container">
+
+
+
+            <div class="bg-image"
+                style="background-image: url('__ADMIN_T__/assets/img/apple-is-getting-normal-1.jpg');">
+                <div class="row no-gutters bg-primary-op">
+                    <div class="hero-static col-md-6 d-flex align-items-center bg-white">
+                        <div class="p-3 w-100">
+                            <div class="mb-3 text-center">
+
+                                <a class="link-fx font-w800 font-size-h1" href="index.html">
+                                    <span class="text-dark">爱果</span><span class="text-primary">VIP</span>
+                                </a>
+                                <p class="text-uppercase font-w700 font-size-sm text-muted">aiguovip</p>
+                            </div>
+                            <div class="row no-gutters justify-content-center">
+
+                                {//找回密码弹窗}
+                                <div class="modal fade " id="modal-block-normal" tabindex="-1" role="dialog" aria-labelledby="modal-block-normal" style=" padding-right: 17px;" aria-modal="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form class="js-validation" name="form1-user" action="{:url('vip/login/edit_pwd')}" method="post">
+                                            <div class="block block-themed block-transparent mb-0">
+                                                <div class="block-header bg-primary-dark">
+                                                    <h3 class="block-title">
+                                                        <i class="fa fa-user-edit mr-1"></i> 找回密码
+                                                    </h3>
+                                                    <div class="block-options">
+                                                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                                            <i class="fa fa-fw fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="block-content font-size-sm">
+                                                    <div class="form-group">
+                                                            <input type="tel" id="phone_tel" class="form-control form-control-lg form-control-alt" name="phone" placeholder="手机号码">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control form-control-lg form-control-alt" id="btn_pwd" name="password" placeholder="新密码">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <span id="smscode" class="input-group-text border-0 pull-right" style="background-color: #5c80d1;color:#fff;cursor: pointer;">获取验证码</span>
+                                                        <input type="text" class="form-control form-control-lg form-control-alt col-5" name="code" placeholder="手机验证码" >
+                                                    </div>
+                                                </div>
+                                                <div class="block-content block-content-full text-right border-top">
+                                                    <button type="button" class="btn btn-sm btn-light" data-dismiss="modal" style="background: none; border: none; color: rgb(8, 8, 253);">关闭</button>
+                                                    <button type="submit" class="btn btn-sm btn-primary ajax-post" target-form="form1-user" data-dismiss="modal" style="background: none; border: none; color: rgb(8, 8, 253);"><i class="fa fa-check mr-1"></i>提交</button>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {//找回密码弹窗}
+                                <div class="col-sm-8 col-xl-6">
+                                    <form class="js-validation-signin form-horizontal push-30-t signin-form"
+                                        name="signin-form" action="{:url('@vip/login')}" method="POST">
+                                        <div class="py-3">
+                                            <div class="form-group">
+                                            <ul class="nav nav-tabs nav-tabs-block js-tabs-enabled" data-toggle="tabs" role="tablist">
+                                                <li id="btn_username" class="nav-link col-6 text-center" style="width:50%">
+                                                   用户名登录
+                                                </li>
+                                                <li id="btn_phone" class="nav-link  col-6 text-center" style="width:50%">
+                                                  手机号登录
+                                                </li>
+
+                                            </ul>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control form-control-lg form-control-alt"
+                                                    id="username" name="username" placeholder="爱果用户名">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password"
+                                                    class="form-control form-control-lg form-control-alt" id="password"
+                                                    name="password" placeholder="密码">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <img src="{:url('verify')}" class="pull-right col-7" id="captchacode"
+                                                    style="cursor: pointer; max-width: 180px"
+                                                    onclick="this.src='{:url('verify')}?d='+Math.random();" title="点击刷新"
+                                                    alt="captcha" />
+                                                <input type="text"
+                                                    class="form-control form-control-lg form-control-alt col-5"
+                                                    id="captcha" name="captcha" placeholder="验证码">
+                                            </div>
+                                            {//
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                        id="login-remember" name="login-remember">
+                                                    <label class="custom-control-label font-w400"
+                                                        for="login-remember">自动登录</label>
+                                                </div>
+                                            </div>
+                                            }
+
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-block btn-primary">
+                                                <i class="fa fa-fw fa-sign-in-alt mr-1"></i> 登录
+                                            </button>
+                                            <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                                <a class="btn btn-sm btn-light d-block d-lg-inline-block mb-1"
+                                                                   href="javascript:void(0)" data-toggle="modal"
+                                                                   data-target="#edituser" id="popup" type="click" name="popup">
+                                                <i class="fab fa-weixin text-muted mr-1"></i> 微信登陆
+                                            </a>
+                                                <a class="btn btn-sm btn-light d-block d-lg-inline-block mb-1"  data-toggle="modal" data-target="#modal-block-normal">
+                                                    <i class="far fa-id-card text-muted mr-1"></i> 忘记密码
+                                                </a>
+                                                <a type="signup" id="signup" type="click" name="signup" class="btn btn-sm btn-light d-block d-lg-inline-block mb-1"
+                                                    href="{:url('/vip/signup')}">
+                                                    <i class="fa fa-user-plus text-muted mr-1"></i> 注册爱果(开放)
+                                                </a>
+
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="hero-static col-md-6 d-none d-md-flex align-items-md-center justify-content-md-center text-md-center">
+                        <div class="p-3">
+                            <p class="display-4 font-w700 text-white mb-3">
+                                嘿.SiRi.进入爱果管理系统！
+                            </p>
+                            <p class="font-size-lg font-w600 text-white-75 mb-0">
+                                Copyright &copy; <span class="js-year-copy">2019</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+{//扫码登录}
+    <div class="modal fade bd-example-modal-sm" id="qrcode" tabindex="-1" role="dialog" aria-labelledby="edituser"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-slideright " role="document">
+            <div class="modal-content">
+                <form class="js-validation" name="form-user" action="/vip/user/edit.html" method="post">
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary">
+                            <h3 class="block-title">
+                                <i class="fab fa-weixin mr-1"></i> 微信扫码登陆</h3>
+                                <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="block-content">
+
+                            <img style="width:268px;height:268px;" src="{:url('/vip/login/qrcode')}" alt="QRCode" id="scan">
+
+                            <div class="block-content block-content-full text-right border-top">
+                                <button type="button" class="btn btn-sm btn-link mr-2" data-dismiss="modal">取消</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {//扫码登录}
+
+
+    <script src="__ADMIN_T__/assets/js/aiguo.core.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+    <script>
+
+        $("#btn_username").click(function() {
+            $(this).css("background-color","#fff");
+            $("#btn_phone").css("background-color","#f8f9fa");
+            $("#username").attr("name","username");
+            $("#username").attr("placeholder","爱果用户名");
+        });
+
+        $("#btn_phone").click(function() {
+            $(this).css("background-color","#fff");
+            $("#btn_username").css("background-color","#f8f9fa");
+            $("#username").attr("name","phone");
+            $("#username").attr("placeholder","手机号码");
+        });
+
+
+        var interval;
+        $(document).ready(function () { 
+            $('#popup').on('click', function () {
+                interval = self.setInterval("clock()", 1000);
+                $('#qrcode').modal('show');
+            });
+            $('#qrcode').on('show.bs.modal', function (event) {
+                var modal = $(this);
+                modal.find('.block-content #scan').attr("src", "{:url('qrcode')}");
+
+            });
+            $('#qrcode').on('hidden.bs.modal', function (event) {
+                clearInterval(interval);
+            });
+            $('.signin-form').on('submit', function () {
+                var $data = $(this).serialize();
+                AAiguovip.loading();
+                $.post($(this).attr('action'), $data, function (res) {
+                    AAiguovip.loading('hide');
+                    if (res.code) {
+                        AAiguovip.notify('登录成功，页面即将跳转~', 'success');
+                        setTimeout(function () {
+                            location.href = res.url;
+                        }, 1500);
+                    } else {
+                        if (res.msg == '验证码不正确，请重新输入') {
+                            $('#captchacode').click();
+                            $("#captcha").val("");
+                        }
+                        AAiguovip.notify(res.msg, 'danger');
+                        $('#captchacode').click();
+                        $("#captcha").val("");
+                    }
+                }).fail(function () {
+                    AAiguovip.loading('hide');
+                    AAiguovip.notify('服务器错误~', 'danger');
+                });
+                return false;
+            });
+        });
+
+        function clock() {
+            var user = { time: "8" };
+            $.ajax({
+                type: "POST",
+                url: "{:url('wxok')}",
+                data: user,
+                success: function (msg) {
+                    if (msg&&msg.url) location.href = msg.url;
+                }
+            });
+        }
+    </script>
+    //验证码
+    <script>
+        $(function(){
+            $("#smscode").click(function() {
+                verification();
+            });
+
+            var time = 180;
+            // $("#phone_tel").blur(function(){
+            //     var phone_tel = $(this).val().replace(/\s*/g,'');
+            //     if (phone_tel.length < 1) {
+            //         AAiguovip.notify('手机号为不能为空','danger');
+            //         return;
+            //     }
+            //     var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+            //     if (!myreg.test(phone_tel)) {
+            //         AAiguovip.notify('亲，您输入的手机号不正确','danger');
+            //         return;
+            //     }
+            // });
+        });
+
+
+        function verification() {
+            var phone_tel = $("#phone_tel").val().replace(/\s*/g,'');
+            if (phone_tel.length < 1) {
+                AAiguovip.notify('手机号为不能为空','danger');
+                return;
+            }
+            var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+            if (!myreg.test(phone_tel)) {
+                AAiguovip.notify('亲，您输入的手机号不正确','danger');
+                return;
+            }
+            var password = $("#btn_pwd").val();
+            $.post(
+                "{:url('vip/login/sendsms')}", {
+                    phone: phone_tel,
+                    edit:'edit_pwd',
+                    password: password,
+                },
+                function (data) {
+                    if (data.code == 0) {
+                        desc_time();
+                        AAiguovip.notify(data.message, 'success');
+                    } else {
+                        AAiguovip.notify(data.message, 'danger');
+                    }
+                    // window.location.reload();
+                },
+                'json'
+            );
+        }
+
+
+        //180s倒计时
+        function desc_time() {
+            if (time === 0) {
+                time = 180;
+                $('#smscode').text('获取验证码');
+                $('#smscode').css("background-color","#5c80d1");
+                $('#smscode').on("click", verification);
+                return;
+            } else {
+                time--;
+                // $('#smscode').hide();
+                $('#smscode').text(time+'秒后再次发送');
+                $('#smscode').css("background-color","#e1e1e1");
+                $('#smscode').off("click");
+            }
+            setTimeout(function(){
+                desc_time();
+            },1000);
+        }
+
+    </script>
+</body>
+
+</html>

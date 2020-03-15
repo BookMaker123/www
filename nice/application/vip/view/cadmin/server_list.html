@@ -1,0 +1,180 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/cadmin/clear_server_list')}">待结算订单</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">服务进度详情</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">
+
+                    </h3>
+                    <!--      搜索选项内容   >-->
+                    <div class="block-options">
+                        <div class="btn-group">
+                            <div class="dropdown-menu dropdown-menu-right">
+
+                                <div role="separator" class="dropdown-divider"></div>
+
+                                <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"  data-target="#setbiaoge">
+                                    <i class="fa fa-user-cog"></i> {:lang('表格自定义设置')}
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                                data-action="fullscreen_toggle"></button>
+                    </div>
+                </div>
+
+
+                <div class="block-content" id="order_list">
+
+                    <!-- new 订单列表内容  包含  start -->
+                    <div class="table-responsive" id="table_view">
+                        <table id="general-table" class="table table-builder js-table-sections table-bordered table-striped table-vcenter js-table-checkable js-table-checkable-enabled js-table-sections-enabled">
+                            <thead>
+                            <tr>
+                                <!--                                <th class="text-center" style="width: 30px;">-->
+                                <!--                                    <div class="custom-control custom-checkbox custom-control-primary d-inline-block">-->
+                                <!--                                        <input type="checkbox" class="custom-control-input" id="check-all"  name="check-all">-->
+                                <!--                                        <label class="custom-control-label" for="check-all"></label>-->
+                                <!--                                    </div>-->
+                                <!--                                </th>-->
+                                <th class="text-nowrap ">服务主键</th>
+                                <th class="text-nowrap " style="width: 70px;">SN序列号</th>
+                                <th class="text-nowrap" style="width: 170px;">IMEI号</th>
+                                <th class="text-nowrap" style="width: 70px;">服务名称</th>
+                                <th class="text-nowrap">服务的价格</th>
+                                <th class="text-nowrap">手机状态</th>
+                                <th class="text-nowrap">查询的状态</th>
+                                <th class="text-nowrap">查询结果</th>
+                                <th class="text-nowrap">返回数据</th>
+                                <th class="text-nowrap">说明</th>
+                                <th class="text-nowrap">第三方订单</th>
+                                <th class="text-nowrap">查询时间</th>
+                                <th class="text-nowrap">添加时间</th>
+
+                            </tr>
+                            </thead>
+                            <tbody class="js-table-sections-header">
+                            {notempty name="$data_list"}
+                            {volist name="data_list" key ="key" id="row"}
+                            <tr>
+                                <!--                                <td class="text-center">-->
+                                <!--                                    <div class="custom-control custom-checkbox custom-control-primary d-inline-block">-->
+                                <!--                                        <input type="checkbox" class="ids custom-control-input" id="row_{}" name="ids[]" value="{}">-->
+                                <!--                                        <label class="custom-control-label" for="row_{}"></label>-->
+                                <!--                                    </div>-->
+                                <!--                                </td>-->
+                                <td class="text">{$row.id}</td>
+                                <td class="text">{$row.mp_sn}</td>
+                                <td class="text">{$row.mp_imei}</td>
+                                <td class="text">{$row.name}</td>
+                                <td class="text">{$row.amount}</td>
+                                <td class="text">{:lang('status')[$row.phone_status]}</td>
+                                <td class="text">{:lang('is_pay')[$row.is_pay]}</td>
+                                <td class="text">{:lang('server_status')[$row.status]}</td>
+                                <td class="text">{$row.json_data}</td>
+                                <td class="text">{$row.remark}</td>
+                                {if condition="($row.three_order_id == 0)"}
+                                <td class="text"></td>
+                                {else /}
+                                <td class="text">{$row.three_order_id}</td>
+                                {/if}
+                                <td class="text">{$row.add_time|date='Y-m-d H:i:s'}</td>
+                                <td class="text">{$row.cx_time|date='Y-m-d H:i:s'}</td>
+                            </tr>
+                            {/volist}
+                            {else /}
+                            <tbody>
+                            <tr class="table-empty">
+                                <td class="text-center empty-info" colspan="7">
+                                    <button type="button" class="btn btn-sm btn-light" data-toggle="modal"
+                                            data-target="#addsnlist">
+                                        <i class="fa fa-database"></i> 亲，当前没有要结算的数据！
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                            {/notempty}
+                            </tbody>
+
+                        </table>
+
+                        <!-- 分页开始 -->
+                        {notempty name="$page"}
+                        {$page|raw}
+                        {/notempty}
+
+                        <div class="blank10"></div>
+                        <!-- 分页 END -->
+
+                    </div>
+                    <!--  订单列表内容 包含 end   -->
+
+
+
+
+
+
+                    <!--  以下是军原来的表格代码 包含 --------------以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 --------------------------------- -->
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</div>
+
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+<script src="__ADMIN_T__/assets/js/check.js"></script>
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+{/block}

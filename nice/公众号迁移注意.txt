@@ -1,0 +1,18 @@
+1	0Y32YnFgGjn9sCv65Xk5Ou2RDuOCitYnBk5A5B0QEgw	服务进度提醒	IT科技	IT软件与服务	详情   删除
+2	3RhwKIDiSiZMz87Rp2s2EpW3Zz6KLo8M8a7r3NZzf5w	会员充值成功通知	IT科技	IT软件与服务	详情   删除
+3	IrpUTTVBS5pYIue9URaAcFd1__doI_WiHAcUYBkbM94	订单服务提醒	IT科技	IT软件与服务	详情   删除
+4	eOBZ7tVJYeDwgk-b2aARSX5S5z3Nybe65vQD9oI76cg	注册成功通知	IT科技	IT软件与服务	详情   删除
+
+
+迁移后的模板ID
+
+1	vTg597Wne46qBc5RsXy_Z4RYAT0HXQn1dU-3Nlukgxg	服务进度提醒	IT科技	IT软件与服务	详情   删除
+2	j3yBQHzf4mG0eEmjr_ldtirtEJE4xj2S5OB_NKlutQg	                会员充值成功通知	IT科技	IT软件与服务	详情   删除
+3	b0XMO7rzV3j5GcofXcevs9q819UG2AQYn60wFz4Ou7E	订单服务提醒	IT科技	IT软件与服务	详情   删除
+4	9H3Tc-xgtG8GHAfiNTa3Bki5Zh2vs4SNl1-YRgCvrms	注册成功通知	IT科技	IT软件与服务	详情   删除
+
+
+管理员账号密码
+账号：tiamo912
+密码：yy123456
+	

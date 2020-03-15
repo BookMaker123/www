@@ -1,0 +1,129 @@
+<div >
+
+    <!--弹出解绑手机界面-->
+    <div class="modal" id="modal-phone_untied" tabindex="-1" role="dialog" aria-labelledby="modal-phone_untied"
+         style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <form class="js-validation" name="form-phone_binding" action="{:url('vip/user/phone_untied')}" method="post">
+                        <div class="block block-themed block-transparent mb-0">
+                            <div class="block-header bg-primary">
+                                <h3 class="block-title">
+                                    <i class="fa fa-user-edit mr-1"></i> 手机解绑
+                                </h3>
+                            </div>
+
+                            <div class="block-content">
+                                <div class="form-group">
+                                    <label for="example-static-input-plain">{:lang('用户名')}<span
+                                            class="text-danger"></span></label><br/>
+                                    <label for="example-static-input-plain">{:session('user.username')}<span
+                                            class="text-danger"></span></label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="tel" id="phone_tel"
+                                               class="form-control form-control-lg form-control-alt" name="phone"
+                                               placeholder="手机号码">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span id="smscode" class="input-group-text border-0 pull-right" style="background-color: #5c80d1;color:black;cursor: pointer;">
+                                            获取验证码
+                                        </span>
+                                        <input type="text"
+                                               class="form-control form-control-lg form-control-alt col-5" name="code" placeholder="手机验证码" >
+                                    </div>
+
+
+                                    <div class="block-content block-content-full text-right border-top">
+                                        <button type="button" class="btn btn-sm btn-light"   style="background: none; border: none; color: #0808FD"  data-dismiss="modal">取消</button>
+                                        <button class="btn btn-minw btn-primary ajax-post" target-form="form-phone_binding"
+                                                type="submit">{:lang('提交')}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--弹出充值金额界面 end -->
+</div>
+
+<script>
+    $(function() {
+        $("#phone_tel").blur(function(){
+            var phone_tel = $(this).val().replace(/\s*/g,'');
+            if (phone_tel.length < 1) {
+                AAiguovip.notify('手机号为不能为空','danger');
+                return;
+            }
+            var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+            if (!myreg.test(phone_tel)) {
+                AAiguovip.notify('亲，您输入的手机号不正确','danger');
+                return;
+            }
+        })
+    });
+
+    function verification() {
+        var phone_tel = $("#phone_tel").val().replace(/\s*/g,'');
+        if (phone_tel.length < 1) {
+            AAiguovip.notify('手机号为不能为空','danger');
+            return;
+        }
+        var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        if (!myreg.test(phone_tel)) {
+            AAiguovip.notify('亲，您输入的手机号不正确','danger');
+            return;
+        }
+        $.post(
+            "{:url('vip/user/sendsms')}", {
+                phone: phone_tel,
+            },
+            function (data) {
+                if (data.code == 0) {
+                    desc_time();
+                    AAiguovip.notify(data.message, 'success');
+                } else {
+                    AAiguovip.notify(data.message, 'danger');
+                }
+                // window.location.reload();
+            },
+            'json'
+        );
+    }
+
+    $(function() {
+        $("#smscode").click(function () {
+            verification();
+        })
+    });
+
+    var time = 180;
+    //180s倒计时
+    function desc_time() {
+        if (time === 0) {
+            time = 180;
+            $('#smscode').text('获取验证码');
+            $('#smscode').css("background-color","#5c80d1");
+            $('#smscode').on("click", verification);
+            return;
+        } else {
+            time--;
+            // $('#smscode').hide();
+            $('#smscode').text(time+'秒后再次发送');
+            $('#smscode').css("background-color","#e1e1e1");
+            $('#smscode').off("click");
+        }
+        setTimeout(function(){
+            desc_time();
+        },1000);
+    }
+
+
+</script>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">  
+    <title>爱果微信登陆页面 - 维修管理&amp; 经销商管理</title>
+    <meta name="keywords" content="苹果维修管理 iPhone ipad 维修管理 Apple经销商管理" />
+    <meta name="description" content="爱果是一款专业为苹果华为等手机经销商打造的管理系统。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Tjun">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css">
+</head>
+<body>
+<div id="page-container">
+                <main id="main-container">
+<div class="bg-image" style="background-image: url('__ADMIN_T__/assets/img/apple-is-getting-normal-1.jpg');">
+    <div class="hero-static d-flex align-items-center">
+        <div class="w-100">
+            <div class="content content-full bg-white">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4 py-4">
+                        <div class="text-center">
+                            
+                            <h1 class="h4 mb-1">
+                                <a class="link-fx font-w800 font-size-h1" href="index.html">
+                                    <span class="text-dark">爱果</span><span class="text-primary">VIP</span>
+                                </a>
+
+                            </h1>
+                            <h2 class="h6 font-w400 text-muted mb-5">
+                                绑定用户
+                            </h2>
+                            <img class="img-avatar img-avatar96" src="{:session('user.wx_touxiang')}" alt="">
+                            <p class="font-w600 text-center my-2">
+                                {:session('user.wx_name')}
+                            </p>
+                        </div>
+                       
+                        <form class="js-validation-signin form-horizontal push-30-t signin-form" name="signin-form" action="{:url('@vip/login')}" method="POST">                           
+                                <div class="form-group">
+                                        <input type="text" class="form-control form-control-lg form-control-alt"
+                                            id="username" name="username" placeholder="爱果用户名">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-lg form-control-alt"
+                                            id="password" name="password" placeholder="密码">
+                                    </div> 
+                                    <div class="form-group">
+                                            <img src="{:url('verify')}" class="pull-right" id="captchacode" style="cursor: pointer;" onclick="this.src='{:url('verify')}?d='+Math.random();" title="点击刷新" alt="captcha" />
+                                            <input type="text" class="form-control form-control-lg form-control-alt col-5" id="captcha" name="captcha" placeholder="验证码">
+                                        </div>
+
+                                <div class="form-group row justify-content-center">
+                                    <div class="col-md-6 col-xl-5">
+                                        <button type="submit" class="btn btn-block btn-light">
+                                                <i class="fa fa-fw fa-sign-in-alt mr-1"></i> 绑定并登陆
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+    
+                    </div>
+                </div>
+            </div>
+            <div class="font-size-sm text-center text-white py-3">
+                <strong>Aiguo5</strong> &copy; 2019
+            </div>
+        </div>
+    </div>
+</div>
+    </main>
+    </div>
+    <script src="__ADMIN_T__/assets/js/aiguo.core.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/core/jquery.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.signin-form').on('submit', function () {
+                var $data = $(this).serialize();
+                AAiguovip.loading();
+                $.post($(this).attr('action'), $data, function (res) {
+                    AAiguovip.loading('hide');
+                    if (res.code) {
+                        AAiguovip.notify('登录成功，页面即将跳转~', 'success');
+                        setTimeout(function () {
+                            location.href = res.url;
+                        }, 1500);
+                    } else {
+                        if (res.msg == '验证码不正确，请重新输入') {
+                            $('#captchacode').click();
+                            $("#captcha").val("");
+                        }
+                        AAiguovip.notify(res.msg, 'danger');
+                        $('#captchacode').click();
+                        $("#captcha").val("");
+                    }
+                }).fail(function () {
+                    AAiguovip.loading('hide');
+                    AAiguovip.notify('服务器错误~', 'danger');
+                });
+                return false;
+            });
+        });
+    </script>
+    </body>
+</html>

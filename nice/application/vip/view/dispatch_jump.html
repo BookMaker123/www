@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>爱果管理 - 苹果维修管理,苹果经销商管理系统</title>
+    <meta name="description" content="第三方苹果华为OPPOVIVO经销商管理">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    {// 选择皮肤颜色<link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/themes/city.min.css">}    
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css" id="css-main"> 
+
+</head>
+<body>
+<div id="page-container">
+                <main id="main-container">
+<div class="hero-static d-flex align-items-center">
+    <div class="w-100">
+        <div class="content content-full bg-white">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6 col-xl-4 py-6">
+                    <div class="text-center">
+
+                        <h1 class="h4 mb-1">
+                                <?php switch ($code) {?>
+                                    <?php case 1:?>
+                                    <i class="fa fa-3x fa-cog fa-spin text-primary"></i><h1><?php echo(strip_tags($msg));?></h1>
+                                    <?php break;?>
+                                    <?php case 0:?>
+                                    <i class="fa fa-3x fa-cog fa-spin text-primary"></i><h1><?php echo(strip_tags($msg));?></h1>
+                                    <?php break;?>
+                                <?php } ?><p>
+                                        
+                                    </p>
+                                <p class="detail"></p>
+
+                      
+                        </h1>
+                        <h2 class="h6 font-w400 text-muted mb-3">
+                            <p class="jump">
+                                页面自动 <a id="href" href="<?php echo($url);?>">跳转</a> 等待时间： <b id="wait"><?php echo($wait);?></b>
+                            </p>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="font-size-sm text-center text-muted py-3">
+            <strong>爱果VIP</strong> &copy; <span data-toggle="year-copy">2019</span>
+        </div>
+    </div>
+</div>
+    </main>
+    </div>
+    <script type="text/javascript">
+        (function(){
+            var wait = document.getElementById('wait'),
+                href = document.getElementById('href').href;
+            var interval = setInterval(function(){
+                var time = --wait.innerHTML;
+                if(time <= 0) {
+                    location.href = href;
+                    clearInterval(interval);
+                };
+            }, 1000);
+        })();
+    </script>
+    </body>
+</html>

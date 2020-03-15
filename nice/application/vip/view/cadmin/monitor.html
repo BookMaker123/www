@@ -1,0 +1,159 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/cadmin/dayreport')}">每日报表</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">服务异常监控  ({notempty name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty} 条)</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="content" id="vue_content">
+
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        <a href="/vip/cadmin/service_abnormal_monitor">
+                            <button type="button" class="btn btn-sm btn-primary pull-r pull-right " data-toggle="modal"
+                                    data-target="#modal-block-vcenter">服务异常监控
+                            </button>
+                        </a>
+                    </h3>
+                    <!--      搜索选项内容   >-->
+                    <div class="block-options">
+                        <div class="btn-group">
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"  data-target="#setbiaoge">
+                                    <i class="fa fa-user-cog"></i> {:lang('表格自定义设置')}
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                                data-action="fullscreen_toggle"></button>
+                    </div>
+                </div>
+
+
+                <div class="block-content" id="order_list">
+
+                    <!-- new 订单列表内容  包含  start -->
+                    <div class="table-responsive" id="table_view">
+                        <table id="general-table" class="table table-builder js-table-sections table-bordered table-striped table-vcenter js-table-checkable js-table-checkable-enabled js-table-sections-enabled">
+                            <thead>
+                            <tr>
+
+                                <th class="text-center text-nowrap" >序列号</th>
+                                <th class="text-center text-nowrap" >日期</th>
+                                <th class="text-center text-nowrap" >保修查询<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >ID锁查询<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >ID锁黑白<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >ID锁监控<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >网络锁<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >运营商<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >正在维修<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >网络锁监控<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >国别(文字)<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >案例国别(文字)<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >MDM锁<br>(成功/失败/失败相差数)</th>
+                                <th class="text-center text-nowrap" >SN转IMEI<br>(成功/失败/失败相差数)</th>
+
+                            </tr>
+                            </thead>
+                            <tbody class="js-table-sections-header">
+                            {notempty name="data_list"}
+                            {volist name="data_list" key ="key" id="vo"}
+                            <tr>
+                                <td class="text-center">{$key}</td>
+                                <td class="text-center">{$vo.add_time}</td>
+                                {volist name="$vo.json_data" key ="k_json" id="v_json"}
+                                    {if condition="$v_json.difference >= 50"}
+                                    <td class="text-center" >{$v_json.success_count}/{$v_json.error_count}/<i style="color: #ff412b">{$v_json.difference}</i></td>
+                                    {else /}
+                                    <td class="text-center">{$v_json.success_count}/{$v_json.error_count}/{$v_json.difference}</td>
+                                    {/if}
+                                {/volist}
+
+                            </tr>
+                            {/volist}
+                            {/notempty}
+                            </tbody>
+
+                        </table>
+
+                        <!-- 分页开始 -->
+                        {notempty name="$page"}
+                        {$page|raw}
+                        {/notempty}
+                        <div class="blank10"></div>
+                        <!-- 分页 END -->
+
+                    </div>
+                    <!--  订单列表内容 包含 end   -->
+
+
+
+
+
+
+                    <!--  以下是军原来的表格代码 包含 --------------以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 --------------------------------- -->
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</div>
+
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+
+{// vue js}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="__ADMIN_T__/assets/js/check.js"></script>
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+{/block}

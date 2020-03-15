@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>注册爱果管理 - 苹果维修管理,苹果经销商管理系统</title>
+    <meta name="description" content="第三方苹果华为OPPOVIVO经销商管理">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    {// 选择皮肤颜色
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/themes/city.min.css">}
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css" id="css-main">
+</head>
+
+<body>
+    <div id="page-container">
+        <main id="main-container">
+            <div class="hero-static">
+                <div class="content">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col-lg-6 col-xl-4">
+                            <div class="block block-themed block-fx-shadow mb-0">
+                                <div class="block-header bg-success">
+                                    <h3 class="block-title">注册爱果</h3>
+                                    <div class="block-options">
+                                  
+                                        <a class="btn-block-option" href="login" data-toggle="tooltip"
+                                            data-placement="left" title="Sign In">
+                                            <i class="fa fa-sign-in-alt"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <div class="p-sm-3 px-lg-4 py-lg-5 text-center">
+                                        <h1 class="mb-2">{:session('wx_name')}</h1>
+                                      
+                                        <img class="img-avatar img-avatar96 " src="{:session('wx_touxiang')}" alt="">
+                                        <p>爱果经销商管理系统注册.</p>
+                                        <form class="js-validation-signup signup-form" action="{:url('@vip/signup/wxsignuppost')}"  method="POST">
+                                            <div class="py-3">
+                                                <div class="form-group">
+                                                    <input type="text"
+                                                        class="form-control form-control-lg form-control-alt"
+                                                        id="username" name="username"
+                                                        placeholder="注册用户名">
+                                                </div>
+                                   
+                                                <div class="form-group">
+                                                    <input type="password"
+                                                        class="form-control form-control-lg form-control-alt"
+                                                        id="password" name="password"
+                                                        placeholder="密码">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="tel"
+                                                           class="form-control form-control-lg form-control-alt" name="phone"
+                                                           placeholder="手机号码" min="1" max="10" >
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <span class="input-group-text border-0 pull-right"  style="background-color: #5c80d1;color:black;cursor: pointer;">
+                                                        获取验证码
+                                                    </span>
+                                                    <input type="text"
+                                                           class="form-control form-control-lg form-control-alt col-5" name="code" placeholder="手机验证码" >
+                                                </div>
+                                  
+                                                <!--
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="signup-terms" name="signup-terms">
+                                                        <label class="custom-control-label font-w400"
+                                                            for="signup-terms">同意条款 </label>
+                                                    </div>
+                                                </div>
+                                                -->
+                                            </div>
+                                            <div class="form-group row justify-content-center">
+                                                <div class="col-md-6 col-xl-5">
+                                                    <button type="submit" class="btn btn-block btn-success ">
+                                                        <i class="fa fa-fw fa-plus mr-1"></i> 立即注册
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content content-full font-size-sm text-muted text-center">
+                    <strong>aiguo5</strong> &copy; <span data-toggle="year-copy"></span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="__ADMIN_T__/assets/js/core/jquery.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.signup-form').on('submit', function () {
+                var $data = $(this).serialize();
+                AAiguovip.loading();
+                $.post($(this).attr('action'), $data, function (res) {
+                    AAiguovip.loading('hide');
+                    if (res.code) {
+                        AAiguovip.notify('注册成功，页面即将跳转~', 'success');
+                        setTimeout(function () {
+                            location.href = res.url;
+                        }, 1500);
+                    } else {
+                        if (res.msg == '验证码不正确，请重新输入') {
+                            $('#captchacode').click();
+                            $("#captcha").val("");
+                        }
+                        AAiguovip.notify(res.msg, 'danger');
+                        $('#captchacode').click();
+                        $("#captcha").val("");
+                    }
+                }).fail(function () {
+                    AAiguovip.loading('hide');
+                    AAiguovip.notify('服务器错误~', 'danger');
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

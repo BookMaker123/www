@@ -1,0 +1,161 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                后台管理
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">数据采集  ({notempty name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty} 条)</li>
+        </ol>
+    </nav>
+</div>
+
+<div id="vue_content">
+
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        <form class="2" onsubmit="return check_search();" name="form-builder2" action="{:url('vip/cadmin/curl_collect')}" method="post">
+                            <div class="input-group input-group-sm" style="width:100%">
+                                <label>网页地址：</label>
+                                <input type="text" class="form-control form-control-alt" id="keyword" name="url" value="{$sort.search}" placeholder="用户名">
+                                <div class="input-group-append">
+                                    <button type="submit" class="input-group-text bg-body border-0 ml-5" >
+                                        <i class="si si-magnifier">立即采集
+                                        </i>
+                                    </button>
+                                    <a class="ml-3" href="{:url('/vip/cadmin/curl_collect')}" style="color:rgb(8, 8, 253);">重置</a>
+                                </div>
+                            </div>
+                        </form>
+                    </h3>
+                    <!--      搜索选项内容   >-->
+                    <div class="block-options">
+                        <div class="btn-group">
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"  data-target="#setbiaoge">
+                                    <i class="fa fa-user-cog"></i> {:lang('表格自定义设置')}
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                                data-action="fullscreen_toggle"></button>
+                    </div>
+                </div>
+
+
+                <div>
+
+                    <!-- new 订单列表内容  包含  start -->
+                    <div class="table-responsive" id="table_view">
+                        <table id="general-table"
+                               class="table table-builder table-bordered table-hover table-striped table-vcenter js-table-sections js-table-checkable font-size-sm mb-0 js-table-checkable-enabled js-table-sections-enabled">
+                            <thead>
+                            <tr>
+
+                                <th class="text-center" style="width: 30px;">序列号</th>
+                                <th class="text" style="width: 50px;">用户名</th>
+                                <th class="text" style="width: 40px;">发送的内容</th>
+                                <th class="text" style="width: 50px;">发送的时间</th>
+                                <th class="text-nowrap" style="width: 40px;">备注说明</th>
+                            </tr>
+                            </thead>
+                            <tbody class="js-table-sections-header">
+                            {notempty name="data_list.0"}
+                            {volist name="data_list" key ="key" id="vo"}
+                            <tr>
+                                <td class="text-center">{$key}</td>
+                                <td class="text-center">{$vo.username}</td>
+                                <td class="text-center">{$vo.data.first.0}<br>{$vo.data.keyword1.0}<br>{$vo.data.keyword2.0}</td>
+                                <td class="text-center">{$vo.c_time|date='Y-m-d H:i'} </td>
+                                <td class="text">{$vo.remark}</td>
+
+                            </tr>
+                            {/volist}
+                            {else /}
+                            <tr>
+                                <td class="text-center empty-info" colspan="7">
+                                    亲，你还未消费，没有消费记录！
+                                </td>
+                            </tr>
+                            {/notempty}
+                            </tbody>
+
+                        </table>
+
+                        <!-- 分页开始 -->
+                        {notempty name="$page"}
+                        {$page|raw}
+                        {/notempty}
+
+                        <div class="blank10"></div>
+                        <!-- 分页 END -->
+
+                    </div>
+                    <!--  订单列表内容 包含 end   -->
+
+
+
+
+
+
+                    <!--  以下是军原来的表格代码 包含 --------------以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 --------------------------------- -->
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</div>
+
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+
+{// vue js}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="__ADMIN_T__/assets/js/check.js"></script>
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+{/block}

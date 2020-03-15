@@ -1,0 +1,253 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/lists')}">经销商管理</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">({notempty name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty} 个)</li>
+        </ol>
+    </nav>
+</div>
+{//中间内容}
+<div class="content">
+    <!-- Message List -->
+
+
+    <div class="row">
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="{:url('vip/vadmin/jiankong',['ztai'=>0])}">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">未查</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$zongarr.0}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="{:url('vip/vadmin/jiankong',['ztai'=>1])}">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">监控中</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$zongarr.1}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="{:url('vip/vadmin/jiankong',['ztai'=>2])}">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">完成</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$zongarr.2}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="{:url('vip/vadmin/jiankong',['ztai'=>4])}">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">错误</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$zongarr.4}</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="block">
+        
+        <div class="block-header"> 1
+        
+            <div class="block-options">
+              
+               
+              
+                <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                    data-action="fullscreen_toggle"></button>
+            </div>
+        </div>
+        <div class="block-content">
+       
+
+
+
+            {notempty name="$Request.param.soso"}
+
+            <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
+                <span class="text-primary font-w700">搜索内容：</span> <mark>{$Request.param.so}</mark>
+            </div>
+            {/notempty}
+            <div class="table-responsive">
+                {//table-striped 黑色背景 table-bordered格子}
+                <table id="general-table"
+                    class="table table-builder js-table-sections table-bordered table-striped table-vcenter js-table-checkable">
+                    <thead>
+                        <tr>
+                            {php}
+                            //获取筛选匹配 是否按钮
+                            //哈哈哈 写出数组 不知道为什么还没成功
+                            if (!empty(request()->param('_filter'))) {
+                            $_filter = request()->param('_filter');
+                            $_filter_arr = array_filter(explode('|', $_filter), 'strlen');
+                            foreach ($_filter_arr as $v1){
+                            $saixuananniu[$v1]='true';
+                            }
+                            }
+                            {/php}
+                            <th class="text-center" style="width: 30px;">
+                                <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+                                    <input type="checkbox" class="custom-control-input" id="check-all" name="check-all">
+                                    <label class="custom-control-label" for="check-all"></label>
+                                </div>
+                            </th>
+                            <th class="text-center" style="width: 30px;">#</th>
+                            <th class="text-nowrap" style="width: 40px;">SN+维修id</th>
+                            <th class="text-nowrap" style="width: 40px;">用户ID</th>
+                            <th>进度状态ID</th>
+                            <th class="text-nowrap">状态</th>
+                            <th class="text-nowrap">进度时间</th>
+                            <th class="text-nowrap">查询时间</th>
+                            <th class="text-nowrap">创建时间</th>
+             
+                      
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {notempty name="$data_list"}
+                        {volist name="data_list" key ="key" id="vo"}
+                        {//js-table-sections-header 点击展开}
+                    <tbody class="js-table-sections-header">
+                        <tr>
+                            <td class="text-center">
+                                <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+                                    <input type="checkbox" class="ids custom-control-input" id="row_{$vo.id}"
+                                        name="ids[]" value="{$vo.id}" />
+                                    <label class="custom-control-label" for="row_{$vo.id}"></label>
+                                </div>
+                            </td>
+                            <td class="text-center">{$vo.id}</td>
+                            <td class="text-nowrap">{$vo.snwid}</td>
+                            <td class="text-nowrap">{$vo.username} ({$vo.uid})</td>
+                            <td class="text-nowrap">{$vo.wx_ztai_id}</td>
+                            <td class="text-nowrap">{$vo.ztai}</td>
+                            <td class="text-nowrap">{notempty name="$vo.wx_time"}    {$vo.wx_time|date='Y-m-d H:i'} {/notempty}</td>
+                            <td class="text-nowrap">{notempty name="$vo.ctime"}    {$vo.ctime|date='Y-m-d H:i'} {/notempty}</td>
+                            <td class="text-nowrap">{notempty name="$vo.create_time"}  {$vo.create_time|date='Y-m-d H:i'} {/notempty}</td>
+                 
+                            
+                                             
+                        </tr>
+
+                        <tbody>               
+    
+                        </tbody>
+
+                    </tbody>            
+                    {/volist}
+              
+                    {else /}
+                    <tbody>
+                        <tr class="table-empty">
+                            <td class="text-center empty-info" colspan="7">
+                                <button type="button" class="btn btn-sm btn-light" data-toggle="modal"
+                                    data-target="#addsnlist">
+                                    <i class="fa fa-database"></i> 当前列表没有管理设备，点击我或者右上角<code>添加</code>按钮。
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {/notempty}
+                    </tbody>
+                    </tbody>
+                </table>
+                {//分页}
+        
+                {notempty name="$page"}               
+                    {$page|raw}               
+                {/notempty}
+    
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <!-- END Message List -->
+
+</div>
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+<div class="modal fade" id="addsnlist" tabindex="-1" role="dialog" aria-labelledby="addsnlist" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideright" role="document">{//modal-dialog-top 上}
+        <div class="modal-content">
+            <form class="" name="form-builder" action="{:url('vip/vadmin/xhaoadd')}"
+                method="post">
+                <div class="block block-themed block-transparent mb-1">
+                    <div class="block-header bg-primary">
+                        <h3 class="block-title">
+                            <i class="fa fa-pencil-alt mr-1"></i> 智能添加
+                        </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="block-content">
+                        <div class="form-group">
+                            <label for="message-msg">智能添加</label>
+                            <textarea class="form-control" id="textbox" name="textbox" rows="8"
+                                placeholder="型号格式表中复制"></textarea>
+                          
+                        </div>
+                        <div class="form-group">
+
+                        </div>
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+                        <button type="button" class="btn btn-sm btn-link mr-2" data-dismiss="modal">取消</button>
+                        <button class="btn btn-minw btn-primary ajax-post" target-form="form-builder"
+                            type="submit">智能添加</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+<script src="__ADMIN_T__/assets/bootstrap4-editable/js/bootstrap-editable.js"></script>
+<link href="__ADMIN_T__/assets/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+
+
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+{/block}

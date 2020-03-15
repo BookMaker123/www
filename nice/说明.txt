@@ -1,0 +1,41 @@
+﻿
+CentOS运行环境https://www.lnmp.org  Nginx+Php不需要安装数据库 数据库用了阿里云的云数据库mysql。
+
+添加虚拟机： https://lnmp.org/faq/lnmp-vhost-add-howto.html
+PS：
+1.新建虚拟机的时候开启SSL功能，选择第二个Letsencrypt免费证书！
+2.伪静态用thinkphp 
+
+
+---------------------------------------------------------------------------------------------
+网站目录public设置
+---------------------------------------------------------------------------------------------
+lnmp
+新建虚拟主机
+/home/wwwroot/www.aiguovip.com/public
+
+chattr -i /home/wwwroot/www.aiguovip.com/public/.user.ini
+修改完成后
+chattr +i /home/wwwroot/www.aiguovip.com/public/.user.ini
+修改2
+/usr/local/nginx/conf/fastcgi.conf 里面的fastcgi_param PHP_ADMIN_VALUE "open_basedir=$document_root/:/tmp/:/proc/"; 在该行行前添加 # 或删除改行，需要重启nginx。
+
+lnmp restart 重启
+---------------------------------------------------------------------------------------------
+
+
+强制HTTPS地址访问
+/usr/local/nginx/conf/vhost/域名
+
+添加到：
+  listen 80;
+        #listen [::]:80;
+        server_name www.aiguovip.com aiguovip.com;
+        index index.html index.htm index.php default.html default.htm default.php;
+        root  /home/wwwroot/www.aiguovip.com/public;
+
+        include rewrite/thinkphp.conf;
+        #error_page   404   /404.html;
+-------------------------------------
+        if ($ssl_protocol = "") { return 301 https://$host$request_uri; }
+

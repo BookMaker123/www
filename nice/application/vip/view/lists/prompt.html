@@ -1,0 +1,33 @@
+
+{//添加说明 帮助说明 }
+<div class="modal fade" id="modal-bind_tishi" tabindex="-1" role="dialog" aria-labelledby="modal-bind_tishi"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent mb-0">
+                <div class="block-header bg-primary-dark">
+                    <h3 class="block-title">手机绑定提示</h3>
+                    <div class="block-options">
+                        <a href="{:url('@vip')}" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-fw fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="block-content">
+                    <p><code>您的帐号未绑定手机号码,请绑定一个手机号码,以方便您完成以下操作！</code></br></p>
+                    <p>亲，请尽量绑定你的手机号，以防被盗</p>
+                    <p><code></code></p>
+                </div>
+                <div class="block-content block-content-full text-right bg-light">
+                    <a class="btn btn-sm btn-light d-block d-lg-inline-block mb-1" data-toggle="modal" onclick="$('#modal-bind_tishi').modal('hide');" data-target="#modal-phone_binding" >
+                        绑定手机号
+                    </a>
+                    <a class="btn btn-sm btn-light d-block d-lg-inline-block mb-1" href="{:url(cookie('__definurl__'))}">
+                            下次再说
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

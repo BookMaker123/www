@@ -1,0 +1,165 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+<div class="content">
+
+    <div class="bg-body-light">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-alt push">
+                <li class="breadcrumb-item">
+                    <a href="{:url('/vip/lists')}">首页</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" >
+                    <a href="{:url('/vip/user/edit_pwd')}">找回密码</a>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    {//手机绑定}
+    <div>
+        <div class="modal-dialog modal-dialog-slideright" role="document">
+            <div class="modal-content">
+
+                <form  action="{:url('vip/user/edit_pwd')}" method="post">
+                    <div class="block block-themed block-transparent mb-0">
+                        <div class="block-header bg-primary">
+                            <h3 class="block-title">
+                                <i class="fa fa-user-edit mr-1"></i> 找回密码
+                            </h3>
+                        </div>
+
+                        <div class="block-content">
+                            <div class="form-group">
+                                <label for="val-password">新密码 <span
+                                        class="text-danger"></span></label>
+                                <input type="password" class="form-control" name="password"
+                                       placeholder="新密码">
+                            </div>
+                            <div class="form-group">
+                                <label for="val-password">确认密码<span
+                                        class="text-danger"></span></label>
+                                <input type="password" class="form-control" name="password1"
+                                       placeholder="确认密码">
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <input type="tel" id="phone_tel"
+                                           class="form-control form-control-lg form-control-alt" name="phone"
+                                           placeholder="手机号码">
+                                </div>
+
+                                <div class="form-group">
+                                                    <span id="smscode" class="input-group-text border-0 pull-right" style="background-color: #5c80d1;color:black;cursor: pointer;">
+                                                        获取验证码
+                                                    </span>
+                                    <input type="text"
+                                           class="form-control form-control-lg form-control-alt col-5" name="code" placeholder="手机验证码" >
+                                </div>
+
+
+                                <div class="block-content block-content-full text-right border-top">
+                                    <button class="btn btn-minw btn-primary "
+                                            type="submit">{:lang('提交')}</button>
+
+                                </div>
+                            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {//手机绑定}
+</div>
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+<script src="__ADMIN_T__/assets/bootstrap4-editable/js/bootstrap-editable.js"></script>
+<link href="__ADMIN_T__/assets/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+<script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+
+
+{//任务JS}
+<script src="__ADMIN_T__/assets/js/tasks.js"></script>
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+<script>
+
+    $("#phone_tel").blur(function(){
+        var phone_tel = $(this).val().replace(/\s*/g,'');
+        if (phone_tel.length < 1) {
+            AAiguovip.notify('手机号为不能为空','danger');
+            return;
+        }
+        var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        if (!myreg.test(phone_tel)) {
+            AAiguovip.notify('亲，您输入的手机号不正确','danger');
+            return;
+        }
+    });
+
+    function verification() {
+        var phone_tel = $("#phone_tel").val().replace(/\s*/g,'');
+        if (phone_tel.length < 1) {
+            AAiguovip.notify('手机号为不能为空','danger');
+            return;
+        }
+        var myreg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+        if (!myreg.test(phone_tel)) {
+            AAiguovip.notify('亲，您输入的手机号不正确','danger');
+            return;
+        }
+        $.post(
+            "{:url('vip/user/sendsms')}", {
+                phone: phone_tel,
+                edit:'edit_pwd',
+            },
+            function (data) {
+                if (data.code == 0) {
+                    desc_time();
+                    AAiguovip.notify(data.message, 'success');
+                } else {
+                    AAiguovip.notify(data.message, 'danger');
+                }
+                // window.location.reload();
+            },
+            'json'
+        );
+    }
+
+    $("#smscode").click(function() {
+        verification();
+    });
+
+    var time = 180;
+    //180s倒计时
+    function desc_time() {
+        if (time === 0) {
+            time = 180;
+            $('#smscode').text('获取验证码');
+            $('#smscode').css("background-color","#5c80d1");
+            $('#smscode').on("click", verification);
+            return;
+        } else {
+            time--;
+            // $('#smscode').hide();
+            $('#smscode').text(time+'秒后再次发送');
+            $('#smscode').css("background-color","#e1e1e1");
+            $('#smscode').off("click");
+        }
+        setTimeout(function(){
+            desc_time();
+        },1000);
+    }
+
+</script>
+{/block}

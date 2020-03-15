@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">  
+    <title>爱果微信登陆页面 - 维修管理&amp; 经销商管理</title>
+    <meta name="keywords" content="苹果维修管理 iPhone ipad 维修管理 Apple经销商管理" />
+    <meta name="description" content="爱果是一款专业为苹果华为等手机经销商打造的管理系统。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Tjun">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css">
+</head>
+<body>
+<div id="page-container">
+                <main id="main-container">
+<div class="bg-image" style="background-image: url('__ADMIN_T__/assets/img/apple-is-getting-normal-1.jpg');">
+    <div class="hero-static d-flex align-items-center">
+        <div class="w-100">
+            <div class="content content-full bg-white">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-4 py-4">
+                        <div class="text-center">
+                            
+                            <h1 class="h4 mb-1">
+                                <a class="link-fx font-w800 font-size-h1" href="index.html">
+                                    <span class="text-dark">爱果</span><span class="text-primary">VIP</span>
+                                </a>
+
+                            </h1>
+                            <h2 class="h6 font-w400 text-muted mb-5">
+                                微信登陆用户选择
+                            </h2>
+                            <img class="img-avatar img-avatar96" src="{:session('user.wx_touxiang')}" alt="">
+                            <p class="font-w600 text-center my-2">
+                                {:session('user.wx_name')}
+                            </p>
+                        </div>
+                       
+                            <div class="form-group row justify-content-center">
+                                <div class="col-md-6 col-xl-5">
+                                    {volist name="loginarr" id="vo"}
+                                        <a class="btn btn-outline-success btn-block btn-light" href="{:url('login/wxuser',['username'=>$vo.username])}" phone_number="{$vo.phone_number}">进入<i class="fa fa-fw fa-sign-in-alt mr-1"></i> {$vo.username} </a>
+                                    {/volist}
+                                    <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                            <a class="btn btn-sm btn-light d-block d-lg-inline-block mb-1" href="{:url('login/wxbind')}" >
+                                                    <i class="fab fa-weixin text-muted mr-1"></i> 绑定已有用户
+                                                </a>
+                                                <a class="btn btn-sm btn-light d-block d-lg-inline-block mb-1" href="{:url('/vip/signup/wxsig')}">
+                                                    <i class="fa fa-user-plus text-muted mr-1"></i> 注册新用户
+                                                </a>
+                                        </p>
+                                     </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="font-size-sm text-center text-white py-3">
+                <strong>Aiguo5</strong> &copy; 2019
+            </div>
+        </div>
+    </div>
+</div>
+    </main>
+    </div>
+    </body>
+
+<script src="__ADMIN_T__/assets/js/core/jquery.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+<script>
+
+
+    // $(".phone2").click(function() {
+    //     var user_id = $(this).attr('btn-id');
+    //     $.post(
+    //         "{:url('vip/login/sendsms')}", {
+    //             user_id: user_id,
+    //         },
+    //         function (data) {
+    //             if (data.code == 0) {
+    //                 AAiguovip.notify(data.message, 'success');
+    //             } else {
+    //                 AAiguovip.notify(data.message, 'danger');
+    //             }
+    //             // window.location.reload();
+    //         },
+    //         'json'
+    //     );
+    // });
+    //
+    // $(".phone").on({
+    //         mouseover : function () {
+    //             var phone = $(this).attr('phone_number');
+    //             if (phone == '') {
+    //                 $(this).next().show();
+    //             }
+    //         },
+    //         mouseout : function () {
+    //             var phone = $(this).attr('phone_number');
+    //             if (phone == '') {
+    //                 hide_p($(this));
+    //             }
+    //         }
+    // }) ;
+    //
+    // function hide_p(th) {
+    //     setTimeout(function(){
+    //         th.next().hide();
+    //     },2000);
+    // }
+
+
+
+</script>
+</html>

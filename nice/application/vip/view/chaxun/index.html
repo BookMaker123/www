@@ -1,0 +1,455 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+
+<div>
+    <img src="__ADMIN_T__/assets/img/gg1200.jpg" style="width:100%;" class="hide lg_show"/>
+    <img src="__ADMIN_T__/assets/img/gg900.jpg" style="width:100%;" class="hide md_show"/>
+    <img src="__ADMIN_T__/assets/img/gg550.jpg" style="width:100%;" class="hide sm_show"/>
+</div>
+
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/lists')}">首页</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {switch name="order_type"}
+                {case value="2"}国别文字{/case}
+                {case value="3"}GSX查询{/case}
+                {case value="4"}整机查询{/case}
+                {default /}
+                基础查询
+                {/switch}
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div id="vue_content">
+
+    <!--智能添加 弹出框 -->
+
+    {include file='chaxun/add_chaxun'/}
+
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        <button onclick="del_com_order()" type="button" class="btn btn-sm  btn-light" target-form="ids"
+                                href="{:url('chaxun/delete')}" data-title="删除查询" data-tips="删除后不能恢复！"
+                                data-confirm="确定删除"
+                                data-cancel="不了">
+                            <i class="fa fa-fw fa-trash-alt text-success"></i>
+                            <span class="d-none d-sm-inline ml-1">删除</span>
+                        </button>
+
+                        <!--                        <button type="button" class="btn btn-sm  btn-light ajax-post confirm" target-form="ids"-->
+                        <!--                                href="{:url('check/all_in_api')}" >-->
+                        <!--                           一键查询-->
+                        <!--                        </button>-->
+                    </h3>
+
+                    <!--      搜索选项内容   >-->
+                    <div class="block-options">
+                        <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#addsnlist">
+                            <i class="fa fa-fw fa-plus-circle text-info"></i>
+                            <span class="d-none d-sm-inline ml-1">{:lang('新建订单')}</span>
+                        </button>
+
+                        <div class="btn-group">
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item btn btn-sm  btn-light ajax-post exceldown" data-toggle="modal"
+                                   data-target="#setbiaoge">
+                                    <i class="fa fa-user-cog"></i> {:lang('表格自定义设置')}
+                                </a>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                                data-action="fullscreen_toggle"></button>
+                    </div>
+                </div>
+
+
+                <div id="order_list">
+
+                    <!-- new 订单列表内容  包含  start -->
+                    <div class="table-responsive" id="table_view">
+                        <table id="general-table"
+                               class="table table-builder table-bordered table-hover table-striped table-vcenter js-table-sections js-table-checkable font-size-sm mb-0 js-table-checkable-enabled js-table-sections-enabled">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 40px;">
+                                    <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+                                        <input type="checkbox" class="custom-control-input" id="check-all"
+                                               name="check-all">
+                                        <label class="custom-control-label" for="check-all"></label>
+                                    </div>
+                                </th>
+                                <th class="text-nowrap ">订单编号</th>
+                                <th class="text-nowrap">订单名称</th>
+                                <th class="text-nowrap">总数</th>
+                                <!--                                <th class="text-nowrap">冻结消费</th>-->
+                                <!--                                <th class="text-nowrap">总消费</th>-->
+                                <th class="text-nowrap">订单备注</th>
+                                <th class="text-nowrap">添加时间</th>
+                            </tr>
+                            </thead>
+                            <tbody class="js-table-sections-header">
+                            {notempty name="$chaxun_list"}
+                            {foreach name="chaxun_list" item="v" key="k"}
+                            <tr>
+                                <td class="text-center text-nowrap">
+                                    <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+                                        <input type="checkbox" class="ids custom-control-input" id="row_{$v.id}"
+                                               name="ids[]" value="{$v.id}">
+                                        <label class="custom-control-label" for="row_{$v.id}"></label>
+                                    </div>
+                                    {$v.id}
+                                </td>
+                                <td class="text"><a href="{:url('vip/chaxun/order_detail',array('id'=>$v.id))}">{$v.cx_order_sn}</a>
+                                </td>
+                                <td class="text">{$v.order_title}</td>
+                                <td class="text">{$v.phone_count}</td>
+                                <td class="text">
+
+                                        <a href="javascript:void(0);" title='备注' class="text_edit_zjb" t-table="tiamo1"
+                                             data-placeholder="填写备注" data-type="text" data-pk="{$v.id}"
+                                             f-name="tiamo1">{$v.remark==''?'未填':$v.remark}
+                                            <i class="fa fa-pencil-alt"></i>
+                                        </a>
+
+                                </td>
+                                <td class="text">{$v.add_time}</td>
+                            </tr>
+                            {/foreach}
+                            {/notempty}
+                            </tbody>
+
+                        </table>
+
+                        <!-- 分页开始 -->
+                        {notempty name="$page"}
+                        {$page|raw}
+                        {/notempty}
+
+                        <div class="blank10"></div>
+                        <!-- 分页 END -->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<!-- 结尾四个按钮 -->
+<div class="content">
+    <!--智能添加 说明框  -->
+    <div class="row">
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x"
+               href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">{:lang("总数量")}</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$equipment_count}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x"
+               href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">{:lang("订单数量")}</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$order_count}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x"
+               href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">已消费</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$consumption_points}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x"
+               href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">剩余积分</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$user_jifen}</div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+</div>
+<!-- 结尾四个按钮 end -->
+<div class="blank10"></div>
+</div>
+</div>
+
+<!--智能添加 说明框  -->
+{include file='chaxun/add_sn_remark'/}
+
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+<script src="__ADMIN_T__/assets/js/chaxun.js"></script>
+
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+
+<script src="__ADMIN_T__/assets/js/plugins/editable/js/bootstrap-editable.js"></script>
+<link rel="__ADMIN_T__/assets/js/plugins/editable/css/bootstrap-editable.css" rel="stylesheet">
+
+<script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+
+{// vue js}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var advancewxlist = [{volist name = "chaxun_list" id = "vo"}"{$vo.id}", {/volist}];
+    var wxlist = [];
+    var casewxlist = [];
+    var order_type = "{$order_type}";
+</script>
+<script>
+    $(function () {
+        var vm = new Vue({
+            el: '#vue_content',
+            data: {
+                fuwulist: [],
+            },
+            created: function () {
+                this.ajax_get_fuwu_list();
+
+            },
+            methods: {
+                ajax_get_fuwu_list: function () {
+                    $.post(
+                        "{:url('vip/Chaxun/ajax_get_fuwu_list')}",
+                        {'type':order_type},
+                        function (data) {
+                            vm.fuwulist = data.content;
+                        },
+                        'json'
+                    );
+                },
+                set_fuwu_check: function (id) {
+                    if (order_type == 3) {
+                        $(".checkbox-inline input").removeProp('checked');
+                        $(".checkbox-inline").removeClass('select_border');
+                        $('#sel_sever_' + id + ' input').prop('checked','checked');
+                        if ($('#sel_sever_' + id + ' input').prop('checked')) {
+                            $('#sel_sever_' + id).addClass('select_border');
+                        }
+                    } else {
+                        if ($('#sel_sever_' + id + ' input').prop('checked')) {
+                            $('#sel_sever_' + id).addClass('select_border');
+                        } else {
+                            $('#sel_sever_' + id).removeClass('select_border');
+                        }
+                    }
+                },
+            }
+        });
+    });
+
+
+    $(function () {
+
+        $(".text_edit_zjb").click(function(){
+            title = $(this).attr('data-placeholder');
+            id =  $(this).attr('data-pk');
+            obj = $(this);
+
+            layer.prompt({title: title, formType: 3}, function(text, index){
+                layer.close(index);
+                $.post(
+                    "{:url('/vip/chaxun/set_remrak')}", {id: id,'data':text},
+                    function (data) {
+                        console.log(id+'idid');
+                        if (data.code == 0) {
+                            console.log(text +'----------'+ "a[data-pk]='"+id+"'");
+                            $(obj).html(text);
+                            AAiguovip.notify(data.message, 'success');
+                        }
+                    },
+                    'json'
+                );
+            });
+            console.log('sssww');
+        });
+
+
+
+        $("#check-all").click(function () {
+            console.log('test');
+            if (this.checked) {
+                $("#order_list tr").find("td:eq(0) :checkbox").prop("checked", true);
+
+            } else {
+                $("#order_list tr").find("td:eq(0) :checkbox").prop("checked", false);
+            }
+        });
+        $("#del_confirm").click(function () {
+                weetAlert(
+                    'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )
+            }
+        );
+    });
+
+
+    $('tbody .text-nowrap a').click(function () {
+        var name = $(this).attr('name');
+        advance_checkrepairs(name, 'wx', 'd');
+    });
+    $('#advance_startrepairs').click(function () {
+
+        var c = $(this).attr('cmd');
+
+        var c_type = $(this).attr('c-type');
+
+        if (c == 'pause') {
+            advance_s = false;
+            $(this).html('<i class="fa fa-play text-primary"></i> 继续查询')
+            $(this).attr('cmd', 'goon')
+        } else if (c == 'goon') {
+            advance_s = true;
+            advance_check();
+            $(this).html('<i class="fa fa-pause text-primary"></i> 暂停查询')
+            $(this).attr('cmd', 'pause')
+        }
+    });
+
+
+    function del_com_order() {
+        id = ""
+        count = 0;
+        $("input[name='ids[]']:checked").each(function () {
+            id = id == "" ? $(this).val() : id + ',' + $(this).val();
+            count = count + 1;
+        });
+        swal({
+            title: '确定删除',
+            text: '您确认删除这' + count + "个订单吗？",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: '确定',
+            cancelButtonText: '不要了?',
+        }).then(function (isConfirm) {
+            if (isConfirm.value === true) {
+                $.post(
+                    "{:url('/vip/chaxun/del_order')}", {id: id},
+                    function (data) {
+                        if (data.code == 0) {
+                            AAiguovip.notify(data.message, 'success');
+                        } else {
+                            AAiguovip.notify(data.message, 'danger');
+                        }
+                        window.location.reload();
+                    },
+                    'json'
+                );
+            } else {
+                // $('#example-sw-custom-success'+id).prop('checked',!is_open_check);
+            }
+        });
+    }
+
+
+	function del_com_order (){
+		id=""
+		count=0;
+		$("input[name='ids[]']:checked").each(function(){
+			id= id==""?$(this).val():id+','+$(this).val();
+			count=count+1;
+		});
+		swal({
+		  title: '确定删除',
+		  text: '您确认删除这'+count+"个订单吗？",
+		  type: 'warning',
+		  showCancelButton: true,
+		  confirmButtonText: '确定',
+		  cancelButtonText: '不要了?',
+		}).then(function(isConfirm) {
+		  if (isConfirm .value === true) {
+				$.post(
+						"{:url('/vip/chaxun/del_order')}",{id:id},
+						function(data){
+							if(data.code== 0){
+								AAiguovip.notify(data.message ,'success');
+							}else{
+								AAiguovip.notify(data.message ,'danger');
+							}
+							window.location.reload();
+						},
+						'json'
+				);
+		  } else {
+			 // $('#example-sw-custom-success'+id).prop('checked',!is_open_check);
+		  }
+		});
+	}
+
+    $('#modal').on('show.bs.modal', function (e) {
+        $(this).load($(e.relatedTarget).data('url'));
+    });
+    $('#editlist').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget);
+        var recipient = button.data('lei');
+        var modal = $(this);
+        $('block-header').find('.block-title').html(recipient);
+        modal.find('.dname').val(button.data('dname'));
+        modal.find('.wuliu').val(button.data('wuliu'));
+        modal.find('.editid').val(button.data('pk'));
+
+    })
+
+</script>
+
+
+<script src="__ADMIN_T__/assets/js/check.js"></script>
+<script>jQuery(function () {
+    One.helpers(['table-tools-checkable', 'table-tools-sections']);
+});</script>
+{/block}

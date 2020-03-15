@@ -1,0 +1,327 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+{//快捷导航}
+
+{//快捷导航}
+
+{//中间内容}
+<div class="bg-image overflow-hidden" style="background-image: url('__ADMIN_T__/assets/media/photos/photo9@2x.jpg');">
+    <div class="bg-primary-dark-op">
+        <div class="content content-narrow content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mt-5 mb-2 text-center text-sm-left">
+                <div class="flex-sm-fill">
+                    <h1 class="font-w600 text-white mb-0 invisible" data-toggle="appear">经销商订单管理</h1>
+                    <h2 class="h4 font-w400 text-white-75 mb-0 invisible" data-toggle="appear" data-timeout="250">进货、出货、维修管理</h2>
+                </div>
+                <div class="flex-sm-00-auto mt-3 mt-sm-0 ml-sm-3">
+                    <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#addlist">
+                        <i class="fa fa-plus text-primary"></i>
+                        <span class="d-sm-inline ml-1">新建订单</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="block">
+        <ul class="nav nav-tabs nav-tabs-block" data-toggle="tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#jxz">进行中 <span class="badge badge-pill badge-info">{$tab_tj.0}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#wc">完成 <span class="badge badge-pill badge-success">{$tab_tj.1}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#search-classic">使用教程 </a>
+            </li>
+
+        </ul>
+        <div class="block-content tab-content overflow-hidden">
+
+            <div class="tab-pane fade fade-up show active" id="jxz" role="tabpanel">
+                {//进行中 完毕}
+                <table class="js-table-sections table table-hover table-vcenter">
+                    <thead>
+                        <tr>
+                            <th style="width: 30px;"></th>
+                            <th>列表名称</th>
+                            <th>数量</th>
+                            
+
+                        </tr>
+                    </thead>
+                    {notempty name="$data_list.0"}
+                    {volist name="data_list.0" key ="key" id="vo"}
+                    <tbody class="js-table-sections-header  {$key==1 ? 'show table-active' : ''}">
+                        <tr>
+                            <td class="text-center">
+                                <i class="fa fa-angle-right text-muted"></i>
+                            </td>
+                            <td class="font-size-sm">
+                                <a href="listsn/index/id/{$vo.d.id}">
+                                    
+                                    <span class="badge badge-success">{$vo.d.dname}</span>
+                                </a>                            
+                                <code>
+                                  <a href="javascript:void(0);"  title="订单介绍"  class="text-edit"  data-table="tiamo1" data-type="text" data-pk="{$vo.d.id}"  data-name="jieshao">{$vo.d.jieshao}</a> 
+                                </code>
+                                <small class="text-muted"> {$vo.d.ftime}</small>
+                            </td>
+                            <td>
+                                <span class="badge badge-info">{$vo.tj.zong}台</span>
+                            </td>
+                          
+                        </tr>
+                    </tbody>
+                    <tbody class="font-size-sm">
+                        <tr>
+                            <td class="text-center"></td>
+                            {// colspan="3" 合并下面表格}
+                            <td class="font-w600 font-size-sm">
+                              
+                                    <a title="" icon="fa fa-pencil" class="badge badge-primary" href="listsn/index/id/{$vo.d.id}" target="_self" data-toggle="tooltip">进入列表</a>
+                                    <code>
+                                            <a href="javascript:void(0);" class="select-edit" data-table="tiamo1" data-type="select"
+                                                data-value="{$vo.d.ztai}" data-source='{"0":"进行中","1":"完成"}' data-pk="{$vo.d.id}"
+                                                data-name="ztai">{switch name="vo.d.ztai"}{case value="0"}进行中{/case}{case
+                                                value="1"}完成{/case}{/switch}</a>
+                                    </code>
+                                    <span class="badge badge-pill badge-success" data-placement="top" data-toggle="popover" title="通过" data-content="{$vo.tj.chenggong}台">{$vo.tj.chenggong}</span>                
+                                    <span class="badge badge-pill badge-danger" data-placement="top" data-toggle="popover" title="拒保" data-content="{$vo.tj.jubao}台">{$vo.tj.jubao}</span>
+                                   
+                            </td>
+                            <td class="font-size-sm">  
+                                  <a class="badge badge-light btn-default ajax-get confirm" href="lists/del/id/{$vo.d.id}" id="startbutton" ><i class="fa fa-fw fa-times text-primary"></i>删除</a>   
+                            </td>                           
+                        </tr>
+                    </tbody>
+                    {/volist}
+                    {else /}
+                    <tbody>
+                        <tr class="table-empty">
+                            <td class="text-center empty-info" colspan="9">
+
+                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#addlist">
+                                    <i class="fa fa-plus text-primary"></i>
+                                    <span class="d-sm-inline ml-1">新建订单</span>
+                                </button>
+                                <i class="fa fa-database"></i> 没有进行中的订单，请建立订单！
+                            </td>
+                        </tr>
+                    </tbody>
+                    {/notempty}
+
+                </table>
+                {//进行中 完毕}
+
+            </div>
+            <div class="tab-pane fade fade-up" id="wc" role="tabpanel">
+                {//完成 完毕}
+                <table class="js-table-sections table table-hover table-vcenter">
+                    <thead>
+                        <tr>
+                            <th style="width: 30px;"></th>
+                            <th>列表名称</th>
+                            <th>数量</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    {notempty name="$data_list.1"}
+                    {volist name="data_list.1" key ="key" id="vo"}
+                    <tbody class="js-table-sections-header  {$key==1 ? 'show table-active' : ''}">
+                        <tr>
+                            <td class="text-center">
+                                <i class="fa fa-angle-right text-muted"></i>
+                            </td>
+                            <td class="font-size-sm">
+                                <a href="listsn/index/id/{$vo.d.id}">
+                                   
+                                    <span class="badge badge-success">{$vo.d.dname}</span>
+                                </a>
+                                <a href="javascript:void(0);" class="select-edit" data-table="tiamo1" data-type="select"
+                                    data-value="{$vo.d.ztai}" data-source='{"0":"进行中","1":"完成"}' data-pk="{$vo.d.id}"
+                                    data-name="ztai">{switch name="vo.d.ztai"}{case value="0"}进行中{/case}{case
+                                    value="1"}完成{/case}{/switch}</a>
+                                <code><a href="javascript:void(0);"  title="订单介绍"  class="text-edit"  data-table="tiamo1" data-type="text" data-pk="{$vo.d.id}"  data-name="jieshao">{$vo.d.jieshao}</a> 
+                                                                    </code>
+
+                            </td>
+                            <td>
+                                <span class="badge badge-info">{$vo.tj.zong}台</span>
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="font-size-sm">
+                        <tr>
+                            <td class="text-center"></td>
+                            {// colspan="3" 合并下面表格}
+                            <td class="font-w600 font-size-sm"><a title="" icon="fa fa-pencil" class="badge badge-primary "
+                                    href="listsn/index/id/{$vo.d.id}" target="_self" data-toggle="tooltip">进入列表</a>
+                            </td>
+                            <td class="font-size-sm">
+                         
+                                <a title="" icon="fa fa-times" class="btn-default ajax-get confirm" href="/wx/index/del/id/111846.html"
+                                    data-tips="删除会同时删除列表所有的记录。且无法恢复！" data-toggle="tooltip"><i class="fa fa-times"></i>删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {/volist}
+                    {else /}
+                    <tbody>
+                        <tr class="table-empty">
+                            <td class="text-center empty-info" colspan="9">
+                                <i class="fa fa-database"></i> 没有已经完成的订单，请先设置成完成！
+                            </td>
+                        </tr>
+                    </tbody>
+                    {/notempty}
+
+                </table>
+                {//完成 完毕}
+            </div>
+
+            <div class="tab-pane fade fade-up" id="search-classic" role="tabpanel">            
+                使用教程：
+                还没更新！             
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content">
+    <div class="row">
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">订单</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$tab_tj.0+$tab_tj.1}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">总数</div>
+                    <div class="font-size-h2 font-w400 text-dark">{$tab_tj.zongtaishu}</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">已售</div>
+                    <div class="font-size-h2 font-w400 text-dark">#</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-6 col-md-3 col-lg-6 col-xl-3">
+            <a class="block block-rounded block-link-pop border-left border-primary border-4x" href="javascript:void(0)">
+                <div class="block-content block-content-full">
+                    <div class="font-size-sm font-w600 text-uppercase text-muted">库存</div>
+                    <div class="font-size-h2 font-w400 text-dark">#</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+{//中间内容}
+
+{//模块}
+{//新建窗口}
+<div class="modal fade" id="addlist" tabindex="-1" role="dialog" aria-labelledby="addlist" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-slideright" role="document">
+        <div class="modal-content">
+
+            <form class="" name="form-builder" action="{:url('vip/lists/add')}" method="post">
+
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary">
+                        <h3 class="block-title">
+                            <i class="fa fa-plus mr-1"></i> 新建订单
+                        </h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">                      
+                        <div class="form-group">
+                            <label for="message-subject">订单时间</label>
+
+                            <input class="js-datepicker form-control" type="text" id="ftime" name="ftime" value=""
+                                data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="yyyy/mm/dd"
+                                placeholder="选择时间">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dname">订单名称</label>
+                            <input class="form-control" type="text" id="dname" name="dname">
+                        </div>
+                    
+                        <button class="btn btn-sm btn-light" type="button" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        其他选填
+                        </button>
+                        <div class="collapse" id="collapseExample">
+                            <div class="form-group">
+                                <label for="dname">物流号</label>
+                                <input class="form-control" type="text" id="wuliu" name="wuliu">
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="block-content block-content-full text-right border-top">
+                        <button type="button" class="btn btn-sm btn-link mr-2" data-dismiss="modal">取消</button>
+                        <button class="btn btn-minw btn-primary ajax-post" target-form="form-builder" type="submit" id="submit">创建订单</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{//新建窗口}
+
+<div id="modal" class="modal fade" name="tip-modal">
+    <div class="modal fade" id="modal-block-slideright" tabindex="-1" role="dialog" aria-labelledby="modal-block-slideright"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-slideright" role="document">
+        </div>
+    </div>
+</div>
+{//模块}
+{/block}
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+{// X-editable 4.0版本}
+<script src="__ADMIN_T__/assets/js/table.js"></script>
+<script src="__ADMIN_T__/assets/bootstrap4-editable/js/bootstrap-editable.js"></script>
+<link href="__ADMIN_T__/assets/bootstrap4-editable/css/bootstrap-editable.css" rel="stylesheet">
+{// 时间选择 解决冲突 X-editable }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+<script>jQuery(function () { One.helpers(['datepicker', 'table-tools-checkable', 'table-tools-sections']); });</script>
+
+<script>
+    $('#modal').on('show.bs.modal', function (e) {
+        $(this).load($(e.relatedTarget).data('url'));
+    }); </script>
+{/block}

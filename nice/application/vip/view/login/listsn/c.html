@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>爱果管理 - 苹果维修管理,苹果经销商管理系统</title>
+    <meta name="description" content="第三方苹果华为OPPOVIVO经销商管理">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="__ADMIN_T__/assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="192x192" href="__ADMIN_T__/assets/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="__ADMIN_T__/assets/img/favicon.ico">
+
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/aiguoui.min.css">
+    {// 选择皮肤颜色
+    <link rel="stylesheet" id="css-main" href="__ADMIN_T__/assets/css/themes/city.min.css">}
+    <link rel="stylesheet" href="__ADMIN_T__/assets/css/aiguovip.css" id="css-main">
+    <script>
+        // url
+        var aiguovip = {
+            'quick_edit_url': '{$quick_edit_url ? $quick_edit_url : url("quickEdit")}',
+            'wajax_url': '{$wajax_url ? $wajax_url : url("checkapi")}',
+            'tasks_url': '{$tasks_url ? $tasks_url : url("updata")}',
+            'aside_edit_url': '/admin/system/quickedit.html',
+            'theme_url': '{:url("vip/ajax/setTheme")}',
+            'checkapi': '{:url("vip/listsn/checkapi")}',
+
+            // 字段过滤
+            '_filter': '{$Request.param._filter ? $Request.param._filter : (isset($_filter) ? $_filter : "")}',
+            '_filter_content': '{$Request.param._filter_content == '' ? (isset($_filter_content) ? $_filter_content : "") : $Request.param._filter_content}',
+            '_field_display': '{$Request.param._field_display ? $Request.param._field_display : (isset($_field_display) ? $_field_display : "")}',
+            '_field_clear': {: json_encode(isset($field_clear) ? $field_clear : [])
+        },
+        //'get_filter_list': '{$get_filter_list ? $get_filter_list : url("getfilterlist")}',
+        'get_filter_list': '{:url("vip/ajax/getFilterList")}',
+            'curr_url': '{:url("", $Request.route)}',
+                'curr_params': {: json_encode($Request.param) },
+
+        };
+    </script>
+</head>
+{php}if(session('user.wx_touxiang'))$touxiang=session('user.wx_touxiang');else $touxiang
+="__ADMIN_T__/assets/img/noavatar.jpg";{/php}
+<style>
+
+.list-timeline .list-timeline-icon {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    width: 34px;
+    height: 34px;
+    line-height: 34px;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+}
+
+</style>
+<body>
+    <div id="page-container"
+        class="sidebar-o sidebar-dark sidebar-mini enable-page-overlay side-scroll page-header-fixed">
+        <aside id="side-overlay" class="font-size-sm">
+            <div class="content-header border-bottom">
+                <a class="img-link mr-1" href="javascript:void(0)">
+                    <img class="img-avatar img-avatar32" src="{$touxiang}" alt="">
+                </a>
+
+
+                <div class="ml-2">
+                    <a class="link-fx text-dark font-w600" href="javascript:void(0)">{:session('user.username')}</a>
+                </div>
+
+
+                <a class="ml-auto btn btn-sm btn-dual" href="javascript:void(0)" data-toggle="layout"
+                    data-action="side_overlay_close">
+                    <i class="fa fa-fw fa-times text-danger"></i>
+                </a>
+            </div>
+
+            <div class="content-side">
+                <div class="block block-transparent pull-x pull-t">
+                    <ul class="nav nav-tabs nav-tabs-alt nav-justified" data-toggle="tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#so-overview">
+                                <i class="fa fa-fw fa-coffee text-gray mr-1"></i> 快速设置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#so-sales">
+                                <i class="fa fa-fw fa-chart-line text-gray mr-1"></i> 销售记录
+                            </a>
+                        </li>
+
+                    </ul>
+                    <div class="block-content tab-content overflow-hidden">
+                        <div class="tab-pane pull-x fade fade-left show active" id="so-overview" role="tabpanel">
+                            <div class="block mb-0">
+                                <div class="block-header block-header-default">
+                                    <h3 class="block-title">快速设置</h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option" data-toggle="block-option"
+                                            data-action="content_toggle"></button>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+                                    <form action="be_pages_dashboard.html" method="POST" onsubmit="return false;">
+                                        <div class="form-group">
+                                            <p class="font-w600 mb-2">
+                                                保修状态
+                                            </p>
+                                            <div class="custom-control custom-switch mb-1">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="so-settings-check1" name="so-settings-check1" checked>
+                                                <label class="custom-control-label switch"
+                                                    for="so-settings-check1">自动查保修</label>
+                                            </div>
+                                        </div>
+
+
+                                        <hr>
+                                        <div class="form-group">
+                                            <p class="font-w600 mb-2">
+                                                维修状态
+                                            </p>
+                                            <div class="custom-control custom-switch mb-1">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="so-settings-check2" name="so-settings-check2" checked>
+                                                <label class="custom-control-label"
+                                                    for="so-settings-check2">自动查维修状态</label>
+                                            </div>
+                                        </div>
+
+
+                                        <hr>
+                                        <div class="form-group">
+                                            <p class="font-w600 mb-1">
+                                                维修进度
+                                            </p>
+
+                                            <div class="custom-control custom-switch mb-1">
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="so-settings-check5" name="so-settings-check5" checked>
+                                                <label class="custom-control-label"
+                                                    for="so-settings-check5">自动查进度</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane pull-x fade fade-right" id="so-sales" role="tabpanel">
+                            <div class="block mb-0">
+                                <div class="block-content">
+                                    <div class="row items-push pull-t">
+                                        <div class="col-6">
+                                            <div class="font-w700 text-uppercase">销售</div>
+                                            <a class="link-fx font-size-h3 font-w300" href="javascript:void(0)">#</a>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="font-w700 text-uppercase">金额</div>
+                                            <a class="link-fx font-size-h3 font-w300" href="javascript:void(0)">#</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="block-content block-content-full block-content-sm bg-body-light">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <span class="font-w600 text-uppercase">今天</span>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <span class="ext-muted">152</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+
+
+        </header>
+
+            {block name="content"}
+
+
+            <div id="" class="layui-layer-content">
+                <div class="" id="filter-check-content">
+                    <div class="alert alert-success alert-dismissable" role="alert"><button type="button" class="close"
+                            data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h3 class="alert-heading font-w300 my-2">维修ID：G*****</h3>
+                        <p class="mb-0">iPhone XS Max</p>
+                        <p class="mb-0">我们的技术人员正在检查您的产品来诊断问题。</p>
+                    </div>                
+                    <div class="block block-rounded block-bordered">
+                        <div class="block-header block-header-default">
+                                <h3 class="block-title"><i class="fa fa-fw fa-truck fa-x text-info"></i>  申请服务</h3><small>2019年3月5日</small>
+                        </div>
+                        <div class="block-content">                           
+                            <p class="font-w600 mb-2">我们已收到您的产品。</p>
+                            <p>我们已收到您的产品。</p>                                   
+                        </div>  
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title"><a class="img-link mr-2"><i class="fa fa-cog text-primary"></i></a> 诊断设备</h3><small>2019年3月5日</small>
+                        </div>
+                        <div class="block-content">
+                              <p class="font-w600 mb-2">我们已收到您的产品。</p>
+                              我们已收到您的产品。
+                        </div>
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title"><i class="fa fa-check-square text-success"></i> 服务完成</h3><small>2019年3月5日</small>
+                        </div>
+                        <div class="block-content"><a class="img-link mr-2">
+                             
+                                
+                              <p class="font-w600 mb-2">我们已收到您的产品。</p>
+                              收到您的产品。
+                        </div>
+                        
+                    </div>                    
+                </div>
+            </div>
+
+      
+
+
+            {/block}
+        </main>
+        {// 页面底部 开始}
+
+        {// 页面底部 完毕}
+    </div>
+    {// oneuiJS//}
+    <script src="__ADMIN_T__/assets/js/aiguo.core.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/aiguo.app.min.js"></script>
+    {// 页面JS//}
+    {block name="script"}
+    {/block}
+</body>
+
+</html>

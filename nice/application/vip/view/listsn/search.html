@@ -1,0 +1,283 @@
+{extend name="layout" /}
+{//中间块https://blog.csdn.net/shi199434/article/details/78828442 表格技术}
+{block name="content"}
+
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/lists')}">{:lang('aiguo标题')}</a>
+            </li>
+            {notempty name="$dingdan"}
+            <li class="breadcrumb-item"> {$dingdan.dname}{notempty name="$dingdan.jieshao"}-{$dingdan.jieshao}{/notempty}
+
+            </li>
+            {/notempty}
+
+            <li class="breadcrumb-item active" aria-current="page">( {$total} 台 )</li>
+        </ol>
+    </nav>
+</div>
+{//中间内容}
+<div class="content">
+    <!-- Message List -->
+    <div class="block">
+        <div class="block-header">
+            <div class="block-options">
+                {notempty name="$Request.param.id"}
+                <button type="button" class="btn btn-sm btn-light" data-toggle="modal" data-target="#addsnlist">
+                    <i class="fa fa-fw fa-plus-circle text-info"></i>
+                    <span class="d-none d-sm-inline ml-1">{:lang('智能添加')}</span>
+                </button>
+                {/notempty}
+                <button type="button" class="btn btn-sm btn-light" data-toggle="block-option"
+                        data-action="fullscreen_toggle"></button>
+            </div>
+        </div>
+        <div class="block-content">
+
+            <div class="collapse" id="collapseExample">
+                {//查询结果自动编辑}
+                <code> 开发中...</code>
+            </div>
+
+            {notempty name="$Request.param.soso"}
+
+            <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
+                <span class="text-primary font-w700">搜索内容：</span> <mark>{$Request.param.so}</mark>
+            </div>
+            {/notempty}
+            <div class="table-responsive">
+                <!-- 以下基础查询 -->
+                {//table-striped黑色背景/table-bordered边界表/table-hover鼠标滑过变色/ table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0/字体整洁}
+                {notempty name="basis_data"}
+                <table id="general-table" class="table  table-builder table-bordered table-hover table-striped table-vcenter js-table-sections js-table-checkable font-size-sm mb-0">
+                    <thead>
+                    <tr>
+
+                        <th class="text-center" style="width: 30px;">订单编号</th>
+                        <th class="text-center" style="width: 30px;">订单名称</th>
+                        <th class="text-center" style="width: 30px;">序列号（SN）</th>
+                        <th class="text-center" style="width: 30px;">IMEI</th>
+                        <th class="text-center" style="width: 30px;">G号</th>
+                        <th class="text-center" style="width: 30px;">客户信息</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <span>维修管理：</span>
+                    {volist name="basis_data" key ="key" id="vo"}
+                    <tbody class="">
+                    <tr>
+
+                        <td class="text-center"><a href="{:url('vip/listsn/index',array('id'=>$vo.id))}">{$vo.id}</a></td>
+                        <td class="text-center">{$vo.dname}</td>
+                        <td class="text-center"><a href="{:url('vip/listsn/index',array('id'=>$vo.id,'keyword'=>$vo.sn,'phone_id'=>$vo.phone_id))}">{$vo.sn}</a></td>
+                        <td class="text-center"><a href="{:url('vip/listsn/index',array('id'=>$vo.id,'keyword'=>$vo.imei,'phone_id'=>$vo.phone_id))}">{$vo.imei}</a></td>
+                        <td class="text-center">{$vo.wid}</td>
+                        <td class="text-center">客户名称：{$vo.kh_name}，客户手机：{$vo.kh_phone}，客户地址：{$vo.kh_kuaidi}</td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                    </tbody>
+                </table>
+                {/notempty}
+
+                <!-- 以下高级查询查询 -->
+                {//table-striped黑色背景/table-bordered边界表/table-hover鼠标滑过变色/ table table-striped table-hover table-borderless table-vcenter font-size-sm mb-0/字体整洁}
+                {notempty name="$senior_data"}
+                <table id="" class="table  table-builder table-bordered table-hover table-striped table-vcenter js-table-sections js-table-checkable font-size-sm mb-0">
+                    <thead>
+                    <tr>
+
+                        <th class="text-center" style="width: 30px;">订单编号</th>
+                        <th class="text-center" style="width: 30px;">订单名称</th>
+                        <th class="text-center" style="width: 30px;">序列号（SN）</th>
+                        <th class="text-center" style="width: 30px;">IMEI</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <span>高级查询：</span>
+                    {volist name="senior_data" key ="k" id="v"}
+                    <tbody class="">
+                    <tr>
+                        <td class="text-center"><a href="{:url('vip/chaxun/order_detail',array('id'=>$v.id))}">{$v.cx_order_sn}</a></td>
+                        <td class="text-center">{$v.order_title}</td>
+                        <td class="text-center"><a href="{:url('vip/chaxun/order_detail',array('id'=>$v.id,'sn_or_imei_url'=>$v.mp_sn))}">{$v.mp_sn}</a></td>
+                        <td class="text-center"><a href="{:url('vip/chaxun/order_detail',array('id'=>$v.id,'sn_or_imei_url'=>$v.mp_imei))}">{$v.mp_imei}</a></td>
+                    </tr>
+                    {/volist}
+                    </tbody>
+                    </tbody>
+                </table>
+                {/notempty}
+                <!--第一层基础查询为空-->
+                {empty name="basis_data"}
+                <!--第二层高级查询为空-->
+                {empty name ="senior_data"}
+                    <tbody>
+                        <i class="fa fa-database" style="text-align:center; padding:50px; font-size: 28px"></i> 您搜索的内容：<code>{$Request.param.so}</code>为空
+                    </tbody>
+                {/empty}
+                {/empty}
+            </div>
+        </div>
+    </div>
+
+
+    {//中间内容}
+    <!-- Table -->
+
+    <!-- END Table -->
+
+    {//测试模板}
+
+    {//模块}
+    {//智能添加}
+    <div class="modal fade" id="addsnlist" tabindex="-1" role="dialog" aria-labelledby="addsnlist" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">{//modal-dialog-top 上 modal-lg放大点}
+            <div class="modal-content">
+                <form class="" name="form-builder" action="{:url('vip/listsn/add',['did'=>$Request.param.id])}"
+                      method="post">
+                    <div class="block block-themed block-transparent mb-1">
+                        <div class="block-header bg-success">
+                            <h3 class="block-title">
+                                <i class="fa fa-pencil-alt mr-1"></i> {:lang('智能添加')}
+                            </h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div class="block-content">
+
+                            <div class="form-group">
+                                <label for="message-msg">{:lang('智能添加')}</label>
+                                <textarea class="form-control" id="textbox" name="textbox" rows="8" placeholder="{:lang('智能添加提示')}"></textarea>
+
+                            </div>
+                            <div class="form-group">
+
+
+
+
+                                <button class="btn btn-sm btn-light" type="button" data-toggle="collapse"
+                                        data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                                    更多
+                                </button>
+
+                                <button class="btn btn-sm btn-light" type="button" data-toggle="modal"
+                                        data-target="#modal-addsnlist" aria-expanded="false" aria-controls="collapseExample">
+                                    <i class="fa fa-book text-muted mr-1"></i>{:lang('智能添加说明')}
+                                </button>
+
+
+                                <div class="collapse" id="collapseExample2">
+                                    <div class="form-group">
+                                        <label for="dname"></label>
+                                        <input class="form-control" type="text" id="beizhu" name="beizhu" placeholder="统一添加或编辑备注（选填）">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                            </div>
+                        </div>
+                        <div class="block-content block-content-full text-right border-top">
+                            <!--
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">{:lang('取消')}</button>
+                           -->
+                            <button class="btn btn-minw btn-primary ajax-post" target-form="form-builder"
+                                    type="submit">{:lang('智能添加')}</button>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {//个性化设置}
+    <div class="modal fade" id="setbiaoge" tabindex="-1" role="dialog" aria-labelledby="setbiaoge" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">{//modal-dialog-top 上 modal-lg放大点}
+            <div class="modal-content">
+                <form class="" name="form-builder21" action="{:url('vip/listsn/getgexinghua',['did'=>$Request.param.id])}" method="post">
+                    <div class="block block-themed block-transparent mb-1">
+                        <div class="block-header bg-success">
+                            <h3 class="block-title">
+                                <i class="fa fa-pencil-alt mr-1"></i> 设置个性化
+                            </h3>
+                            <div class="block-options">
+                                <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-fw fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {//添加说明}
+    <div class="modal fade" id="modal-addsnlist" tabindex="-1" role="dialog" aria-labelledby="modal-addsnlist"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="block block-themed block-transparent mb-0">
+                    <div class="block-header bg-primary-dark">
+                        <h3 class="block-title">智能添加帮助</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p>1.<code>自动识别各种格式！</code></br>
+                            DNPQVM**GRY7</br>
+                            355420079898722 DNPQVMM**RY7</br>
+                            355420079898712 F19QQD4**RY7 G317244333 </br>
+                        </p>
+                        <p>更多格式，自己去发掘！反正不收费！
+                        </p>
+                        <p><code>根据您的数据智能识别添加或编辑，给您人性化的体验！</code></p>
+                    </div>
+                    <div class="block-content block-content-full text-right bg-light">
+                        <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">明白</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {//模块}
+    {/block}
+
+    {block name="script"}
+    <script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+
+    {// 错误提示框 }
+    <script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+    {// 提示框sweetalert2 }
+    <link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+    <script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+    <script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+    {// X-editable 4.0版本}
+    <script src="__ADMIN_T__/assets/js/jm/t00001.js"></script>
+
+    <script src="__ADMIN_T__/assets/js/plugins/editable/js/bootstrap-editable.js"></script>
+    <link
+    ="__ADMIN_T__/assets/js/plugins/editable/css/bootstrap-editable.css" rel="stylesheet">
+    <script src="__ADMIN_T__/assets/js/plugins/layer/layer.js"></script>
+    <script type="text/javascript">
+        // var wxlist = [{volist name="basis_data" id="vo" }"{$vo.id}", {/volist}];
+        // var advancewxlist = []
+    </script>
+    <script src="__ADMIN_T__/assets/js/kehu.js"></script>
+    <!--<script src="__ADMIN_T__/assets/js/jm/c00001.js"></script>-->
+    <script src="__ADMIN_T__/assets/js/check.js"></script>
+    <script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+    {/block}

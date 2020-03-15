@@ -1,0 +1,146 @@
+{extend name="layout" /}
+{//中间块}
+{block name="content"}
+
+<div class="bg-body-light">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-alt push">
+            <li class="breadcrumb-item">
+                <a href="{:url('/vip/user/jifenjilu')}">个人积分</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">会员积分流水 ({notempty
+                name="$page"}{$data_list->total()|raw}
+                {else/}{$data_list|count} {/notempty} 条)
+            </li>
+        </ol>
+    </nav>
+</div>
+
+<div id="vue_content">
+
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+
+            <div class="block">
+                <div class="block-header">
+                    <h3 class="block-title">
+                        当前积分:{$user_jifen}
+                        <button type="button" class="btn btn-sm btn-primary pull-r pull-right " data-toggle="modal"
+                                data-target="#modal-block-vcenter">积分充值
+                        </button>
+                    </h3>
+
+                </div>
+
+
+                <div id="order_list">
+
+                    <!-- new 订单列表内容  包含  start -->
+                    <div class="table-responsive" id="table_view">
+                        <table id="general-table"
+                               class="table table-builder js-table-sections table-bordered table-striped table-vcenter js-table-checkable js-table-checkable-enabled js-table-sections-enabled">
+                            <thead>
+                            <tr>
+
+                                <th class="text-center" style="width: 80px;">序列号</th>
+                                <!--                                <th class="text-center" style="width: 100px;">用户名</th>-->
+                                <th class="text-center text-nowrap">扣款类型</th>
+                                <!--                            <th class="text" style="width: 40px;">数量</th>                            -->
+                                <th class="text-center text-nowrap" >消费积分</th>
+                                <th class="text-center text-nowrap">消费冻结积分</th>
+                                <th class="text-center" style="width: 140px;">扣款说明</th>
+                                <th class="text-center text-nowrap">添加时间</th>
+
+                            </tr>
+                            </thead>
+                            <tbody class="js-table-sections-header">
+                            {notempty name="data_list"}
+                            {volist name="data_list" key ="key" id="vo"}
+                            <tr>
+                                <td class="text-center  text-nowrap">{$vo.id}</td>
+                                <!--                                <td class="text-center">{}</td>-->
+                                <td class="text-center  text-nowrap">{:lang('change_type')[$vo.change_type]}</td>
+                                <td class="text-center {$vo.jifenxiaofei < '0'?'error_color':'error_success'}">
+                                    {$vo.jifenxiaofei}
+                                </td>
+                                <td class="text-center  text-nowrap  {$vo.dongjie_jifen < '0'?'error_color':'error_success'}">
+                                    {$vo.dongjie_jifen}
+                                </td>
+                                <td class="text " style="width: 180px">
+                                    <div  style="width: 190px;">
+                                        {$vo.chaxuntext}
+                                    </div>
+
+                                </td>
+                                <td class="text-center  text-nowrap">{$vo.create_time|date='Y-m-d H:i'}</td>
+
+                            </tr>
+                            {/volist}
+                            {else /}
+                            <tbody>
+                            <tr class="table-empty">
+                                <td class="text-center empty-info" colspan="7">
+                                    <i class="fa fa-database"></i> 亲，你还未消费，没有消费记录！
+                                </td>
+                            </tr>
+                            </tbody>
+                            {/notempty}
+                            </tbody>
+
+                        </table>
+
+                        <!-- 分页开始 -->
+                        {notempty name="$page"}
+                        {$page|raw}
+                        {/notempty}
+
+                        <div class="blank10"></div>
+                        <!-- 分页 END -->
+
+                    </div>
+                    <!--  订单列表内容 包含 end   -->
+
+
+                    <!--  以下是军原来的表格代码 包含 --------------以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 以下是军原来的表格代码 包含 --------------------------------- -->
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+</div>
+
+
+{//中间内容}
+<!-- Table -->
+
+<!-- END Table -->
+
+{//测试模板}
+
+{//模块}
+{//智能添加}
+
+
+{//智能添加}
+
+
+{//模块}
+
+{/block}
+
+{block name="script"}
+<script src="__ADMIN_T__/assets/js/aiguovip.js"></script>
+
+{// 错误提示框 }
+<script src="__ADMIN_T__/assets/js/plugins/bootstrap-notify/bootstrap-notify.min.js"></script>
+{// 提示框sweetalert2 }
+<link rel="stylesheet" href="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.css">
+<script src="__ADMIN_T__/assets/js/plugins/es6-promise/es6-promise.auto.min.js"></script>
+<script src="__ADMIN_T__/assets/js/plugins/sweetalert2/sweetalert2.min.js"></script>
+
+{/block}

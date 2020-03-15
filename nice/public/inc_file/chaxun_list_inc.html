@@ -1,0 +1,101 @@
+{notempty name="$order_list"}
+{volist name="order_list" key ="key" id="row"}
+<tr>
+    <td class="text-center" style="width: 30px;">
+        <div class="custom-control custom-checkbox custom-control-primary d-inline-block">
+            <input type="checkbox" class="ids custom-control-input" id="row_{$row.id.value}" name="ids[]" value="{$row.id.value}">
+            <label class="custom-control-label" for="row_{$row.id.value}"></label>
+        </div>
+    </td>
+    <td>
+        <!--ID 监控-->
+        <div class="custom-control custom-switch custom-control-success mb-1" name="id_jiankong">
+            <input @change="change_jiankong('{$row.id.value}')" {$row.id_jiankong.value==1? 'checked=' : '' } value="{$row.id.value}"
+            type="checkbox" id="example-sw-custom-success{$row.id.value}" name="example-sw-success1" class="custom-control-input">
+            <label for="example-sw-custom-success{$row.id.value}" class="custom-control-label"></label>
+        </div>
+    </td>
+    <td  data-toggle="modal" data-target="#server_list" class="text-nowrap" th_id="server_sn" name='序列号SN'>
+											<span class="th_name {$row.info.status=='1'?'error_color':'error_success'}">
+												{$row.server_sn.value}
+												{$row.info.status=='1'?'无效':''}
+												{$row.info.status=='3'?'替换':''}
+											</span>
+    </td>
+    <td class="server_1 server_6 show_all  text-nowrap" th_id="server_imei" name='IMEI'>
+											<span class="th_name {$row.info.status=='2'?'error_color':'error_success'}">
+												{$row.server_imei.value}{$row.info.status=='2'?'无效':''}
+											</span>
+    </td>
+    <td class="server_1 server_6  hide " th_id="server_imei2" name='IMEI2'>
+											<span class="th_name">
+												{$row.server_imei2.value}
+											</span>
+    </td>
+    <td class="server_1 server_6  show_all" th_id="server_model" name='设备型号'>
+        <span class="th_name">{$row.server_model.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_net_banben" name='网络版本'>
+        <span class="th_name">{$row.server_net_banben.value}</span>
+    </td>
+    <td class="server_1 server_6  show_all" th_id="server_phone_color" name='颜色'>
+        <span class="th_name">{$row.server_phone_color.value}</span>
+    </td>
+    <td class="server_1 server_6 show_all " th_id="server_phone_size" name='容量'>
+        <span class="th_name">{$row.server_phone_size.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_phone_bx_lx" name='保修类型'>
+        <span class="th_name">{$row.server_phone_bx_lx.value}</span>
+    </td>
+
+    <td class="server_1 hide " th_id="server_buy_date" name='购买日期'>
+        <span class="th_name">{$row.server_buy_date.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_bx_end_date" name='过保日期'>
+											<span class="th_name">
+												<span class="{$row.server_bx_end_date.end_day_num >=0?'success_color':'error_color'}">
+													{$row.server_bx_end_date.value}
+												</span>
+												<span class="badge {$row.server_bx_end_date.end_day_num > =0 ?'badge-success':'badge-danger'}">{$row.server_bx_end_date.end_day_num}</span>
+											</span>
+    </td>
+    <td class="server_1 hide " th_id="server_buy_jihuo" name='激活状态'>
+        <span class="th_name">{$row.server_buy_jihuo.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_phone_zhichi" name='电话支持'>
+        <span class="th_name">{$row.server_phone_zhichi.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_buy_yanzheng" name="购买验证">
+        <span class="th_name">{$row.server_buy_yanzheng.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_jiechu" name="借出设备">
+        <span class="th_name">{$row.server_jiechu.value}</span>
+    </td>
+    <td class="server_1 hide " th_id="server_guanhuan" name="官换">
+        <span class="th_name">{$row.server_guanhuan.value}</span>
+    </td>
+    <td class="server_2  server_3 hide " th_id="server_id_lock" name='激活锁状态'>
+        <span class="th_name">{$row.server_id_lock.value}</span>
+    </td>
+    <td class="server_3  hide " th_id="server_id_black" 　name='ID黑白名单'>
+        <span class="th_name">{$row.server_id_black.value}</span>
+    </td>
+
+    <td class="server_5  hide " th_id="server_net_lock" 　name='网络锁'>
+        <span class="th_name">{$row.server_net_lock.value}</span>
+    </td>
+    <td class="server_6  hide " th_id="server_yunyingshang" name='运营商'>
+        <span class="th_name">{$row.server_yunyinshang.value}</span>
+    </td>
+    <td class="server_6  hide " th_id="server_yunyingshang_country" name='运营商国家'>
+        <span class="th_name">{$row.server_yunyingshang_country.value}</span>
+    </td>
+    <td class="server_7  hide " th_id="server_weixiu" name='维修状态'>
+        <span class="th_name">{$row.server_weixiu.value}</span>
+    </td>
+    <td class="server_15 hide " th_id="server_MDM" 　name='MDM锁'>
+        <span class="th_name">{$row.server_MDM.value}</span>
+    </td>
+</tr>
+{/volist}
+{/notempty}

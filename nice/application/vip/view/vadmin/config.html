@@ -1,0 +1,91 @@
+{extend name="layout" /}
+{//中间块}
+
+{block name="content"}
+
+
+
+<div class="block">
+        <div class="block-content">
+            <ul class="nav nav-pills push">
+                <li class="nav-item mr-1">
+                    <a class="nav-link active" href="{:url('vip/Vadmin/config')}">系统设置</a>
+                </li>
+                <li class="nav-item mr-1">
+                        <a class="nav-link " href="{:url('vip/Vadmin/log')}">日志</a>
+                </li>
+                <li class="nav-item ">
+                        <a class="nav-link " href="{:url('vip/Vadmin/log')}">日志</a>
+                </li>
+            </ul>
+        </div>
+</div>
+
+{//中间内容}
+<div class="content">
+    <h2 class="content-heading">系统设置</h2>
+
+<div class="block">
+
+    <div class="block-content block-content-full">
+            <form class="" name="form-builder" action="#"  method="post">
+
+            <div class="row">
+                <div class="">
+                    <p class="font-size-sm text-muted">                      
+                    </p>
+                </div>
+                <div class="col-lg-6 col-xl-13">            
+                    <div class="form-group">
+                        <label for="example-textarea-input-alt">型号</label>
+                        <textarea class="form-control form-control-alt" id="xhao" name="xhao" rows="10" placeholder="输入型号">{$data_list.xhao.value}</textarea>
+                        <div class="help-block"> 直接从表格复制 </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-xl-13">            
+                    <div class="form-group">
+                        <label for="example-textarea-input-alt">维修状态</label>
+                        <textarea class="form-control form-control-alt" id="ztai" name="ztai" rows="10" placeholder="输入维修状态">{$data_list.ztai.value}</textarea>
+                        <div class="help-block"> 直接从表格复制</div>
+                    </div>                   
+                </div>
+                <div class="col-lg-6 col-xl-13">            
+                        <div class="form-group">
+                            <label for="example-textarea-input-alt">进度API</label>
+                            <textarea class="form-control form-control-alt" id="wxapi" name="wxapi" rows="10" placeholder="输入维修状态">{$data_list.wxapi.value}</textarea>
+                            <div class="help-block"> 
+                                https://mysupport.apple.com/api/v1/supportaccount/getRepairStatus?repairId=#WXID&serialNumber=#WXSN</br>
+                                http://tiamo.applinzi.com/wx_curl.php?wid=#WXID&sn=#WXSN</br>
+                                阿里云函数：</br>
+                                https://1569576395704989.cn-hangzhou.fc.aliyuncs.com/2016-08-15/proxy/api/jindu/tiamo_-_#WXSN_-_#WXID</br>
+                                https://1569576395704989.cn-shanghai.fc.aliyuncs.com/2016-08-15/proxy/api/checkjindu/tiamo_-_#WXSN_-_#WXID</br>
+                            </div>
+                        </div>                   
+                    </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="block-content block-content-full  border-top">
+                        <button class="btn btn-minw btn-primary ajax-post" target-form="form-builder"
+                        type="submit">提交</button>
+                    <button type="button" class="btn btn-sm btn-link mr-2" data-dismiss="modal">取消</button>                
+
+                </div>
+
+
+        </form>
+    </div>
+</div>
+</div>
+
+
+{//中间内容}
+
+
+{/block}
+
+{block name="script"}
+
+
+
+<script>jQuery(function () { One.helpers(['table-tools-checkable', 'table-tools-sections']); });</script>
+{/block}
