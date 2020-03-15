@@ -1,0 +1,14 @@
+/thinkphp
+/vendor
+/config/app.php
+/config/database.php
+/config/cookie.php
+/config/session.php
+/novel_pc
+/public/ueditor
+/runtime
+/sql
+/application/home_back
+/application/member_back
+/novel_mobile
+/application/wap

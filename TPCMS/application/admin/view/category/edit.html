@@ -1,0 +1,207 @@
+﻿<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/lib/html5shiv.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="__STATIC__/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title>编辑书籍分类 - 书籍分类管理 - YPcms&nbsp;后台管理系统</title>
+<meta name="keywords" content=" ">
+<meta name="description" content=" ">
+</head>
+<body>
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>父级：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<select class="formControls input-text col-xs-8 col-sm-9" name="pid" {%empty name="$pidname"%}disabled{%/empty%}>
+					{%if $pidname.title%}
+					<option class="input-text" value=" {%$pidname.id%}"> {%$pidname.title%} </option>
+					{%/if%}
+					<option class="input-text" value=" 0"> 顶级 </option>
+					{%volist name='lis' id='vo'%}
+					<option class="input-text" value=" {%$vo.id%}"> {%$vo.title%} </option>
+					{%/volist%}
+				</select> 
+			</div>
+		</div>
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{%$list.title%}" placeholder="权限节点名称" id="title" name="title">
+			</div>
+		</div>
+		<div class="row cl" style="line-height: 120px;">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>默认展示图标：</label>
+			<div class="formControls col-xs-4 col-sm-4">
+				<input type="file" id="file" class="input-text"  onchange="imgsr()" name="avatar">
+			</div>
+			<div class="col-xs-1 col-sm-1"><img id="show" src="{%$list.avatar%}"  alt="" style="border: 1px solid #cccccc;width: 120px;height: 120px;"></div>
+		</div>
+		<div class="row cl" style="line-height: 120px;">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>鼠标事件图标：</label>
+			<div class="formControls col-xs-4 col-sm-4">
+				<input type="file" id="file2" class="input-text"  onchange="imgsr2()" name="avatar2">
+			</div>
+			<div class="col-xs-1 col-sm-1"><img id="show2" src="{%$list.avatar2%}"  alt="" style="border: 1px solid #cccccc;width: 120px;height: 120px;"></div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">SEO标题：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{%$list.seotitle%}" placeholder="SEO标题" id="seotitle" name="seotitle">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">SEO关键词：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{%$list.keywords%}" placeholder="SEO关键词" id="keywords" name="keywords">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">内容摘要： <br>（SEO关键词描述）</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="description" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{%$list.description%}</textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权重：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{%$list.weigh%}" placeholder="" id="weigh" name="weigh">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+			<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+				{%if $list.status === 'normal'%}
+				<div class="radio-box">
+					<input type="radio" id="sex-1" name="status" value="normal" checked>
+					<label for="sex-1">启用</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="status" value="hidden">
+					<label for="sex-2">禁用</label>
+				</div>
+				{%else/%}
+				<div class="radio-box">
+					<input type="radio" id="sex-1" name="status" value="normal">
+					<label for="sex-1">启用</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="status" value="hidden" checked>
+					<label for="sex-2">禁用</label>
+				</div>
+				{%/if%}
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				{%:token()%}
+				<button type="submit" class="btn btn-success radius" id="admin-role-save" ><i class="icon-ok"></i> 确定</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__STATIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".permission-list dt input:checkbox").click(function(){
+		$(this).closest("dl").find("dd input:checkbox").prop("checked",$(this).prop("checked"));
+	});
+	$(".permission-list2 dd input:checkbox").click(function(){
+		var l =$(this).parent().parent().find("input:checked").length;
+		var l2=$(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
+		if($(this).prop("checked")){
+			$(this).closest("dl").find("dt input:checkbox").prop("checked",true);
+			$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",true);
+		}
+		else{
+			if(l==0){
+				$(this).closest("dl").find("dt input:checkbox").prop("checked",false);
+			}
+			if(l2==0){
+				$(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked",false);
+			}
+		}
+	});
+	
+	$("#form-admin-role-add").validate({
+		rules:{
+			title:{
+				required:true,
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				success: function(data){
+					layer.msg(data, {icon:1,time:1000}, function(){
+								var index = parent.layer.getFrameIndex(window.name);
+								parent.location.reload(); //刷新父页面
+								parent.layer.close(index);
+							});
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg(textStatus, {icon:1,time:1000}, function(){
+								var index = parent.layer.getFrameIndex(window.name);
+								parent.location.reload(); //刷新父页面
+								parent.layer.close(index);
+							});
+				}
+			});
+		}
+	});
+});
+    function imgsr(){
+        var r= new FileReader();
+        f=document.getElementById('file').files[0];
+        r.readAsDataURL(f);
+        r.onload=function (e) {
+            document.getElementById('show').src=this.result;
+        };
+    }
+    function imgsr2(){
+        var r= new FileReader();
+        f=document.getElementById('file2').files[0];
+        r.readAsDataURL(f);
+        r.onload=function (e) {
+            document.getElementById('show2').src=this.result;
+        };
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

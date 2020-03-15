@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/lib/html5shiv.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="__STATIC__/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>编辑baner - banner图管理 - YPcms&nbsp;后台管理系统</title>
+<meta name="keywords" content=" ">
+<meta name="description" content=" ">
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" action="" method="post" id="form-admin-add">
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="{%$list.title%}" placeholder="" id="title" name="title">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>位置标识ID：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="{%$list.biaoshi%}" placeholder="位置标识ID" id="biaoshi" name="biaoshi">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>链接地址：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="{%$list.url%}" placeholder="" id="url" name="url">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所在位置：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" autocomplete="off" value="{%$list.bannerweizi%}" placeholder="所在位置" id="bannerweizi" name="bannerweizi">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Banner图片：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="file" id="file" class="input-text" onchange="imgsr()" name="avatar" style="width: 350px"> <span style="color: red;"> 比例：4324x1152</span>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"></label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<img id="show" src="{%$list.avatar%}" alt="" style="border: 1px solid #cccccc;width: auto;min-width: 150px;height: 150px;">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Banner缩略图片：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="file" id="file2" class="input-text" onchange="imgsr2()" name="avatar2" style="width: 350px"> <span style="color: red;"> 比例：448x202</span>
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"></label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<img id="show2" src="{%$list.avatar2%}"  alt="" style="border: 1px solid #cccccc;width: auto;min-width: 150px;height: 150px;">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>权重：</label>
+		<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="{%$list.weigh%}" placeholder="" id="weigh" name="weigh">
+		</div>
+	</div>
+	<div class="row cl">
+		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>状态：</label>
+		<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+			{%if $list.status === 'normal'%}
+				<div class="radio-box">
+					<input type="radio" id="sex-1" name="status" value="normal" checked>
+					<label for="sex-1">启用</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="status" value="hidden">
+					<label for="sex-2">禁用</label>
+				</div>
+				{%else/%}
+				<div class="radio-box">
+					<input type="radio" id="sex-1" name="status" value="normal">
+					<label for="sex-1">启用</label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="sex-2" name="status" value="hidden" checked>
+					<label for="sex-2">禁用</label>
+				</div>
+			{%/if%}
+		</div>
+	</div>
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			{%:token()%}
+			<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+		</div>
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<script type="text/javascript" src="__STATIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	$("#form-admin-add").validate({
+		rules:{
+			biaoshi:{
+				required:true,
+			},
+			bannerweizi:{
+				required:true,
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				success: function(data){
+					layer.msg('修改成功!', {icon:1,time:1000}, function(){
+								var index = parent.layer.getFrameIndex(window.name);
+								parent.location.reload(); //刷新父页面
+								parent.layer.close(index);
+							});
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+					layer.msg(textStatus, {icon:1,time:1000}, function(){
+								var index = parent.layer.getFrameIndex(window.name);
+								parent.location.reload(); //刷新父页面
+								parent.layer.close(index);
+							});
+				}
+			});
+		}
+	});
+});
+
+    function imgsr(){
+        var r= new FileReader();
+        f=document.getElementById('file').files[0];
+        r.readAsDataURL(f);
+        r.onload=function (e) {
+            document.getElementById('show').src=this.result;
+        };
+    }
+    function imgsr2(){
+        var r= new FileReader();
+        f=document.getElementById('file2').files[0];
+        r.readAsDataURL(f);
+        r.onload=function (e) {
+            document.getElementById('show2').src=this.result;
+        };
+    }
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

@@ -1,0 +1,146 @@
+﻿<div id="myselfinfo" class="text-c .hidden-md">
+	<div class="text-c">
+		<div class="user-info">
+			<div class="col-md-offset-1 img-responsive">
+				<img src="{%$list.avatar%}" class="avatar size-XXXL round" id="ed_avatar" alt="头像"> 
+			</div>
+			<div class="text-l va-b img-responsive ml-20">
+				<span>帐户名：{%$list.username%}</span><br/>
+				<span>用户名：<span id ="ed_nickname">{%$list.nickname%}</span></span><br/>
+				<span>手机号码：<span id ="ed_phone">{%$list.phone%}</span></span><br/>
+				<span>电子邮箱：<span id ="ed_email">{%$list.email%}</span></span>	
+			</div>		
+				<!-- <div class="user-account">
+					<p class="tip">下午好，Tom</p>  
+				</div>
+				<div class="user-modify">
+					<a href="#">修改资料&gt;</a>
+				</div> -->
+		</div>
+		<div class="mt-50">
+			<div class="codeView docs-example">
+				<form id="user-info" action="" method="post" class="form form-horizontal text-l" id="demoform-1">
+					<legend >修改个人信息/密码</legend>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">头&nbsp;&nbsp;&nbsp;像：</label>
+						<div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+							<input class="input-text upload-url" type="text"  id="uploadfile-2" readonly="">
+							<a href="javascript:void();" class="btn btn-primary upload-btn"><i class="Hui-iconfont"></i> 浏览文件</a>
+							<input type="file" multiple="" id="files" name="avatar" onchange="imgsrs(this)" class="input-file">
+							</span> </div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3"></label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<img id="shows" src="{%$list.avatar%}"  alt="" style="border: 1px solid #cccccc;width: 150px;height: 150px;">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">用户名：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" name="nickname" autocomplete="off" placeholder="用户名">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">手机号码：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" name="phone" autocomplete="off" placeholder="手机号码">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">电子邮箱：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="text" class="input-text" name="email" autocomplete="off" placeholder="电子邮箱">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">密码：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="password" class="input-text" id="password" name="password" autocomplete="off" placeholder="密码">
+						</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-4 col-sm-3">确认密码：</label>
+						<div class="formControls col-xs-8 col-sm-9">
+							<input type="password" class="input-text" name="password2" autocomplete="off" placeholder="确认密码">
+						</div>
+					</div>
+					<div class="row cl">
+						<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+							<input class="btn btn-primary radius" id="submit" type="submit" value="提交">
+							<input class="btn btn-warning radius" type="reset" value="重置">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$("#user-info").validate({
+				rules:{
+					nickname:{
+						required:false,
+						minlength:4,
+						maxlength:16,
+					},
+					phone:{
+						required:false,
+						isPhone:true,
+					},
+					email:{
+						required:false,
+						email:true,
+					},
+					// password:"required",
+					password2:{
+						equalTo: "#password"
+					},
+				},
+				onkeyup:false,
+				focusCleanup:true,
+				success:"valid",
+				submitHandler:function(form){
+					$("#user-info").ajaxSubmit({
+						type:'post',
+						url: "user_edit",
+						target: "#div2",
+						dataType:"json",
+						success: function(data){
+							var icons = 1
+							if (data.code == 1) {
+								icons = 1
+								if (data.data.nickname) {
+									$("#ed_nickname").text(data.data.nickname);
+								}
+								if (data.data.phone) {
+									$("#ed_phone").text(data.data.phone);
+								}
+								if (data.data.email) {
+									$("#ed_email").text(data.data.email);
+								}
+								if (data.data.avatar) {
+									$("#ed_avatar").attr("src",data.data.avatar);
+								}
+							$("#user-info").resetForm();
+							} else {
+								icons = 2
+							}
+							layer.msg(data.msg, {icon:icons,time:1000}, function(){
+									if (data.url) {
+										location.href = data.url;
+									}
+								});
+						},
+						error: function(XmlHttpRequest, textStatus, errorThrown){
+							// layer.msg(textStatus, {icon:1,time:1000}, function(){
+							// 			var index = parent.layer.getFrameIndex(window.name);
+							// 			// parent.location.reload(); //刷新父页面
+							// 			parent.layer.close(index);
+							// 		});
+						}
+					});
+					return false;
+				}
+			});
+	</script> 
+</div>

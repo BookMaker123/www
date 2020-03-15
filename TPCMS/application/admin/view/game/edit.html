@@ -1,0 +1,558 @@
+<!--_meta 作为公共模版分离出去-->
+<!DOCTYPE HTML>
+<html>
+<head> 
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="__STATIC__/lib/html5shiv.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="__STATIC__/updateimg/updateimg.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="__STATIC__/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<!--/meta 作为公共模版分离出去-->
+
+<title>编辑游戏下载 - 游戏下载管理 - YPcms&nbsp;后台管理系统</title>
+<meta name="keywords" content="">
+<meta name="description" content=" ">
+
+<script language="javascript"> 
+<!--
+
+function SelectArcList(fname){
+  var posLeft = 10;
+  var posTop = 10;
+  window.open("{%:url('special/content_select_list')%}?f="+fname, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=700,height=500,left="+posLeft+", top="+posTop);
+}
+
+function SelectArcList2(fname){
+  var posLeft = 10;
+  var posTop = 10;
+  window.open("{%:url('special/content_select_list2')%}?f="+fname, "selArcList", "scrollbars=yes,resizable=yes,statebar=no,width=700,height=500,left="+posLeft+", top="+posTop);
+}
+ 
+--> 
+</script>
+
+</head>
+<body>
+<article class="page-container">
+  <form class="form form-horizontal" name="form1" action="" method="post" id="form-article-add">
+    <div class="row cl">
+      <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>游戏下载标题：</label>
+      <div class="formControls col-xs-3 col-sm-3">
+        <input type="text" class="input-text" value="{%$list.title%}" placeholder="游戏下载标题" id="title" name="title">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1"><span class="c-red">*</span>简略标题：</label>
+      <div class="formControls col-xs-3 col-sm-3">
+        <input type="text" class="input-text" value="{%$list.shorttitle%}" placeholder="简略标题" id="shorttitle" name="shorttitle">
+      </div>
+    </div>
+    <div class="row cl" style="line-height: 120px;">
+      <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>缩略图：</label>
+      <div class="formControls col-xs-4 col-sm-4">
+        <input type="file" id="file" class="input-text"  onchange="imgsr()" name="avatar">
+      </div>
+      <div class="col-xs-1 col-sm-1"><img id="show" src="{%$list.avatar%}" alt="" style="border: 1px solid #cccccc;width: 120px;height: 120px;"></div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+      <div class="formControls col-xs-4 col-sm-4"> 
+        <span class="select-box">
+          <select name="channeltype_id" class="select">
+            {%volist name='lis' id='vo'%}
+            <option class="input-text" value="{%$vo.id%}"> {%$vo.typename%} </option>
+            {%/volist%}
+          </select>
+        </span> 
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">权重：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.weigh%}" placeholder="权重" id="weigh" name="weigh">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">SEO标题：</label>
+      <div class="formControls col-xs-3 col-sm-3">
+        <input type="text" class="input-text" value="{%$list.seotitle%}" placeholder="SEO标题" id="seotitle" name="seotitle">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">SEO关键词：</label>
+      <div class="formControls col-xs-5 col-sm-5">
+        <input type="text" class="input-text" value="{%$list.keywords%}" placeholder="SEO关键词" id="keywords" name="keywords">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">游戏简介  ：<br>（SEO描述）</label>
+      <div class="formControls col-xs-8 col-sm-9">
+        <textarea name="description" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{%$list.description%}</textarea>
+        <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">下载地址： <br>（PC）</label>
+      <div class="formControls col-xs-2 col-sm-2">
+        <input type="text" class="input-text" value="{%$list.xzpc%}" placeholder="下载地址（PC）" id="xzpc" name="xzpc">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">下载地址：（IOS）</label>
+      <div class="formControls col-xs-2 col-sm-2">
+        <input type="text" class="input-text" value="{%$list.xzios%}" placeholder="下载地址（IOS）" id="xzios" name="xzios">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">下载地址：（android）</label>
+      <div class="formControls col-xs-3 col-sm-3">
+        <input type="text" class="input-text" value="{%$list.zxandroid%}" placeholder="下载地址（android）" id="zxandroid" name="zxandroid">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">游戏大小：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.size%}" placeholder="游戏大小" id="size" name="size">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">游戏版本：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.version%}" placeholder="v1.0" id="version" name="version">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">下载次数：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.click%}" placeholder="0" id="click" name="click">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">操作系统：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.czxit%}" placeholder="苹果/安卓" id="czxit" name="czxit">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">游戏类型：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.leixin%}" placeholder="角色扮演" id="leixin" name="leixin">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">游戏玩法：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.wanfa%}" placeholder="角色" id="wanfa" name="wanfa">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">游戏好评：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.haopin%}" placeholder="" id="haopin" name="haopin">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">游戏差评：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.chapin%}" placeholder="" id="chapin" name="chapin">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">游戏评分：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.pingfen%}" placeholder="1~10分不含小数点" id="pingfen" name="pingfen">
+      </div>
+      <label class="form-label col-xs-1 col-sm-1">游戏厂商：</label>
+      <div class="formControls col-xs-1 col-sm-1">
+        <input type="text" class="input-text" value="{%$list.changshan%}" placeholder="游戏厂商" id="changshan" name="changshan">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">节点列表  <b>游戏下载</b>：</label>
+      <div class="formControls col-xs-8 col-sm-8">
+        <textarea name="arcid1" id="arcid1" cols="" rows="" class="textarea"  placeholder="最多选择5个关联游戏" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{%$list.arcid1%}</textarea>
+        <!-- <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p> -->
+      </div>
+      <div class="formControls col-xs-1 col-sm-1"><input class="btn btn-primary radius" name="selarc1" type="button" id="selarc12" value="选择节点" style="width:100px;margin-top: 60px;" onClick="SelectArcList('form1.arcid1');"></div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2">节点列表  <b>文章资讯</b>：</label>
+      <div class="formControls col-xs-8 col-sm-8">
+        <textarea name="arcid2" id="arcid2" cols="" rows="" class="textarea"  placeholder="最多选择5个关联游戏" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)">{%$list.arcid2%}</textarea>
+        <!-- <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p> -->
+      </div>
+      <div class="formControls col-xs-1 col-sm-1"><input class="btn btn-primary radius" name="selarc2" type="button" id="selarc12" value="选择节点" style="width:100px;margin-top: 60px;" onClick="SelectArcList2('form1.arcid2');"></div>
+    </div>
+    <div class="row cl" style="line-height: 50px;">
+      <label class="form-label col-xs-2 col-sm-2"><span class="c-red">*</span>游戏截图：</label>
+    </div>
+      <div class="main">
+        <div id="showimg"> 
+          <ul id="showui">
+            {%volist name='arr_img' id='vo'%}
+                <li>
+                  <div class="showdiv">
+                    <img class="left" src="__STATIC__/updateimg/img/Arrow_left.svg" />
+                    <img class="center" src="__STATIC__/updateimg/img/delete.svg" />
+                    <img class="right" src="__STATIC__/updateimg/img/Arrow_right.svg" />
+                  </div>
+                  <img id="srcimgid{%$i%}" class="showimg" src="{%$vo%}" />
+                </li>
+              {%/volist%}
+          </ul>
+          <div id="showinput"></div>
+        </div><br>
+        <div class="upimg">
+          <input type="file" name="screenshots[]" id="upgteimg" value="" multiple />
+        </div><br>
+      </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>审核状态：</label>
+      <div class="formControls col-xs-3 col-sm-3">
+        <span class="select-box">
+          <select name="status" class="select">
+            <option value="0">待审核</option>
+            <option value="1">审核通过</option>
+            <option value="2">审核失败</option>
+          </select>
+        </span> 
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>是否启用：</label>
+      <div class="formControls col-xs-3 col-sm-3">
+        <div class="radio-box">
+          <input type="radio" id="sex-1" name="switch" value="1" checked>
+          <label for="sex-1">启用</label>
+        </div>
+        <div class="radio-box">
+          <input type="radio" id="sex-2" name="switch" value="0">
+          <label for="sex-2">禁用</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row cl">
+      <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+        {%:token()%}
+        <button onClick="article_save_submit();" class="btn btn-primary radius" class="btn" id="submit" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+        <!-- <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button> -->
+        <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+      </div>
+    </div>
+  </form>
+  <br>
+</article>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__STATIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__STATIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer /作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__STATIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="__STATIC__/lib/webuploader/0.1.5/webuploader.min.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/ueditor/1.4.3/ueditor.config.js"></script> 
+<script type="text/javascript" src="__STATIC__/lib/ueditor/1.4.3/ueditor.all.min.js"> </script> 
+<script type="text/javascript" src="__STATIC__/lib/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+
+<script type="text/javascript">
+$(function(){
+  $('.skin-minimal input').iCheck({
+    checkboxClass: 'icheckbox-blue',
+    radioClass: 'iradio-blue',
+    increaseArea: '20%'
+  });
+  
+  //表单验证
+  $("#form-article-add").validate({
+    rules:{
+      title:{
+        required:true,
+      },
+    },
+    onkeyup:false,
+    focusCleanup:true,
+    success:"valid",
+    submitHandler:function(form){
+      $(form).ajaxSubmit({
+        success: function(data){
+          layer.msg('修改成功!', {icon:1,time:1000}, function(){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.location.reload(); //刷新父页面
+                parent.layer.close(index);
+              });
+        },
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+          layer.msg(textStatus, {icon:1,time:1000}, function(){
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.location.reload(); //刷新父页面
+                parent.layer.close(index);
+              });
+        }
+      });
+    }
+  });
+  
+  $list = $("#fileList"),
+  $btn = $("#btn-star"),
+  state = "pending",
+  uploader;
+
+  var uploader = WebUploader.create({
+    auto: true,
+    swf: '__STATIC__/lib/webuploader/0.1.5/Uploader.swf',
+  
+    // 文件接收服务端。
+    server: 'fileupload.php',
+  
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#filePicker',
+  
+    // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+    resize: false,
+    // 只允许选择图片文件。
+    accept: {
+      title: 'Images',
+      extensions: 'gif,jpg,jpeg,bmp,png',
+      mimeTypes: 'image/*'
+    }
+  });
+  uploader.on( 'fileQueued', function( file ) {
+    var $li = $(
+      '<div id="' + file.id + '" class="item">' +
+        '<div class="pic-box"><img></div>'+
+        '<div class="info">' + file.name + '</div>' +
+        '<p class="state">等待上传...</p>'+
+      '</div>'
+    ),
+    $img = $li.find('img');
+    $list.append( $li );
+  
+    // 创建缩略图
+    // 如果为非图片文件，可以不用调用此方法。
+    // thumbnailWidth x thumbnailHeight 为 100 x 100
+    uploader.makeThumb( file, function( error, src ) {
+      if ( error ) {
+        $img.replaceWith('<span>不能预览</span>');
+        return;
+      }
+  
+      $img.attr( 'src', src );
+    }, thumbnailWidth, thumbnailHeight );
+  });
+  // 文件上传过程中创建进度条实时显示。
+  uploader.on( 'uploadProgress', function( file, percentage ) {
+    var $li = $( '#'+file.id ),
+      $percent = $li.find('.progress-box .sr-only');
+  
+    // 避免重复创建
+    if ( !$percent.length ) {
+      $percent = $('<div class="progress-box"><span class="progress-bar radius"><span class="sr-only" style="width:0%"></span></span></div>').appendTo( $li ).find('.sr-only');
+    }
+    $li.find(".state").text("上传中");
+    $percent.css( 'width', percentage * 100 + '%' );
+  });
+  
+  // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+  uploader.on( 'uploadSuccess', function( file ) {
+    $( '#'+file.id ).addClass('upload-state-success').find(".state").text("已上传");
+  });
+  
+  // 文件上传失败，显示上传出错。
+  uploader.on( 'uploadError', function( file ) {
+    $( '#'+file.id ).addClass('upload-state-error').find(".state").text("上传出错");
+  });
+  
+  // 完成上传完了，成功或者失败，先删除进度条。
+  uploader.on( 'uploadComplete', function( file ) {
+    $( '#'+file.id ).find('.progress-box').fadeOut();
+  });
+  uploader.on('all', function (type) {
+        if (type === 'startUpload') {
+            state = 'uploading';
+        } else if (type === 'stopUpload') {
+            state = 'paused';
+        } else if (type === 'uploadFinished') {
+            state = 'done';
+        }
+
+        if (state === 'uploading') {
+            $btn.text('暂停上传');
+        } else {
+            $btn.text('开始上传');
+        }
+    });
+
+    $btn.on('click', function () {
+        if (state === 'uploading') {
+            uploader.stop();
+        } else {
+            uploader.upload();
+        }
+    });
+  
+  var ue = UE.getEditor('editor');
+  
+});
+    // 缩略图
+    function imgsr(){
+        var r= new FileReader();
+        f=document.getElementById('file').files[0];
+        r.readAsDataURL(f);
+        r.onload=function (e) {
+            document.getElementById('show').src=this.result;
+        };
+    }
+
+
+
+
+
+
+// 游戏截图
+window.onload = function() {
+        var input = document.getElementById("upgteimg");
+        var showui = document.getElementById("showui");
+        var result;
+        var dataArr = [
+              {%volist name='arr_img' id='vo'%}
+                {name: "{%$vo%}", base64: "{%$vo%}"},
+              {%/volist%}
+            ]; // 储存所选图片的结果(文件名和base64数据)  
+        var fd; //FormData方式发送请求    
+        var oSelect = document.getElementById("select");
+        var oAdd = document.getElementById("add");
+        var showinput = document.getElementById("showinput");
+        var oSubmit = document.getElementById("submit");
+        var oInput = document.getElementById("upgteimg");
+        var lilength = showui.getElementsByTagName('li');
+        function show() {}
+        //监听展示图片的ul,执行判断是否隐藏
+        showui.addEventListener("click", function() {
+          show();
+        });
+        if(typeof FileReader === 'undefined') {
+          alert("抱歉，你的浏览器不支持 FileReader");
+          input.setAttribute('disabled', 'disabled');
+        } else {
+          input.addEventListener('change', readFile, false);
+        }
+
+
+        function readFile() {
+          fd = new FormData();
+          var iLen = this.files.length;
+          var index = 0;
+          var currentReViewImgIndex = 0;
+          for(var i = 0; i < iLen; i++) {
+            if(!input['value'].match(/.jpg|.gif|.png|.jpeg|.bmp/i)) {　　 //判断上传文件格式    
+              return alert("上传的图片格式不正确，请重新选择");
+            }
+            var reader = new FileReader();
+            reader.index = i;
+            fd.append(i, this.files[i]);
+            reader.readAsDataURL(this.files[i]); //转成base64    
+            reader.fileName = this.files[i].name;
+            reader.onload = function(e) {
+              var imgMsg = {
+                name: this.fileName, //获取文件名    
+                base64: this.result //reader.readAsDataURL方法执行完后，base64数据储存在reader.result里    
+              }
+              dataArr.push(imgMsg);
+              for(var j = 0; j < dataArr.length; j++) {
+                currentReViewImgIndex = dataArr.length;
+              }
+              result = '<div class="showdiv"><img class="left" src="__STATIC__/updateimg/img/Arrow_left.svg" /><img class="center" src="__STATIC__/updateimg/img/delete.svg" /><img class="right" src="__STATIC__/updateimg/img/Arrow_right.svg" /></div><img id="srcimgid' + currentReViewImgIndex + '" class="showimg" src="' + this.result + '" />';
+
+              var li = document.createElement('li');
+              li.innerHTML = result;
+              showui.appendChild(li);
+              show()
+
+            }
+          }
+        }
+
+  function onclickimg() {
+    var dataArrlist = dataArr.length;
+    var lilength = document.querySelectorAll('ul#showui li');
+    for (var i = 0; i < lilength.length; i++) {
+      lilength[i].getElementsByTagName('img')[0].onclick = function(num) {
+        return function() {
+          if (num == 0) {} else {
+            var list = 0;
+            for (var j = 0; j < dataArr.length; j++) {
+              list = j
+            }
+            var up = num - 1;
+            dataArr.splice(up, 0, dataArr[num]);
+            dataArr.splice(num + 1, 1)
+            var lists = $("ul#showui li").length;
+            for (var j = 0; j < lists; j++) {
+              var usid = $("ul#showui li")[j].getElementsByTagName('img')[3];
+              $("#" + usid.id + "").attr("src", dataArr[j].base64)
+            }
+          }
+        }
+      }(i)
+      lilength[i].getElementsByTagName('img')[1].onclick = function(num) {
+        return function() {
+          if (dataArr.length == 1) {
+            dataArr = [];
+            $("ul#showui").html("")
+          } else {
+            $("ul#showui li:eq(" + num + ")").remove()
+            dataArr.splice(num, 1)
+          }
+        }
+      }(i)
+      lilength[i].getElementsByTagName('img')[2].onclick = function(num) {
+        return function() {
+          var list = 0;
+          for (var j = 0; j < dataArr.length; j++) {
+            list = j
+          }
+          var datalist = list + 1;
+          dataArr.splice(datalist, 0, dataArr[num]);
+          dataArr.splice(num, 1)
+          var lists = $("ul#showui li").length;
+          for (var j = 0; j < lists; j++) {
+            var usid = $("ul#showui li")[j].getElementsByTagName('img')[3];
+            $("#" + usid.id + "").attr("src", dataArr[j].base64)
+          }
+        }
+      }(i)
+    }
+  }
+  showui.addEventListener("click", function() {
+    onclickimg();
+  }, true)
+        function send() {
+          for(var j = 0; j < dataArr.length; j++) {
+            var inputdata;
+            inputdata = '<input name="screenshots[]" type="text" id="" value="' + dataArr[j].base64 + '" />';
+            showinput.innerHTML += inputdata;
+          }
+        }
+
+        // oSubmit.onclick = function() {
+        //   if(!dataArr.length) {
+        //     return alert('请先选择文件');
+        //   }
+        //   send();
+        // }
+
+        $('#showui').on('DOMNodeInserted', function() {
+          show();
+        })
+      }
+
+
+
+
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
