@@ -1,0 +1,1391 @@
+---------------------------------------------------------------
+
+[2019-12-15T23:40:27+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.112443s] [吞吐率：8.89req/s] [内存消耗：2,934.34kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011983s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.010157s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000472s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.009870s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000532s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:40:31+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.087334s] [吞吐率：11.45req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'upgrade-insecure-requests' => '1',
+  'origin' => 'http://www.tpcms.com',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011611s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005382s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000383s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007235s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000533s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000503s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005691s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000375s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:40:31+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.085467s] [吞吐率：11.70req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012287s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.008799s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000351s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007409s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000493s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:40:50+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.080122s] [吞吐率：12.48req/s] [内存消耗：3,334.67kb] [文件加载：97]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010550s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007169s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000419s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005705s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000519s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000482s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005664s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000345s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:40:50+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.080872s] [吞吐率：12.37req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012670s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.010545s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000503s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.009285s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000446s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:40:54+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.081686s] [吞吐率：12.24req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'upgrade-insecure-requests' => '1',
+  'origin' => 'http://www.tpcms.com',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010804s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005745s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000436s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005713s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000587s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000502s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.006367s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000402s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:40:54+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.071349s] [吞吐率：14.02req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000918s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.012693s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000445s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007380s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000544s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:42:42+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.078459s] [吞吐率：12.75req/s] [内存消耗：3,334.39kb] [文件加载：97]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000630s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006678s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000283s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007106s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000536s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000421s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.006400s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000359s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:42:42+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.093677s] [吞吐率：10.67req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011222s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.010365s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000361s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.009016s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000450s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:43:16+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.092487s] [吞吐率：10.81req/s] [内存消耗：3,334.39kb] [文件加载：97]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011035s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007366s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000429s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.008147s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000627s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000484s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.007582s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000326s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:43:16+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.096901s] [吞吐率：10.32req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000837s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.013294s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000609s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.014170s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000866s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:43:23+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/user_edit
+[运行时间：0.056688s] [吞吐率：17.64req/s] [内存消耗：2,911.71kb] [文件加载：88]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://www.tpcms.com',
+  'accept' => '*/*',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010252s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005629s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000411s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005590s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000519s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:55:47+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/user_edit
+[运行时间：0.064248s] [吞吐率：15.56req/s] [内存消耗：2,911.79kb] [文件加载：88]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://www.tpcms.com',
+  'accept' => '*/*',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011016s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007194s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000442s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005843s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000489s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:56:03+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/user_edit
+[运行时间：0.058169s] [吞吐率：17.19req/s] [内存消耗：2,911.71kb] [文件加载：88]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://www.tpcms.com',
+  'accept' => '*/*',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010540s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005746s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000405s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005735s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000511s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:02+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.099964s] [吞吐率：10.00req/s] [内存消耗：3,334.45kb] [文件加载：97]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009943s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.008846s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000487s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007107s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.001345s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000492s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.009519s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000388s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:02+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.086392s] [吞吐率：11.58req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011084s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007043s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000497s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007160s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000447s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:04+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.088596s] [吞吐率：11.29req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010746s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006412s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000678s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007624s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000549s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000620s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.006613s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000361s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:05+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.073806s] [吞吐率：13.55req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010535s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007576s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000999s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007373s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000480s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:11+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/user_edit
+[运行时间：0.059231s] [吞吐率：16.88req/s] [内存消耗：2,911.71kb] [文件加载：88]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://www.tpcms.com',
+  'accept' => '*/*',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010159s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006162s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000387s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005652s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000560s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:15+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.098587s] [吞吐率：10.14req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012348s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006309s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000383s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005679s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000550s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000501s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005810s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000343s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:16+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.101806s] [吞吐率：9.82req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012393s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.014767s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000502s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.008229s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000533s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:21+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.084087s] [吞吐率：11.89req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010823s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007043s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000429s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005469s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000604s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000518s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.006259s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000438s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:21+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.077862s] [吞吐率：12.84req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010472s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005519s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000425s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005503s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000518s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:26+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/user_edit
+[运行时间：0.056753s] [吞吐率：17.62req/s] [内存消耗：2,911.71kb] [文件加载：88]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://www.tpcms.com',
+  'accept' => '*/*',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011032s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.007072s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000405s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005503s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000508s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:30+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/user_edit
+[运行时间：0.060196s] [吞吐率：16.61req/s] [内存消耗：2,911.71kb] [文件加载：88]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'content-type' => 'application/x-www-form-urlencoded; charset=UTF-8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'x-requested-with' => 'XMLHttpRequest',
+  'origin' => 'http://www.tpcms.com',
+  'accept' => '*/*',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010863s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005380s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000396s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005778s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000523s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:33+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.090483s] [吞吐率：11.05req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010781s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005600s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000399s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007460s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000556s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000432s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.006960s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000360s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:34+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.095951s] [吞吐率：10.42req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012436s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.009196s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000619s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.011203s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000589s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:36+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.087826s] [吞吐率：11.39req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010966s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005550s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000434s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.006207s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.001066s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000441s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.007032s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000440s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:36+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.089628s] [吞吐率：11.16req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012026s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.011316s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000649s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.010323s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000555s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:37+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.086547s] [吞吐率：11.55req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009810s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005429s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000405s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005550s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000689s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000454s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005775s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000366s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:37+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.079010s] [吞吐率：12.66req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000686s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.008832s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.001436s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.009304s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000542s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:38+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.088253s] [吞吐率：11.33req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010090s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006530s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000609s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005805s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000513s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000873s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005761s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000376s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:38+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.074673s] [吞吐率：13.39req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000592s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006061s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000389s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.012869s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000509s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:43+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.086896s] [吞吐率：11.51req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010254s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005628s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000397s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007773s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000568s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000393s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.006967s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000344s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:43+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.093340s] [吞吐率：10.71req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001922s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006971s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000579s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.017723s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000850s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:51+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.091831s] [吞吐率：10.89req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011323s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.006828s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000425s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.005529s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000612s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000479s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005902s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000443s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:51+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.080142s] [吞吐率：12.48req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.012688s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.009765s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000458s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007418s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000509s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:57+08:00] 127.0.0.1 POST www.tpcms.com/admin/index/index
+[运行时间：0.077258s] [吞吐率：12.94req/s] [内存消耗：3,183.57kb] [文件加载：95]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'content-type' => 'application/x-www-form-urlencoded',
+  'origin' => 'http://www.tpcms.com',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'content-length' => '58',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+  'uploadfile-2' => '',
+  'nickname' => '',
+  'phone' => '',
+  'email' => '',
+  'password' => '',
+  'password2' => '',
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\index.html [ array (
+  0 => 'list',
+  1 => 'ruleList',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.000669s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.005353s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.000859s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.006946s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000559s ]
+[ sql ] [ SQL ] SELECT `name`,`pid` FROM `yp_auth_rule` WHERE  `status` = 'normal'  AND `ismenu` = 0  AND `name` LIKE '%/index' [ RunTime:0.000409s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_admin` [ RunTime:0.005872s ]
+[ sql ] [ SQL ] SELECT `username`,`nickname`,`avatar`,`phone`,`email` FROM `yp_admin` WHERE  `id` = 7 LIMIT 1 [ RunTime:0.000384s ]
+---------------------------------------------------------------
+
+[2019-12-15T23:59:57+08:00] 127.0.0.1 GET www.tpcms.com/admin/index/welcome
+[运行时间：0.081266s] [吞吐率：12.31req/s] [内存消耗：2,934.44kb] [文件加载：89]
+[ info ] [ LANG ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'thinkphp_show_page_trace=0|0; PHPSESSID=mptutpjno5hjefio4i3dgoufo6',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.tpcms.com/admin/index/index',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.tpcms.com',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpToolbox\myphp_www\PHPTutorial\WWW\Mywook\wwwroot\qxgl\TPCMS\application\admin\view\index\welcome.html [ array (
+  0 => 'data',
+) ]
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001023s ] mysql:host=127.0.0.1;port=3306;dbname=tpcms;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_group_access` [ RunTime:0.011125s ]
+[ sql ] [ SQL ] SELECT `aga`.`uid`,`aga`.`group_id`,`ag`.`id`,`ag`.`pid`,`ag`.`name`,`ag`.`rules` FROM `yp_auth_group_access` `aga` LEFT JOIN `yp_auth_group` `ag` ON `aga`.`group_id`=`ag`.`id` WHERE  ( aga.uid='7' and ag.status='normal' ) [ RunTime:0.001194s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `yp_auth_rule` [ RunTime:0.007537s ]
+[ sql ] [ SQL ] SELECT `id`,`pid`,`condition`,`name`,`title`,`ismenu` FROM `yp_auth_rule` WHERE  `status` = 'normal' [ RunTime:0.000612s ]
